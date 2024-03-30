@@ -82,6 +82,13 @@ local config = function()
 		on_attach = on_attach,
 	})
 
+  lspconfig.clangd.setup({
+    on_attach = function (client, bufnr)
+      client.server_capabilities.signatureHelpProvider = false
+      on_attach(client, bufnr)
+      capabilities = capabilities
+    end
+  })
 	-- php
 	-- lspconfig.intelephense.setup({
 	-- 	capabilities = capabilities,
