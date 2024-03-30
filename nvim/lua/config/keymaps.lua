@@ -8,3 +8,7 @@ mapkey("<leader>e", "NvimTreeToggle", "n")
 mapkey("<leader>sv", "vsplit", "n") -- Split Vertically
 mapkey("<leader>sh", "split", "n") -- Split Horizontally
 mapkey("<leader>sm", "MaximizerToggle", "n") -- Toggle Minimise
+
+-- DAP
+mapkey("<leader>db", "DapToggleBreakpoint<CR>", "n")
+mapkey("<leader>dr", "DapContinue<CR>", "n")

@@ -4,9 +4,12 @@ return {
     event = "BufReadPre",
 	  opts = {
 		  ensure_installed = {
-			  "clang", "intelephense"	
-		  }
-	  },
+			  "clangd",
+        "clang-format",
+        "codelldb",
+        "intelephense"
+    }
+  },
 	  config = function()
 	    require("mason").setup()
 	  end
