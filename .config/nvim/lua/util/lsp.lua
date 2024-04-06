@@ -6,6 +6,11 @@ local M = {}
 M.on_attach = function(client, bufnr)
 	local opts = { noremap = true, silent = true, buffer = bufnr }
 
+  -- Enable inlay hints if installed neovim version supports them
+  if client.server_capabilities.inlayHintProvider then
+      vim.lsp.buf.inlay_hint(bufnr, true)
+  end
+
 	mapkey("<leader>fd", "Lspsaga finder", "n", opts) -- go to definition
 	mapkey("<leader>gd", "Lspsaga peek_definition", "n", opts) -- peak definition
 	mapkey("<leader>gD", "Lspsaga goto_definition", "n", opts) -- go to definition
