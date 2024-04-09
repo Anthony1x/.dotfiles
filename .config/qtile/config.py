@@ -23,14 +23,14 @@ keys = [
     Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
     # Toggle between different layouts as defined below
     Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
-    Key([mod], "q", lazy.window.kill(), desc="Kill focused window"),
+    Key([mod], "w", lazy.window.kill(), desc="Kill focused window"),
     Key([mod], "f", lazy.window.toggle_fullscreen(), desc="Toggle fullscreen on the focused window"),
     Key([mod], "f", lazy.window.toggle_floating(), desc="Toggle floating on the focused window"),
     Key([mod, "shift"], "r", lazy.reload_config(), desc="Reload the config"),
     Key([mod, "shift"], "x", lazy.shutdown(), desc="Shutdown Qtile"),
     Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
     Key([mod], "d", lazy.spawn(mymenu)),
-    Key([mod], "w", lazy.spawn(browser)),
+    Key([mod], "q", lazy.spawn(browser)),
     Key([mod, "shift"], "Return", lazy.spawn(files)),
     Key([mod, "mod1"], "s", lazy.spawn(screenie)),
     Key(["mod1"], "n", lazy.spawn(discord)),
@@ -145,8 +145,8 @@ colors = [["#141b1f", "#141b1f"], # 0
 
 # Define layouts and layout themes
 layout_theme = {
-        "margin":20,
-        "border_width": 4,
+        "margin":6,
+        "border_width": 2,
         "border_focus": colors[7],
         "border_normal": colors[2]
     }
@@ -272,26 +272,6 @@ screens = [
             size=30,
             margin=6),
         ),
-    Screen(
-        top=bar.Bar([
-            groupbox,
-            sep,
-            weather,
-            tasks,
-            sep,
-            volicon,
-            volume,
-            cpuicon,
-            cpu,
-            memicon,
-            mem,
-            clockicon,
-            clock,
-            curlayout,
-            ],
-            size=30,
-            margin=6),
-        )
 ]
 
 # Drag floating layouts.
