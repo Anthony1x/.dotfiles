@@ -224,10 +224,10 @@ volicon = widget.TextBox(text = "󰕾", fontsize = 25, font = "JetBrainsMono Ner
 volume = widget.Volume(foreground=colors[8], padding=10, background = colors[0])
 cpuicon = widget.TextBox(text = "", fontsize = 20, font = "JetBrainsMono Nerd Font Mono",  background = colors[0], foreground = colors[5])
 cpu = widget.CPU(font = "JetBrainsMono Nerd Font Mono", update_interval = 1.0, format = '{load_percent}%', foreground = colors[8], background = colors[0], padding = 5)
-memicon = widget.TextBox(text = "", fontsize = 20, font = "JetBrainsMono Nerd Font Mono", background = colors[0], foreground = colors[7])
+memicon = widget.TextBox(text = "", fontsize = 20, font = "JetBrainsMono Nerd Font Mono", background = colors[0], foreground = colors[7])
 mem = widget.Memory(font = "JetBrainsMono Nerd Font Mono", foreground = colors[8], background = colors[0], format = '{MemUsed: .0f}{mm} /{MemTotal: .0f}{mm}', measure_mem='G', padding = 5,)
 clockicon = widget.TextBox(text = "", fontsize = 20, font = "JetBrainsMono Nerd Font Mono", background = colors[0], foreground = colors[6])
-clock = widget.Clock(format='%I:%M %p', font = "JetBrainsMono Nerd Font Mono", padding = 10, background = colors[0], foreground = colors[8])
+clock = widget.Clock(format='%a, %d-%m.%Y, %H:%M', font = "JetBrainsMono Nerd Font Mono", padding = 10, background = colors[0], foreground = colors[8])
 curlayout = widget.CurrentLayoutIcon(scale = 0.5, foreground = colors[0], background = colors[4], padding = 10,)
 tray = widget.Systray(background = colors[0])
 
@@ -262,9 +262,10 @@ top_screen_bar = bar.Bar([
         cpu,
         memicon,
         mem,
+        tray,
+        sep,
         clockicon,
         clock,
-        tray,
         curlayout,
         ],
         margin=3,
