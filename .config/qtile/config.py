@@ -17,8 +17,9 @@ files = "thunar"
 discord = "discord"
 screenie = "flameshot gui"
 
-keys = [
+fake_screen_index = 0;
 
+keys = [
     Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
     # Toggle between different layouts as defined below
     Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
@@ -53,15 +54,18 @@ keys = [
     Key([mod, "control"], "k", lazy.layout.grow_up(), desc="Grow window up"),
     Key([mod], "n", lazy.layout.normalize(), desc="Reset all window sizes"),
 
-# Switch focus to specific monitor (out of three)
+    # Switch focus to specific monitor (out of three)
     Key([mod], "i", lazy.to_screen(0)),
     Key([mod], "o", lazy.to_screen(1)),
 
-# Switch focus of monitors
+    # Switch focus of monitors
     Key([mod], "period", lazy.next_screen()),
     Key([mod], "comma", lazy.prev_screen()),
 
-
+    # TODO: Switch super-ultrawide monitor layout
+    # Key([mod, "control"], "v", fake_screen_index = 0),
+    # Key([mod, "control"], "b", fake_screen_index = 1),
+    # Key([mod, "control"], "n", fake_screen_index = 2)
 ]
 
 # Create labels for groups and assign them a default layout.
