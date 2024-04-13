@@ -231,7 +231,9 @@ clock = widget.Clock(format='%I:%M %p', font = "JetBrainsMono Nerd Font Mono", p
 curlayout = widget.CurrentLayoutIcon(scale = 0.5, foreground = colors[0], background = colors[4], padding = 10,)
 tray = widget.Systray(background = colors[0])
 
-screens = [
+
+fake_screens = [
+    Screen(x=0,y=0,width=1280,height=1440),
     Screen(
         top=bar.Bar([
             groupbox,
@@ -247,32 +249,47 @@ screens = [
             mem,
             clockicon,
             clock,
+            tray,
             curlayout,
             ],
             margin=6,
             size=30),
+            x=1280,
+            y=0,
+            width=2560,
+            height=1440
         ),
-    Screen(
-        top=bar.Bar([
-            groupbox,
-            sep,
-            weather,
-            tasks,
-            sep,
-            volicon,
-            volume,
-            cpuicon,
-            cpu,
-            memicon,
-            mem,
-            clockicon,
-            clock,
-            curlayout,
-            ],
-            size=30,
-            margin=6),
-        ),
+    Screen(x=3840,y=0,width=1280,height=1440),
+
 ]
+
+# screens = [
+#     Screen(
+#         top=bar.Bar([
+#             groupbox,
+#             sep,
+#             weather,
+#             tasks,
+#             sep,
+#             volicon,
+#             volume,
+#             cpuicon,
+#             cpu,
+#             memicon,
+#             mem,
+#             clockicon,
+#             clock,
+#             tray,
+#             curlayout,
+#             ],
+#             margin=6,
+#             size=30),
+#             x=0,
+#             y=0,
+#             width=600,
+#             height=480
+#         ),
+# ]
 
 # Drag floating layouts.
 mouse = [
