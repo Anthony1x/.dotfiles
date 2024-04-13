@@ -230,11 +230,9 @@ clock = widget.Clock(format='%I:%M %p', font = "JetBrainsMono Nerd Font Mono", p
 curlayout = widget.CurrentLayoutIcon(scale = 0.5, foreground = colors[0], background = colors[4], padding = 10,)
 tray = widget.Systray(background = colors[0])
 
-
 fake_screens = [
-    Screen(x=0,y=0,width=1280,height=1440),
     Screen(
-        top=bar.Bar([
+        bottom=bar.Bar([
             groupbox,
             sep,
             weather,
@@ -251,14 +249,15 @@ fake_screens = [
             tray,
             curlayout,
             ],
-            margin=6,
+            margin=3,
             size=30),
             x=1280,
             y=0,
             width=2560,
-            height=1440
-        ),
-    Screen(x=3840,y=0,width=1280,height=1440),
+            height=1440),
+    Screen(x=0,y=1440,width=1280,height=1440),
+    Screen(x=1280,y=1440,width=2560,height=1440),
+    Screen(x=3840,y=1440,width=1280,height=1440),
 
 ]
 
