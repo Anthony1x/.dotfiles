@@ -230,64 +230,68 @@ clock = widget.Clock(format='%I:%M %p', font = "JetBrainsMono Nerd Font Mono", p
 curlayout = widget.CurrentLayoutIcon(scale = 0.5, foreground = colors[0], background = colors[4], padding = 10,)
 tray = widget.Systray(background = colors[0])
 
-fake_screens = [
-    Screen(
-        bottom=bar.Bar([
-            groupbox,
-            sep,
-            weather,
-            tasks,
-            sep,
-            volicon,
-            volume,
-            cpuicon,
-            cpu,
-            memicon,
-            mem,
-            clockicon,
-            clock,
-            tray,
-            curlayout,
-            ],
-            margin=3,
-            size=30),
-            x=1280,
-            y=0,
-            width=2560,
-            height=1440),
-    Screen(x=0,y=1440,width=1280,height=1440),
-    Screen(x=1280,y=1440,width=2560,height=1440),
-    Screen(x=3840,y=1440,width=1280,height=1440),
+bottom_screen_bar = bar.Bar([
+        groupbox,
+        sep,
+        weather,
+        tasks,
+        sep,
+        volicon,
+        volume,
+        cpuicon,
+        cpu,
+        memicon,
+        mem,
+        clockicon,
+        clock,
+        curlayout,
+        ],
+        margin=3,
+        size=30)
 
+top_screen_bar = bar.Bar([
+        groupbox,
+        sep,
+        weather,
+        tasks,
+        sep,
+        volicon,
+        volume,
+        cpuicon,
+        cpu,
+        memicon,
+        mem,
+        clockicon,
+        clock,
+        tray,
+        curlayout,
+        ],
+        margin=3,
+        size=30)
+
+fake_screen_layouts = [
+    # 16:9 middle
+    [
+        Screen(bottom=top_screen_bar,x=0,y=1280,width=2560,height=1440),
+        Screen(top=bottom_screen_bar,x=0,y=1440,width=1280,height=1440),
+        Screen(top=bottom_screen_bar,x=1280,y=1440,width=2560,height=1440),
+        Screen(top=bottom_screen_bar,x=3840,y=1440,width=1280,height=1440),
+    ],
+    # 21:9 middle
+    [
+        Screen(bottom=top_screen_bar,x=0,y=0,width=2560,height=1440),
+        Screen(x=0,y=1440,width=840,height=1440),
+        Screen(x=840,y=1440,width=3440,height=1440),
+        Screen(x=4280,y=1440,width=840,height=1440),
+    ],
+    # 32:9, no fake screens
+    [
+        Screen(bottom=top_screen_bar,x=0,y=0,width=2560,height=1440),
+        Screen(x=0,y=1440,width=5120,height=1440),
+    ],
 ]
 
-# screens = [
-#     Screen(
-#         top=bar.Bar([
-#             groupbox,
-#             sep,
-#             weather,
-#             tasks,
-#             sep,
-#             volicon,
-#             volume,
-#             cpuicon,
-#             cpu,
-#             memicon,
-#             mem,
-#             clockicon,
-#             clock,
-#             tray,
-#             curlayout,
-#             ],
-#             margin=6,
-#             size=30),
-#             x=0,
-#             y=0,
-#             width=600,
-#             height=480
-#         ),
-# ]
+fake_screens = fake_screen_layouts[fake_screen_index]
 
 # Drag floating layouts.
 mouse = [
