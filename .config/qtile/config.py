@@ -35,7 +35,6 @@ keys = [
     Key([mod, "mod1"], "s", lazy.spawn(screenie)),
     Key(["mod1"], "n", lazy.spawn(discord)),
 
-
     # Movement Keys
     Key([mod], "h", lazy.layout.left(), desc="Move focus to left"),
     Key([mod], "l", lazy.layout.right(), desc="Move focus to right"),
@@ -124,7 +123,6 @@ keys.extend([
     Key([mod], "n", lazy.group['scratchpad'].dropdown_toggle('term')),
     Key([mod], "c", lazy.group['scratchpad'].dropdown_toggle('ranger')),
     Key([mod], "v", lazy.group['scratchpad'].dropdown_toggle('volume')),
-    Key([mod], "m", lazy.group['scratchpad'].dropdown_toggle('mus')),
     Key([mod, "shift"], "n", lazy.group['scratchpad'].dropdown_toggle('term2')),
 ])
 
