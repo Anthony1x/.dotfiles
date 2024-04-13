@@ -272,10 +272,10 @@ top_screen_bar = bar.Bar([
 fake_screen_layouts = [
     # 16:9 middle
     [
-        Screen(bottom=top_screen_bar,x=0,y=1280,width=2560,height=1440),
-        Screen(top=bottom_screen_bar,x=0,y=1440,width=1280,height=1440),
-        Screen(top=bottom_screen_bar,x=1280,y=1440,width=2560,height=1440),
-        Screen(top=bottom_screen_bar,x=3840,y=1440,width=1280,height=1440),
+        Screen(bottom=top_screen_bar,x=1280,y=0,width=2560,height=1440),
+        Screen(x=0,y=1440,width=1280,height=1440),
+        Screen(x=1280,y=1440,width=2560,height=1440),
+        Screen(x=3840,y=1440,width=1280,height=1440),
     ],
     # 21:9 middle
     [
