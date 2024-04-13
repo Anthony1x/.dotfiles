@@ -8,7 +8,6 @@ from libqtile.config import Click, Drag, Group, ScratchPad, DropDown, Key, Match
 from libqtile.lazy import lazy
 from settings.path import qtile_path
 from extra import multiColorTag
-from customlayouts import threeThirds
 
 mod = "mod4"
 terminal = "alacritty"
@@ -153,14 +152,13 @@ layout_theme = {
     }
 
 layouts = [
-  layout.MonadTall(**layout_theme),
+  layout.MonadTall(**layout_theme)
   # layout.MonadWide(**layout_theme),
   # layout.MonadThreeCol(**layout_theme),
   # layout.Floating(**layout_theme),
   # layout.Spiral(**layout_theme),
   # layout.RatioTile(**layout_theme),
   # layout.Max(**layout_theme)
-   threeThirds.BetterMonadThreeCol(**layout_theme)
 ]
 
 window_name = widget.WindowName()
