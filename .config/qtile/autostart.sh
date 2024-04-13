@@ -1,7 +1,11 @@
 #!/bin/bash
-#
 
-wlr-randr --output DP-3 --pos 2070,1570 --output DP-2 --pos 3990,970 --scale 1.30 --output HDMI-A-1 --pos 3990,2070 --scale 1.30
+# Set monitors (exported by arandr)
+xrandr --output DP-0 --mode 2560x1440 --pos 1280x0
+xrandr --output DP-4 --primary --mode 5120x1440 --pos 0x1440
 
-swww query || swww init & 
+# Set wallpapers
+feh --bg-fill /home/anthony/Pictures/Wallpaper/Desktop/Catppuccin.png
+
+swww query || swww init &
 
