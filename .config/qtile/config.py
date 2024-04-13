@@ -109,11 +109,10 @@ for vt in range(1, 8):
 
 # Define scratchpads
 groups.append(ScratchPad("scratchpad", [
-    DropDown("term", "alacritty --class=scratch", width=0.8, height=0.8, x=0.1, y=0.1, opacity=1),
-    DropDown("term2", "alacritty --class=scratch", width=0.8, height=0.8, x=0.1, y=0.1, opacity=1),
-    DropDown("ranger", "alacritty --class=ranger -e ranger", width=0.8, height=0.8, x=0.1, y=0.1, opacity=0.9),
-    DropDown("volume", "alacritty --class=volume -e pulsemixer", width=0.8, height=0.8, x=0.1, y=0.1, opacity=0.9),
-    DropDown("mus", "alacritty --class=mus -e ncspot", width=0.8, height=0.8, x=0.1, y=0.1, opacity=0.9),
+    DropDown("term", "{terminal} --class=scratch", width=0.8, height=0.8, x=0.1, y=0.1, opacity=1),
+    DropDown("term2", "{terminal} --class=scratch", width=0.8, height=0.8, x=0.1, y=0.1, opacity=1),
+    DropDown("ranger", "{terminal} --class=ranger -e ranger", width=0.8, height=0.8, x=0.1, y=0.1, opacity=0.9),
+    DropDown("volume", "{terminal} --class=volume -e pulsemixer", width=0.8, height=0.8, x=0.1, y=0.1, opacity=0.9),
 ]))
 
 # Scratchpad keybindings
