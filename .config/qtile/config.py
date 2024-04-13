@@ -1,10 +1,8 @@
-from typing import List  # noqa: F401
 import os
 import subprocess
-from os import path
 
-from libqtile import layout, hook
-from libqtile.config import Click, Drag, Group, ScratchPad, DropDown, Key, Match
+from libqtile import  hook
+from libqtile.config import Click, Drag
 from libqtile.lazy import lazy
 from screens import fake_screens
 from keys import mod
