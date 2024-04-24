@@ -1,0 +1,15 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: Qtile",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/bin/qtile",
+            "cwd": "${workspaceFolder}",
+            "args": ["-c", "libqtile/resources/default_config.py"],
+            "console": "integratedTerminal",
+            "env": {"PYTHONUNBUFFERED":"1", "DISPLAY":":1"}
+        }
+    ]
+}
