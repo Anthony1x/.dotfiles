@@ -3,7 +3,7 @@ from libqtile.lazy import lazy
 from libqtile import qtile
 
 mod = "mod4"
-terminal = "alacritty"
+terminal = "kitty"
 mymenu = "rofi -show drun"
 browser = "firefox"
 files = "thunar"

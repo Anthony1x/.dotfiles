@@ -1,0 +1,2 @@
+[keyboard.bindings]
+- { key: NumpadEnter,          chars: "\x0d" }

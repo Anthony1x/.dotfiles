@@ -1,11 +1,11 @@
 #!/bin/bash
 
-# Set monitors (exported by arandr)
-xrandr --output DP-0 --mode 2560x1440 --pos 1280x0
-xrandr --output DP-4 --primary --mode 5120x1440 --pos 0x1440
+xrandr --output DP1 --primary --mode 3440x1440 --pos 1920x240 --rotate normal
+xrandr --output HDMI1 --mode 1920x1200 --pos 5360x0 --rotate left
+xrandr --output eDP1 --mode 1920x1080 --pos 0x1080 --rotate normal
 
 # Set wallpapers
-feh --bg-fill /home/anthony/Pictures/Wallpaper/Desktop/Firewatch.jpg
+feh --bg-fill /home/anthony/Pictures/Wallpapers/Poon.png
 
 swww query || swww init &
 

@@ -139,5 +139,11 @@ fake_screen_layouts = [
     ],
 ]
 
+laptop_work_layout = [
+    Screen(x=0,y=1080),
+    Screen(top=top_screen_bar,x=1920,y=240),
+    Screen(x=5360,y=0)
+]
+
 fake_screen_index = 0;
-fake_screens = fake_screen_layouts[fake_screen_index]
+screens = laptop_work_layout
