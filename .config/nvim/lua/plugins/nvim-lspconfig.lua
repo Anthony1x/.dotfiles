@@ -105,7 +105,11 @@ local config = function()
       client.server_capabilities.signatureHelpProvider = false
       on_attach(client, bufnr)
       capabilities = capabilities
-    end
+    end,
+    cmd = {
+      'clangd',
+      '--offset-encoding=utf-16'
+    }
   })
 
 	-- php
