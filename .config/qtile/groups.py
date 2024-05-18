@@ -1,7 +1,6 @@
 from keys import keys, mod, terminal
-from libqtile.config import Click, Drag, Group, ScratchPad, DropDown, Key, Match
+from libqtile.config import Group, ScratchPad, DropDown, Key
 from libqtile.lazy import lazy
-from colors import colors
 
 # Create labels for groups and assign them a default layout.
 groups = []

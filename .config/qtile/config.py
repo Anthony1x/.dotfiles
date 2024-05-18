@@ -5,7 +5,7 @@ from libqtile import  hook
 from libqtile.config import Click, Drag
 from libqtile.lazy import lazy
 from screens import fake_screens
-from keys import mod
+from keys import mod, keys
 from groups import groups
 from layouts import layouts, floating_layout
 
@@ -13,6 +13,7 @@ groups = groups
 layouts = layouts
 floating_layout = floating_layout
 fake_screens = fake_screens
+keys = keys
 
 # Drag floating layouts.
 mouse = [
@@ -23,7 +24,7 @@ mouse = [
 
 dgroups_key_binder = None
 dgroups_app_rules = []  # type: list
-follow_mouse_focus = False
+follow_mouse_focus = True
 bring_front_click = False
 floats_kept_above = True
 cursor_warp = True

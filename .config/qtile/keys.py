@@ -1,4 +1,4 @@
-from libqtile.config import Drag, Key
+from libqtile.config import Key
 from libqtile.lazy import lazy
 from libqtile import qtile
 
