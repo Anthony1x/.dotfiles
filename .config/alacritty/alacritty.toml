@@ -3,9 +3,6 @@ import = [
   "~/.config/alacritty/fonts.toml"
 ]
 
-[shell]
-program = "tmux"
-
 [env]
 TERM = "xterm-256color"
 
