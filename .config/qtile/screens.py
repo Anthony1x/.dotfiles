@@ -85,7 +85,7 @@ def init_widgets_list():
             #background='#303F9F'+'.8',
             background=Gruvbox['shade1'],
             #foreground = colors[1],
-            format='{down:.0f}{down_suffix} ↓↑',
+            format='{down:.0f}{down_suffix} ↓ {up:.0f}{up_suffix}↑',
             padding=10
         ),
         widget.CPU(
