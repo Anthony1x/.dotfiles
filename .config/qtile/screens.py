@@ -74,7 +74,7 @@ def init_widgets_list():
             padding=10,
             background=Gruvbox['shade5'],
             #foreground = colors[4],
-            format = "⏱  %a, %b %d - %I:%M:%S %p",
+            format = "⏱  %a, %b %d - %H:%M",
         ),
         widget.Spacer(
             **decor_right,
