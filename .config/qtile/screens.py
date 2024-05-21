@@ -90,7 +90,7 @@ def init_widgets_list():
         ),
         widget.CPU(
             **decor_right,
-            format = ' {load_percent}%',
+            format = '{load_percent}% ',
             #foreground = colors[4],
             background=Gruvbox['shade2'],
             padding=10,
@@ -102,13 +102,13 @@ def init_widgets_list():
             mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(terminal + ' -e btop')},
             measure_mem='M',
             format = '{MemUsed: .0f}{mm}',
-            fmt = ' {} used',
+            fmt = '{} used  ',
         ),
         widget.Volume(
             **decor_right,
             padding=10,
             background=Gruvbox['shade5'],
-            fmt = ' {}',
+            fmt = '{}  ',
         ),
         widget.Volume(
             **decor_right,
@@ -116,27 +116,18 @@ def init_widgets_list():
             background=Gruvbox['shade6'],
             channel='Capture',
             #foreground = colors[7],
-            fmt = ' {}',
-        ),
-        widget.CurrentLayoutIcon(
-            **decor_left,
-            #background="#ffffff.7",
-            #background=Gruvbox['red']+".7",
-            background='#FF5E5E'+'.7',
-            padding = 2,
-            scale = 0.6,
-            foreground = colors[1],
+            fmt = '{} ',
         ),
         widget.CurrentLayout(
             **decor_left,
             background='#FF5E5E'+'.7',
             #foreground = colors[1],
-            padding = 5
-        ),
+            # padding = 2
+        ), 
         widget.Systray(
             **decor_right,
-            background=Gruvbox['shade8'],
-            padding = 3
+            #background=Gruvbox['shade8'],
+            padding = 5
         ),
     ]
 
