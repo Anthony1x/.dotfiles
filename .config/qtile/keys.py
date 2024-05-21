@@ -63,7 +63,7 @@ keys.extend([
     Key([mod], "n", lazy.group['scratchpad'].dropdown_toggle('term')),
     Key([mod], "c", lazy.group['scratchpad'].dropdown_toggle('ranger')),
     Key([mod], "v", lazy.group['scratchpad'].dropdown_toggle('volume')),
-    Key([mod, "shift"], "n", lazy.group['scratchpad'].dropdown_toggle('term2')),
+    Key([mod, "shift"], "n", lazy.group['scratchpad'].dropdown_toggle('top')),
 ])
 
 # Add key bindings to switch VTs in Wayland.
