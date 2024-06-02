@@ -10,6 +10,8 @@ files = "thunar"
 discord = "discord"
 screenie = "flameshot gui"
 
+scripts_dir = "/home/anthony/.config/qtile/scripts"
+
 keys = [
     Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
     # Toggle between different layouts as defined below
@@ -24,7 +26,7 @@ keys = [
     Key([mod], "q", lazy.spawn(browser)),
     Key([mod, "shift"], "Return", lazy.spawn(files)),
     Key([mod, "mod1"], "s", lazy.spawn(screenie)),
-    Key(["mod1"], "n", lazy.spawn(discord)),
+    Key([mod, "mod1"], "o", lazy.spawn(f"{scripts_dir}/picom_toggle.sh")),
 
     # Movement Keys
     Key([mod], "h", lazy.layout.left(), desc="Move focus to left"),
@@ -61,7 +63,6 @@ keys = [
 # Scratchpad keybindings
 keys.extend([
     Key([mod], "n", lazy.group['scratchpad'].dropdown_toggle('term')),
-    Key([mod], "c", lazy.group['scratchpad'].dropdown_toggle('ranger')),
     Key([mod], "v", lazy.group['scratchpad'].dropdown_toggle('volume')),
     Key([mod, "shift"], "n", lazy.group['scratchpad'].dropdown_toggle('top')),
 ])
