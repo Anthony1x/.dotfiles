@@ -3,13 +3,14 @@ from libqtile.lazy import lazy
 from libqtile import qtile
 
 mod = "mod4"
+alt = "mod1"
 terminal = "kitty"
 mymenu = "rofi -show drun"
-browser = "firefox"
+browser = "brave"
 files = "thunar"
 discord = "discord"
 screenie = "flameshot gui"
-
+screen_lock = "betterlockscreen -l"
 scripts_dir = "/home/anthony/.config/qtile/scripts"
 
 keys = [
@@ -25,8 +26,15 @@ keys = [
     Key([mod], "d", lazy.spawn(mymenu)),
     Key([mod], "q", lazy.spawn(browser)),
     Key([mod, "shift"], "Return", lazy.spawn(files)),
-    Key([mod, "mod1"], "s", lazy.spawn(screenie)),
-    Key([mod, "mod1"], "o", lazy.spawn(f"{scripts_dir}/picom_toggle.sh")),
+    Key([mod, alt], "s", lazy.spawn(screenie)),
+    Key([mod, alt], "o", lazy.spawn(f"{scripts_dir}/picom_toggle.sh")),
+    Key([mod, alt], "l", lazy.spawn(screen_lock)),
+
+
+    # Media Keys - change volume
+    Key([], "XF86AudioLowerVolume", lazy.spawn("pamixer -d 2"), desc="Lower Volume by 2%"),
+    Key([], "XF86AudioRaiseVolume", lazy.spawn("pamixer -i 2"), desc="Raise Volume by 2%"),
+    Key([], "XF86AudioMute", lazy.spawn("pamixer -t"), desc="Mute/Unmute Volume"),
 
     # Movement Keys
     Key([mod], "h", lazy.layout.left(), desc="Move focus to left"),

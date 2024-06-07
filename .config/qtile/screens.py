@@ -123,7 +123,7 @@ def init_widgets_list():
             background='#FF5E5E'+'.7',
             #foreground = colors[1],
             # padding = 2
-        ), 
+        ),
         widget.Systray(
             **decor_right,
             #background=Gruvbox['shade8'],
