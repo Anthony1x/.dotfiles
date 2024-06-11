@@ -1,5 +1,6 @@
 local config = function()
 	local theme = require("lualine.themes.catppuccin")
+    local gitblame = require('gitblame')
 
 	-- set bg transparency in all modes
 	--theme.normal.c.bg = nil
@@ -12,15 +13,17 @@ local config = function()
 		options = {
 			theme = theme,
 			globalstatus = true,
+            section_separators = { left = '', right = '' },
+            component_separators = '',
 		},
 		sections = {
 			lualine_a = { "mode" },
-			lualine_b = { "buffers" },
-			lualine_x = { "encoding", "fileformat", "filetype" },
-			lualine_y = { "progress" },
-			lualine_z = { "location" },
+			-- lualine_b = { "buffers" },
+            lualine_x = {{ gitblame.get_current_blame_text, cond = gitblame.is_blame_text_available }},
+			lualine_y = { "fileformat", "filetype" },
+			lualine_z = { "progress", "location" },
 		},
-		tabline = {},
+		-- tabline = {},
 	})
 end
 

@@ -105,15 +105,11 @@ local config = function()
       client.server_capabilities.signatureHelpProvider = false
       on_attach(client, bufnr)
       capabilities = capabilities
-    end,
-    cmd = {
-      'clangd',
-      '--offset-encoding=utf-16'
-    }
+    end
   })
 
 	-- php
-	 lspconfig.intelephense.setup({
+	lspconfig.intelephense.setup({
 	 	capabilities = capabilities,
 	 	on_attach = on_attach,
 	 	filetypes = { "php" },
@@ -131,6 +127,7 @@ local config = function()
 	local alex = require("efmls-configs.linters.alex")
 	local hadolint = require("efmls-configs.linters.hadolint")
 	local solhint = require("efmls-configs.linters.solhint")
+	-- local php = require("efmls-configs.")
 
 	-- configure efm server
 	lspconfig.efm.setup({
@@ -175,7 +172,7 @@ local config = function()
 				markdown = { alex, prettierd },
 				docker = { hadolint, prettierd },
 				solidity = { solhint },
-				php = { php }
+        -- php = { php }
 			},
 		},
 	})
