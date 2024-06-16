@@ -5,6 +5,14 @@ from colors import colors, Gruvbox
 from qtile_extras import widget
 from qtile_extras.widget.decorations import PowerLineDecoration
 from keys import terminal
+from dotenv import set_key
+from keys import keys, mod, shift
+from libqtile.config import Key
+from libqtile.lazy import lazy
+from libqtile import qtile
+from dotenv import get_key
+from pathlib import Path
+
 
 decor_left = {
     "decorations": [
@@ -74,7 +82,7 @@ def init_widgets_list():
             padding=10,
             background=Gruvbox['shade5'],
             #foreground = colors[4],
-            format = "⏱  %a, %b %d - %H:%M",
+            format = "%a, %b %d - %H:%M 󰥔",
         ),
         widget.Spacer(
             **decor_right,
@@ -133,6 +141,7 @@ def init_widgets_list():
 
     return widgets_list
 
+
 def init_widgets_screen1():
     widgets_screen1 = init_widgets_list()
     return widgets_screen1
@@ -143,28 +152,65 @@ def init_widgets_screen2():
     del widgets_screen2[22:24]
     return widgets_screen2
 
+# --- SCREEN INDEX SHIFT START --- #
+
+file = Path('/home/anthony/.config/qtile/.env')
+current_index = int(get_key(dotenv_path=file, key_to_get="FAKE_SCREEN_INDEX"))
+
+def next_layout(qtile):
+    global file, current_index
+
+    current_index += 1
+    if current_index >= len(fake_screen_layouts):
+        current_index = 0
+
+    set_key(dotenv_path=file, key_to_set="FAKE_SCREEN_INDEX", value_to_set=str(current_index))
+
+    qtile.reload_config()
+
+def prev_layout(qtile):
+    global file, current_index
+
+    current_index -= 1
+    if current_index < 0:
+        current_index = len(fake_screen_layouts) - 1  # Loop back to the last layout if going below 0
+    set_key(dotenv_path=file, key_to_set="FAKE_SCREEN_INDEX", value_to_set=str(current_index))
+
+    qtile.reload_config()
+
+keys.extend([
+    #  Switch super-ultrawide monitor layout
+    Key([mod, shift], "o", lazy.function(next_layout)),
+    Key([mod, shift], "i", lazy.function(prev_layout)),
+])
+
+# --- SCREEN INDEX SHIFT END --- #
 
 fake_screen_layouts = [
     # 16:9 middle
     [
-        Screen(bottom=bar.Bar(widgets=init_widgets_screen1(),background=tsBgColor, size=26),x=1280,y=0,width=2560,height=1440),
+        Screen(bottom=bar.Bar(widgets=init_widgets_screen1(), background=tsBgColor, size=26),x=1280,y=0,width=2560,height=1440),
         Screen(x=0,y=1440,width=1280,height=1440),
         Screen(x=1280,y=1440,width=2560,height=1440),
         Screen(x=3840,y=1440,width=1280,height=1440),
     ],
-    # 21:9 middle
+    # 21:9 + 11:9
     [
-        Screen(bottom=bar.Bar(widgets=init_widgets_screen1(),background=tsBgColor, size=26),x=0,y=0,width=2560,height=1440),
-        Screen(x=0,y=1440,width=840,height=1440),
-        Screen(x=840,y=1440,width=3440,height=1440),
-        Screen(x=4280,y=1440,width=840,height=1440),
+        Screen(bottom=bar.Bar(widgets=init_widgets_screen1(), background=tsBgColor, size=26),x=1280,y=0,width=2560,height=1440),
+        Screen(x=0,y=1440,width=3440,height=1440),
+        Screen(x=3440,y=1440,width=1680,height=1440),
+    ],
+    # 2x 16:9 side by side
+    [
+        Screen(bottom=bar.Bar(widgets=init_widgets_screen1(), background=tsBgColor, size=26),x=1280,y=0,width=2560,height=1440),
+        Screen(x=0,y=1440,width=2560,height=1440),
+        Screen(x=2560,y=1440,width=2560,height=1440),
     ],
     # 32:9, no fake screens
     [
-        Screen(bottom=bar.Bar(widgets=init_widgets_screen1(),background=tsBgColor, size=26),x=0,y=0,width=2560,height=1440),
+        Screen(bottom=bar.Bar(widgets=init_widgets_screen1(), background=tsBgColor, size=26),x=1280,y=0,width=2560,height=1440),
         Screen(x=0,y=1440,width=5120,height=1440),
     ],
 ]
 
-fake_screen_index = 0;
-fake_screens = fake_screen_layouts[fake_screen_index]
+fake_screens = fake_screen_layouts[current_index]

@@ -1,4 +1,4 @@
-from keys import keys, mod, terminal
+from keys import keys, mod, shift, terminal
 from libqtile.config import Group, ScratchPad, DropDown, Key
 from libqtile.lazy import lazy
 
@@ -26,9 +26,9 @@ for i in range(len(group_names)):
 for i in groups:
     keys.extend([
         Key([mod], i.name, lazy.group[i.name].toscreen(), desc="Mod + number to move to that group."),
-        Key(["mod1"], "Tab", lazy.screen.next_group(), desc="Move to next group."),
-        Key(["mod1", "shift"], "Tab", lazy.screen.prev_group(), desc="Move to previous group."),
-        Key([mod, "shift"], i.name, lazy.window.togroup(i.name), desc="Move focused window to new group."),
+        Key([mod], "Tab", lazy.screen.next_group(), desc="Move to next group."),
+        Key([mod, shift], "Tab", lazy.screen.prev_group(), desc="Move to previous group."),
+        Key([mod, shift], i.name, lazy.window.togroup(i.name), desc="Move focused window to new group."),
     ])
 
 # Define scratchpads

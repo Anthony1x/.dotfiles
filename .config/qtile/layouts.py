@@ -11,8 +11,8 @@ layout_theme = {
     }
 
 layouts = [
-  layout.MonadTall(**layout_theme)
-  # layout.MonadWide(**layout_theme),
+  layout.MonadTall(**layout_theme),
+  layout.MonadWide(**layout_theme),
   # layout.MonadThreeCol(**layout_theme),
   # layout.Floating(**layout_theme),
   # layout.Spiral(**layout_theme),

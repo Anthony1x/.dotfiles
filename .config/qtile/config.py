@@ -39,7 +39,7 @@ def autostart():
 
 # If things like steam games want to auto-minimize themselves when losing
 # focus, should we respect this or not?
-auto_minimize = True
+auto_minimize = False # True
 
 # When using the Wayland backend, this can be used to configure input devices.
 wl_input_rules = None
