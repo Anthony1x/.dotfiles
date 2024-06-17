@@ -1,0 +1,101 @@
+# $schema" = "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json"
+final_space = true
+version = 2
+
+[palette]
+os = "#ACB0BE"
+pink = "#F5BDE6"
+lavender = "#B7BDF8"
+blue = "#8AADF4"
+wight = "#FFFFFF"
+yellow = "#F9E2AF"
+text = "#494D64"
+
+[[blocks]]
+alignment = "left"
+type = "prompt"
+newline = true
+
+  [[blocks.segments]]
+  background = "p:blue"
+  foreground = "p:wight"
+  powerline_symbol = ""
+  leading_diamond = ""
+  style = "diamond"
+  template = "{{.Icon}} "
+  type = "os"
+
+  [[blocks.segments]]
+  background = "p:blue"
+  foreground = "p:text"
+  powerline_symbol = ""
+  style = "diamond"
+  template = "{{ .UserName }}@{{ .HostName }}"
+  type = "session"
+
+  [[blocks.segments]]
+  background = "p:pink"
+  foreground = "p:text"
+  powerline_symbol = ""
+  style = "powerline"
+  template = " {{ .Path }}"
+  type = "path"
+
+    [blocks.segments.properties]
+    folder_icon = "...."
+    home_icon = "~"
+    style = "agnoster_short"
+
+  [[blocks.segments]]
+  background = "p:lavender"
+  foreground = "p:text"
+  style = "powerline"
+  powerline_symbol = ""
+  template = " {{ .HEAD }}"
+  type = "git"
+
+    [blocks.segments.properties]
+    branch_icon = " "
+    cherry_pick_icon = " "
+    commit_icon = " "
+    fetch_status = false
+    fetch_upstream_icon = false
+    merge_icon = " "
+    no_commits_icon = " "
+    rebase_icon = " "
+    revert_icon = " "
+    tag_icon = " "
+
+
+  [[blocks.segments]]
+    type = "text"
+    style = "plain"
+    foreground_templates = [
+      "{{if gt .Code 0}}red{{end}}",
+      "{{if eq .Code 0}}magenta{{end}}",
+    ]
+    template = "\n ❯"
+
+[[blocks]]
+  type = 'rprompt'
+  overflow = 'hidden'
+
+  [[blocks.segments]]
+    type = 'executiontime'
+    style = 'diamond'
+    foreground = 'p:text'
+    background = 'p:yellow'
+    template = '{{ .FormattedMs }}'
+    leading_diamond = "\ue0b6"
+    trailing_diamond = "\ue0b4"
+    [blocks.segments.properties]
+      threshold = 500
+
+[transient_prompt]
+  background = "transparent"
+  foreground = "#ffffff"
+  template = "❯ "
+  foreground_templates = [
+    "{{if gt .Code 0}}red{{end}}",
+    "{{if eq .Code 0}}magenta{{end}}",
+  ]
