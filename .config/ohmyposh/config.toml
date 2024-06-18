@@ -66,19 +66,9 @@ newline = true
     revert_icon = " "
     tag_icon = " "
 
-
-  [[blocks.segments]]
-    type = "text"
-    style = "plain"
-    foreground_templates = [
-      "{{if gt .Code 0}}red{{end}}",
-      "{{if eq .Code 0}}magenta{{end}}",
-    ]
-    template = "\n ❯"
-
 [[blocks]]
-  type = 'rprompt'
-  overflow = 'hidden'
+alignment = "right"
+type = "prompt"
 
   [[blocks.segments]]
     type = 'executiontime'
@@ -89,7 +79,20 @@ newline = true
     leading_diamond = "\ue0b6"
     trailing_diamond = "\ue0b4"
     [blocks.segments.properties]
-      threshold = 500
+      threshold = 250
+
+[[blocks]]
+alignment = "left"
+type = "prompt"
+
+  [[blocks.segments]]
+    type = "text"
+    style = "plain"
+    foreground_templates = [
+      "{{if gt .Code 0}}red{{end}}",
+      "{{if eq .Code 0}}magenta{{end}}",
+    ]
+    template = "\n ❯"
 
 [transient_prompt]
   background = "transparent"
