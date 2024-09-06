@@ -42,27 +42,27 @@ local config = function()
 	})
 
 	-- typescript
-	lspconfig.tsserver.setup({
-    -- Re-enable this block comment once inlay hints are actually supported in neovim
-    -- [
-    init_options = {
-        preferences = {
-            includeInlayParameterNameHints = "all",
-            includeInlayParameterNameHintsWhenArgumentMatchesName = true,
-            includeInlayFunctionParameterTypeHints = true,
-            includeInlayVariableTypeHints = true,
-            includeInlayPropertyDeclarationTypeHints = true,
-            includeInlayFunctionLikeReturnTypeHints = true,
-            includeInlayEnumMemberValueHints = true,
-            importModuleSpecifierPreference = 'non-relative'
-        },
-    },
-    -- ]
+	lspconfig.ts_ls.setup({
+		-- Re-enable this block comment once inlay hints are actually supported in neovim
+		-- [
+		init_options = {
+			preferences = {
+				includeInlayParameterNameHints = "all",
+				includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+				includeInlayFunctionParameterTypeHints = true,
+				includeInlayVariableTypeHints = true,
+				includeInlayPropertyDeclarationTypeHints = true,
+				includeInlayFunctionLikeReturnTypeHints = true,
+				includeInlayEnumMemberValueHints = true,
+				importModuleSpecifierPreference = "non-relative",
+			},
+		},
+		-- ]
 
 		on_attach = on_attach,
 		capabilities = capabilities,
 		filetypes = {
-			"typescript",
+			"typescript", "javascript"
 		},
 		root_dir = lspconfig.util.root_pattern("package.json", "tsconfig.json", ".git"),
 	})
@@ -98,21 +98,21 @@ local config = function()
 		on_attach = on_attach,
 	})
 
-  -- C / C++
-  lspconfig.clangd.setup({
-    filetypes = { "c", "cpp", "h", "hpp" },
-    on_attach = function (client, bufnr)
-      client.server_capabilities.signatureHelpProvider = false
-      on_attach(client, bufnr)
-      capabilities = capabilities
-    end
-  })
+	-- C / C++
+	lspconfig.clangd.setup({
+		filetypes = { "c", "cpp", "h", "hpp" },
+		on_attach = function(client, bufnr)
+			client.server_capabilities.signatureHelpProvider = false
+			on_attach(client, bufnr)
+			capabilities = capabilities
+		end,
+	})
 
 	-- php
 	lspconfig.intelephense.setup({
-	 	capabilities = capabilities,
-	 	on_attach = on_attach,
-	 	filetypes = { "php" },
+		capabilities = capabilities,
+		on_attach = on_attach,
+		filetypes = { "php" },
 	})
 
 	local luacheck = require("efmls-configs.linters.luacheck")
@@ -172,7 +172,7 @@ local config = function()
 				markdown = { alex, prettierd },
 				docker = { hadolint, prettierd },
 				solidity = { solhint },
-        -- php = { php }
+				-- php = { php }
 			},
 		},
 	})
