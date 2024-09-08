@@ -31,34 +31,38 @@ keys = [
     Key([mod, alt], "o", lazy.spawn(f"{scripts_dir}/picom_toggle.sh")),
     Key([mod, alt], "l", lazy.spawn(screen_lock)),
 
-    # Media Keys - change volume
-    Key([], "XF86AudioLowerVolume", lazy.spawn("pamixer -d 2"), desc="Lower Volume by 2%"),
-    Key([], "XF86AudioRaiseVolume", lazy.spawn("pamixer -i 2"), desc="Raise Volume by 2%"),
-    Key([], "XF86AudioMute", lazy.spawn("pamixer -t"), desc="Mute/Unmute Volume"),
-
     # Movement Keys
-    Key([mod], "h", lazy.layout.left(), desc="Move focus to left"),
-    Key([mod], "l", lazy.layout.right(), desc="Move focus to right"),
-    Key([mod], "j", lazy.layout.down(), desc="Move focus down"),
-    Key([mod], "k", lazy.layout.up(), desc="Move focus up"),
+    Key([mod], "left", lazy.layout.left(), desc="Move focus to left"),
+    Key([mod], "right", lazy.layout.right(), desc="Move focus to right"),
+    Key([mod], "down", lazy.layout.down(), desc="Move focus down"),
+    Key([mod], "up", lazy.layout.up(), desc="Move focus up"),
     Key([mod], "space", lazy.layout.next(), desc="Move window focus to other window"),
 
-    Key([mod, shift], "h", lazy.layout.shuffle_left(), desc="Move window to the left"),
-    Key([mod, shift], "l", lazy.layout.shuffle_right(), desc="Move window to the right"),
-    Key([mod, shift], "j", lazy.layout.shuffle_down(), desc="Move window down"),
-    Key([mod, shift], "k", lazy.layout.shuffle_up(), desc="Move window up"),
+    Key([mod, shift], "left", lazy.layout.shuffle_left(), desc="Move window to the left"),
+    Key([mod, shift], "right", lazy.layout.shuffle_right(), desc="Move window to the right"),
+    Key([mod, shift], "up", lazy.layout.shuffle_down(), desc="Move window down"),
+    Key([mod, shift], "down", lazy.layout.shuffle_up(), desc="Move window up"),
 
-    Key([mod, "control"], "h", lazy.layout.grow_left(), desc="Grow window to the left"),
-    Key([mod, "control"], "l", lazy.layout.grow_right(), desc="Grow window to the right"),
-    Key([mod, "control"], "j", lazy.layout.grow_down(), desc="Grow window down"),
-    Key([mod, "control"], "k", lazy.layout.grow_up(), desc="Grow window up"),
+    Key([mod, "control"], "left", lazy.layout.grow_left(), desc="Grow window to the left"),
+    Key([mod, "control"], "right", lazy.layout.grow_right(), desc="Grow window to the right"),
+    Key([mod, "control"], "down", lazy.layout.grow_down(), desc="Grow window down"),
+    Key([mod, "control"], "up", lazy.layout.grow_up(), desc="Grow window up"),
 
+    # Layouts
     Key([alt], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
     Key([alt, shift], "Tab", lazy.prev_layout(), desc="Toggle between layouts"),
 
     # Switch focus of monitors
     Key([mod], "period", lazy.next_screen()),
     Key([mod], "comma", lazy.prev_screen()),
+
+    # Media keys
+    Key([], "XF86AudioRaiseVolume", lazy.spawn('pactl set-sink-volume @DEFAULT_SINK@ +2%')),
+    Key([], "XF86AudioLowerVolume", lazy.spawn('pactl set-sink-volume @DEFAULT_SINK@ -2%')),
+    Key([], "XF86AudioMute", lazy.spawn('pactl set-sink-mute @DEFAULT_SINK@ toggle')),
+    Key([], "XF86AudioPlay", lazy.spawn('playerctl play-pause')),
+    Key([], "XF86AudioPrev", lazy.spawn('playerctl previous')),
+    Key([], "XF86AudioNext", lazy.spawn('playerctl next')),
 ]
 
 # Scratchpad keybindings
