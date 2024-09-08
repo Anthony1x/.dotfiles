@@ -70,6 +70,7 @@ vim.api.nvim_create_autocmd({ "BufLeave", "FocusLost", "InsertEnter", "CmdlineEn
 })
 
 if vim.g.neovide then
-    -- vim.g.neovide_transparency = 0.9
-    -- vim.g.neovide_window_blurred = true
+    vim.g.neovide_transparency = 0.9
+    vim.g.neovide_window_blurred = true
+    vim.g.neovide_scroll_animation_length = 0.1
 end
