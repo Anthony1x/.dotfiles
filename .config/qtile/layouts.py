@@ -8,7 +8,14 @@ layout_theme = {
         "border_width": 2,
         "border_focus": colors[7],
         "border_normal": colors[2]
-    }
+}
+
+layout_theme_floating = {
+    "margin": 0,
+    "border_width": 3,
+    "border_focus": colors[7],
+    "border_normal": colors[2]
+}
 
 layouts = [
   layout.MonadTall(**layout_theme),
@@ -21,6 +28,7 @@ layouts = [
 ]
 
 floating_layout = layout.Floating(
+    **layout_theme_floating,
     float_rules=[
         # Run the utility of `xprop` to see the wm class and name of an X client.
         *layout.Floating.default_float_rules,

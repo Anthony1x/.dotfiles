@@ -74,7 +74,7 @@ keys.extend([
 for vt in range(1, 8):
     keys.append(
         Key(
-            ["control", "mod1"],
+            ["control", alt],
             f"f{vt}",
             lazy.core.change_vt(vt).when(func=lambda: qtile.core.name == "wayland"),
             desc=f"Switch to VT{vt}",
