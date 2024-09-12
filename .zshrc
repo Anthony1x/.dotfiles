@@ -1,8 +1,6 @@
 export PATH=$PATH:/home/anthony/.spicetify
 export PATH=$PATH:/home/anthony/.local/bin
 
-plugins=(git)
-
 eval "$(oh-my-posh init zsh --config $HOME/.config/ohmyposh/config.toml)"
 
 if [[ "$TERM_PROGRAM" == 'vscode' ]] || [[ "$TERM_PROGRAM" == 'zed' ]] ; then
@@ -19,3 +17,6 @@ alias KILLYOURSELF="exit"
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /usr/share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+
+SAVEHIST=5000  # Save most-recent 5000 lines
+HISTFILE=~/.zsh_history
