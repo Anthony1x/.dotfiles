@@ -1,25 +1,11 @@
-local mapkey = require("util.keymapper").mapkey
--- local wk = require("which-key")
+-- Keymaps are automatically loaded on the VeryLazy event
+-- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
+-- Add any additional keymaps here
 
-local toggle = "Neotree toggle"
-local focus = "Neotree focus"
+-- use `vim.keymap.set` instead
+local map = vim.keymap.set
 
--- Directory Navigation
-mapkey("<leader>m", focus, "n")
-mapkey("<leader>e", toggle, "n")
-
--- Window Management
-mapkey("<leader>sv", "vsplit", "n") -- Split Vertically
-mapkey("<leader>sh", "split", "n") -- Split Horizontally
-mapkey("<leader>sm", "MaximizerToggle", "n") -- Toggle Minimise
-
--- DAP
-mapkey("<leader>db", "DapToggleBreakpoint<CR>", "n")
-mapkey("<leader>dr", "DapContinue<CR>", "n")
-
--- Format
-mapkey("<leader>fm", ":lua vim.lsp.buf.format()<CR>", "n")
-
--- wk.add({
--- 	{ "<leader>fm",":lua vim.lsp.buf.format()<CR>", "Format", "n" },
--- })
+-- Enable inlay hint support
+map("n", "<leader>uh", function()
+    vim.lsp.inlay_hint(0, nil)
+end, { desc = "Toggle inlay hints" })
