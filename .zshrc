@@ -14,11 +14,9 @@ if [[ "$TERM_PROGRAM" == 'vscode' ]] || [[ "$TERM_PROGRAM" == 'zed' ]] ; then
   alias 'rg'='rg --smart-case --hidden --no-heading --column'
 fi
 
-plugins=(
-    zsh-autosuggestions,
-    zsh-syntax-highlighting,
-    fast-syntax-highlighting
-)
+source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /usr/share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 
 alias yay="paru"
 alias ls="eza"
