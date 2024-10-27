@@ -16,6 +16,8 @@ screen_lock = "betterlockscreen -l"
 scripts_dir = "/home/anthony/.config/qtile/scripts"
 shutdown_command = "rofi -show power-menu -modi power-menu:/home/anthony/.local/bin/rofi-power-menu"
 
+anki_record = "/home/anthony/.local/bin/record_audio.sh"
+
 keys = [
     Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
     Key([mod], "w", lazy.window.kill(), desc="Kill focused window"),
@@ -63,6 +65,10 @@ keys = [
     Key([], "XF86AudioPlay", lazy.spawn('playerctl play-pause')),
     Key([], "XF86AudioPrev", lazy.spawn('playerctl previous')),
     Key([], "XF86AudioNext", lazy.spawn('playerctl next')),
+
+    # Anki recording script 
+    Key([mod], "m", lazy.spawn(anki_record)),
+
 ]
 
 # Scratchpad keybindings

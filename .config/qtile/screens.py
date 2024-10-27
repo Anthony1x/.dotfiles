@@ -13,6 +13,8 @@ from libqtile import qtile
 from dotenv import get_key
 from pathlib import Path
 
+font = "Maple Mono"
+
 
 decor_left = {
     "decorations": [
@@ -38,6 +40,7 @@ def init_widgets_list():
         widget.GroupBox(
             **decor_left,
             fontsize = 11,
+            font = font,
             margin_y = 5,
             margin_x = 5,
             padding_y = 0,
@@ -58,7 +61,8 @@ def init_widgets_list():
             **decor_left,
             fmt=" {}",
             foreground="000000.8",
-            distro="Arch_yay",
+            font = font,
+            distro="Arch_paru",
             update_interval=900,
             colour_have_updates=colors[4],
             colour_no_updates=colors[4],
@@ -71,6 +75,7 @@ def init_widgets_list():
             foreground = colors[6],
             width=555,
             padding=5,
+            font = font,
             background="#08080c99",
         ),
         widget.Spacer(
@@ -83,10 +88,12 @@ def init_widgets_list():
             background=Gruvbox['shade5'],
             #foreground = colors[4],
             format = "%a, %b %d - %H:%M 󰥔",
+            font = font,
         ),
         widget.Spacer(
             **decor_right,
             foreground="#08080c99",
+            font = font,
         ),
         widget.Net(
             **decor_right,
@@ -94,7 +101,8 @@ def init_widgets_list():
             background=Gruvbox['shade1'],
             #foreground = colors[1],
             format='{down:.0f}{down_suffix} ↓ {up:.0f}{up_suffix}↑',
-            padding=10
+            padding=10,
+            font = font,
         ),
         widget.CPU(
             **decor_right,
@@ -102,6 +110,7 @@ def init_widgets_list():
             #foreground = colors[4],
             background=Gruvbox['shade2'],
             padding=10,
+            font = font,
         ),
          widget.Memory(
             **decor_right,
@@ -111,12 +120,14 @@ def init_widgets_list():
             measure_mem='M',
             format = '{MemUsed: .0f}{mm}',
             fmt = '{} used  ',
+            font = font,
         ),
         widget.Volume(
             **decor_right,
             padding=10,
             background=Gruvbox['shade5'],
             fmt = '{}  ',
+            font = font,
         ),
         widget.Volume(
             **decor_right,
@@ -124,16 +135,19 @@ def init_widgets_list():
             background=Gruvbox['shade6'],
             channel='Capture',
             #foreground = colors[7],
+            font = font,
             fmt = '{} ',
         ),
         widget.CurrentLayout(
             **decor_left,
             background='#FF5E5E'+'.7',
+            font = font,
             #foreground = colors[1],
             # padding = 2
         ),
         widget.Systray(
             **decor_right,
+            font = font,
             #background=Gruvbox['shade8'],
             padding = 5
         ),
