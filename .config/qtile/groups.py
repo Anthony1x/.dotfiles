@@ -33,7 +33,7 @@ for i in groups:
 
 # Define scratchpads
 groups.append(ScratchPad("scratchpad", [
-    DropDown("term", f"{terminal} --class=scratch", width=0.8, height=0.8, x=0.1, y=0.1, opacity=0.9),
+    DropDown("term", f"{terminal} --class=scratch", width=0.8, height=0.8, x=0.1, y=0.1, opacity=1),
     DropDown("top", f"{terminal} --class=scratch -e btop", width=0.8, height=0.8, x=0.1, y=0.1, opacity=1),
-    DropDown("volume", f"{terminal} --class=volume -e pulsemixer", width=0.8, height=0.8, x=0.1, y=0.1, opacity=0.9),
+    DropDown("volume", f"{terminal} --class=volume -e pulsemixer", width=0.8, height=0.8, x=0.1, y=0.1, opacity=1),
 ]))

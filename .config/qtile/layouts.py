@@ -4,10 +4,10 @@ from libqtile.config import Match
 
 # Define layouts and layout themes
 layout_theme = {
-        "margin":6,
-        "border_width": 2,
-        "border_focus": colors[7],
-        "border_normal": colors[2]
+    "margin":6,
+    "border_width": 2,
+    "border_focus": colors[7],
+    "border_normal": colors[2]
 }
 
 layout_theme_floating = {
