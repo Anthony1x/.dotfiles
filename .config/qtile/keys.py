@@ -17,6 +17,7 @@ scripts_dir = "/home/anthony/.config/qtile/scripts"
 shutdown_command = "rofi -show power-menu -modi power-menu:/home/anthony/.local/bin/rofi-power-menu"
 
 anki_record = "/home/anthony/.local/bin/record_audio.sh"
+anki_screenie = "/home/anthony/.local/bin/take_screenshot.sh"
 
 keys = [
     Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
@@ -59,15 +60,18 @@ keys = [
     Key([mod], "comma", lazy.prev_screen()),
 
     # Media keys
-    Key([], "XF86AudioRaiseVolume", lazy.spawn('pactl set-sink-volume @DEFAULT_SINK@ +2%')),
-    Key([], "XF86AudioLowerVolume", lazy.spawn('pactl set-sink-volume @DEFAULT_SINK@ -2%')),
-    Key([], "XF86AudioMute", lazy.spawn('pactl set-sink-mute @DEFAULT_SINK@ toggle')),
+    Key([], "XF86AudioRaiseVolume", lazy.spawn(f'{scripts_dir}/volume.sh up')),
+    # Key([], "XF86AudioRaiseVolume", lazy.spawn('pactl set-sink-volume @DEFAULT_SINK@ +2%')),
+    Key([], "XF86AudioLowerVolume", lazy.spawn(f'{scripts_dir}/volume.sh down')),
+    # Key([], "XF86AudioLowerVolume", lazy.spawn('pactl set-sink-volume @DEFAULT_SINK@ -2%')),
+    Key([], "XF86AudioMute", lazy.spawn(f'{scripts_dir}/volume.sh mute')),
     Key([], "XF86AudioPlay", lazy.spawn('playerctl play-pause')),
     Key([], "XF86AudioPrev", lazy.spawn('playerctl previous')),
     Key([], "XF86AudioNext", lazy.spawn('playerctl next')),
 
-    # Anki recording script 
-    Key([mod], "m", lazy.spawn(anki_record)),
+    # Anki recording scripts
+    Key([mod], "m", lazy.spawn(anki_screenie)),
+    Key([mod, shift], "m", lazy.spawn(anki_record)),
 
 ]
 
@@ -78,15 +82,3 @@ keys.extend([
     Key([mod, shift], "n", lazy.group['scratchpad'].dropdown_toggle('top')),
 ])
 
-# Add key bindings to switch VTs in Wayland.
-# We can't check qtile.core.name in default config as it is loaded before qtile is started
-# We therefore defer the check until the key binding is run by using .when(func=...)
-for vt in range(1, 8):
-    keys.append(
-        Key(
-            ["control", alt],
-            f"f{vt}",
-            lazy.core.change_vt(vt).when(func=lambda: qtile.core.name == "wayland"),
-            desc=f"Switch to VT{vt}",
-        )
-    )
