@@ -25,3 +25,5 @@ alias sizeof="stat --printf='%s'"
 alias man='batman'
 alias KILLYOURSELF="exit"
 
+
+export N_PREFIX="$HOME/Documents/Programs/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"  # Added by n-install (see http://git.io/n-install-repo).

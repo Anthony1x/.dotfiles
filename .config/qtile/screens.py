@@ -13,7 +13,7 @@ from libqtile import qtile
 from dotenv import get_key
 from pathlib import Path
 
-font = "Maple Mono"
+font = "JetbrainsMono Nerd Font"
 
 
 decor_left = {

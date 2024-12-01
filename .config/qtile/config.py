@@ -41,7 +41,4 @@ def autostart():
 # focus, should we respect this or not?
 auto_minimize = False # True
 
-# When using the Wayland backend, this can be used to configure input devices.
-wl_input_rules = None
-
 wmname = "qtile"
