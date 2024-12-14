@@ -53,19 +53,6 @@ widget_padding = 15
 
 # Widgets Decorations
 
-widget_decoration = "RectDecoration"
-
-widget_decoration_border_width = 1
-widget_decoration_border_color = theme['accent']
-widget_decoration_border_opacity = 1.0
-widget_decoration_border_padding_x = 0
-widget_decoration_border_padding_y = 0
-
-widget_decoration_powerline_path = "arrow_left"
-widget_decoration_powerline_size = 10
-widget_decoration_powerline_padding_x = 0
-widget_decoration_powerline_padding_y = 0
-
 widget_decoration_rect_filled = True
 widget_decoration_rect_color = theme["alt_background"]
 widget_decoration_rect_opacity = 1.0
@@ -78,9 +65,8 @@ widget_decoration_rect_radius = 10
 # Groups
 groups = []
 
-groups_count = 9
 group_names = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
-group_labels = group_names
+group_labels = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
 
 # Add group names, labels, and default layouts to the groups object.
 for i in range(len(group_names)):

@@ -45,24 +45,7 @@ def volume(output):
         return output
 
 
-@WidgetTweaker
-def currentLayout(output):
-    return output.capitalize()
-
-
 decorations = {
-    "BorderDecoration": {
-        "border_width": widget_decoration_border_width,
-        "colour": widget_decoration_border_color + format(int(widget_decoration_border_opacity * 255), "02x"),
-        "padding_x": widget_decoration_border_padding_x,
-        "padding_y": widget_decoration_border_padding_y,
-    },
-    "PowerLineDecoration": {
-        "path": widget_decoration_powerline_path,
-        "size": widget_decoration_powerline_size,
-        "padding_x": widget_decoration_powerline_padding_x,
-        "padding_y": widget_decoration_powerline_padding_y,
-    },
     "RectDecoration": {
         "group": True,
         "filled": widget_decoration_rect_filled,
@@ -75,8 +58,8 @@ decorations = {
     }
 }
 
-decoration = [getattr(widget.decorations, widget_decoration)
-              (**decorations[widget_decoration])]
+decoration = [getattr(widget.decorations, 'RectDecoration')
+              (**decorations['RectDecoration'])]
 
 widget_defaults = dict(
     font=bar_font,
@@ -97,13 +80,18 @@ left = [
     widget.GroupBox(
         font=f"{bar_font} Bold",
         disable_drag=True,
-        borderwidth=0,
         fontsize=15,
         inactive=theme['disabled'],
         active=bar_foreground_color,
         block_highlight_text_color=theme['accent'],
         padding=7,
         fmt=groupBox,
+        highlight_color = "#00000000",
+        highlight_method = "line",
+        this_current_screen_border = theme['highlight'],
+        this_screen_border = '00000000',
+        other_current_screen_border = theme['highlight'],
+        other_screen_border = '00000000',
     ),
 ]
 
@@ -139,7 +127,6 @@ right = [
     widget.Volume(
         fmt=' {}',
         channel='Capture',
-        # foreground = colors[7],
     ), space,
     widget.StatusNotifier(),
 ]

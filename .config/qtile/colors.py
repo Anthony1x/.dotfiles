@@ -46,11 +46,13 @@ CATPPUCCIN = {
 }
 
 CATPPUCCIN_MOCHA = {
-    'foreground': '#cdd6f4',
-    'background': '#1e1e2e',
-    'alt_background': '#181825',
-    'disabled': '#313244',
+    'foreground': CATPPUCCIN["text"],
+    'background': CATPPUCCIN["base"],
+    'alt_background': CATPPUCCIN["mantle"],
+    'disabled': CATPPUCCIN['surface0'],
     'accent': CATPPUCCIN['red'],
+    'highlight': CATPPUCCIN['green'],
+
 }
 
 Gruvbox = {
