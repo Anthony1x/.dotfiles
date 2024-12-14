@@ -52,12 +52,8 @@ keys = [
     Key([mod, shift], "down", lazy.layout.shuffle_down(), desc="Move window down"),
     Key([mod, shift], "up", lazy.layout.shuffle_up(), desc="Move window up"),
 
-    Key([mod, "control"], "left", lazy.layout.grow_left(),
-        desc="Grow window to the left"),
-    Key([mod, "control"], "right", lazy.layout.grow_right(),
-        desc="Grow window to the right"),
-    Key([mod, "control"], "down", lazy.layout.grow_down(), desc="Grow window down"),
-    Key([mod, "control"], "up", lazy.layout.grow_up(), desc="Grow window up"),
+    Key([mod, "control"], "i", lazy.layout.shrink(), desc="Shrink window"),
+    Key([mod, "control"], "o", lazy.layout.grow(), desc="Grow window"),
 
     # Layouts
     Key([alt], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
