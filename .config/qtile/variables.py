@@ -1,5 +1,4 @@
 from colors import CATPPUCCIN_MOCHA as theme
-from libqtile.config import Group
 from keys import keys, mod, shift, terminal
 from libqtile.config import Group, ScratchPad, DropDown, Key
 from libqtile.lazy import lazy
@@ -42,7 +41,7 @@ bar_foreground_color = theme['foreground']
 bar_background_opacity = 0
 bar_global_opacity = 1.0
 bar_nerd_font = "JetbrainsMono Nerd Font"
-bar_font = bar_nerd_font # "Opensans Medium"
+bar_font = bar_nerd_font  # "Opensans Medium"
 bar_fontsize = 13.2
 
 # Widgets
@@ -95,15 +94,21 @@ for i in range(len(group_names)):
 # Add group specific keybindings
 for i in groups:
     keys.extend([
-        Key([mod], i.name, lazy.group[i.name].toscreen(), desc="Mod + number to move to that group."),
+        Key([mod], i.name, lazy.group[i.name].toscreen(),
+            desc="Mod + number to move to that group."),
         Key([mod], "Tab", lazy.screen.next_group(), desc="Move to next group."),
-        Key([mod, shift], "Tab", lazy.screen.prev_group(), desc="Move to previous group."),
-        Key([mod, shift], i.name, lazy.window.togroup(i.name), desc="Move focused window to new group."),
+        Key([mod, shift], "Tab", lazy.screen.prev_group(),
+            desc="Move to previous group."),
+        Key([mod, shift], i.name, lazy.window.togroup(i.name),
+            desc="Move focused window to new group."),
     ])
 
 # Define scratchpads
 groups.append(ScratchPad("scratchpad", [
-    DropDown("term", f"{terminal} --class=scratch", width=0.8, height=0.8, x=0.1, y=0.1, opacity=1),
-    DropDown("top", f"{terminal} --class=scratch -e btop", width=0.8, height=0.8, x=0.1, y=0.1, opacity=1),
-    DropDown("volume", f"{terminal} --class=volume -e pulsemixer", width=0.8, height=0.8, x=0.1, y=0.1, opacity=1),
+    DropDown("term", f"{terminal} --class=scratch",
+             width=0.8, height=0.8, x=0.1, y=0.1, opacity=1),
+    DropDown("top", f"{terminal} --class=scratch -e btop",
+             width=0.8, height=0.8, x=0.1, y=0.1, opacity=1),
+    DropDown("volume", f"{terminal} --class=volume -e pulsemixer",
+             width=0.8, height=0.8, x=0.1, y=0.1, opacity=1),
 ]))

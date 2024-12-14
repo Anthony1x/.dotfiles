@@ -6,7 +6,7 @@ alt = "mod1"
 shift = "shift"
 
 terminal = "kitty"
-mymenu = "rofi -show drun"
+rofi = "rofi -show drun"
 browser = "brave"
 files = "thunar"
 screenie = "flameshot gui"
@@ -23,12 +23,14 @@ anki_record = "/home/anthony/.local/bin/record_audio.sh"
 keys = [
     Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
     Key([mod], "w", lazy.window.kill(), desc="Kill focused window"),
-    Key([mod], "f", lazy.window.toggle_floating(), desc="Toggle floating on the focused window"),
-    Key([mod, alt], "f", lazy.window.toggle_fullscreen(), desc="Toggle fullscreen on the focused window"),
+    Key([mod], "f", lazy.window.toggle_floating(),
+        desc="Toggle floating on the focused window"),
+    Key([mod, alt], "f", lazy.window.toggle_fullscreen(),
+        desc="Toggle fullscreen on the focused window"),
     Key([mod, shift], "r", lazy.reload_config(), desc="Reload the config"),
     Key([mod, shift], "x", lazy.spawn(shutdown_command), desc="Open power menu"),
     Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
-    Key([mod], "d", lazy.spawn(mymenu)),
+    Key([mod], "d", lazy.spawn(rofi)),
     Key([mod], "q", lazy.spawn(browser)),
     Key([mod, shift], "Return", lazy.spawn(files)),
     Key([mod, alt], "s", lazy.spawn(screenie)),
@@ -40,15 +42,20 @@ keys = [
     Key([mod], "right", lazy.layout.right(), desc="Move focus to right"),
     Key([mod], "down", lazy.layout.down(), desc="Move focus down"),
     Key([mod], "up", lazy.layout.up(), desc="Move focus up"),
-    Key([mod], "space", lazy.layout.next(), desc="Move window focus to other window"),
+    Key([mod], "space", lazy.layout.next(),
+        desc="Move window focus to other window"),
 
-    Key([mod, shift], "left", lazy.layout.shuffle_left(), desc="Move window to the left"),
-    Key([mod, shift], "right", lazy.layout.shuffle_right(), desc="Move window to the right"),
+    Key([mod, shift], "left", lazy.layout.shuffle_left(),
+        desc="Move window to the left"),
+    Key([mod, shift], "right", lazy.layout.shuffle_right(),
+        desc="Move window to the right"),
     Key([mod, shift], "up", lazy.layout.shuffle_down(), desc="Move window down"),
     Key([mod, shift], "down", lazy.layout.shuffle_up(), desc="Move window up"),
 
-    Key([mod, "control"], "left", lazy.layout.grow_left(), desc="Grow window to the left"),
-    Key([mod, "control"], "right", lazy.layout.grow_right(), desc="Grow window to the right"),
+    Key([mod, "control"], "left", lazy.layout.grow_left(),
+        desc="Grow window to the left"),
+    Key([mod, "control"], "right", lazy.layout.grow_right(),
+        desc="Grow window to the right"),
     Key([mod, "control"], "down", lazy.layout.grow_down(), desc="Grow window down"),
     Key([mod, "control"], "up", lazy.layout.grow_up(), desc="Grow window up"),
 
@@ -62,9 +69,8 @@ keys = [
 
     # Media keys
     Key([], "XF86AudioRaiseVolume", lazy.spawn(f'{scripts_dir}/volume.sh up')),
-    # Key([], "XF86AudioRaiseVolume", lazy.spawn('pactl set-sink-volume @DEFAULT_SINK@ +2%')),
-    Key([], "XF86AudioLowerVolume", lazy.spawn(f'{scripts_dir}/volume.sh down')),
-    # Key([], "XF86AudioLowerVolume", lazy.spawn('pactl set-sink-volume @DEFAULT_SINK@ -2%')),
+    Key([], "XF86AudioLowerVolume", lazy.spawn(
+        f'{scripts_dir}/volume.sh down')),
     Key([], "XF86AudioMute", lazy.spawn(f'{scripts_dir}/volume.sh mute')),
     Key([], "XF86AudioPlay", lazy.spawn('playerctl play-pause')),
     Key([], "XF86AudioPrev", lazy.spawn('playerctl previous')),
@@ -83,4 +89,3 @@ keys.extend([
     Key([mod], "v", lazy.group['scratchpad'].dropdown_toggle('volume')),
     Key([mod, shift], "n", lazy.group['scratchpad'].dropdown_toggle('top')),
 ])
-

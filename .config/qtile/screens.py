@@ -9,10 +9,13 @@ from libqtile.lazy import lazy
 from dotenv import get_key
 from pathlib import Path
 from variables import *
+from keys import terminal
+
 
 class WidgetTweaker:
     def __init__(self, func):
         self.format = func
+
 
 @WidgetTweaker
 def groupBox(output):
@@ -116,15 +119,16 @@ right = [
         padding=10,
     ),
     widget.CPU(
-        format = ' {load_percent}%',
+        format=' {load_percent}%',
         padding=10,
     ),
-        widget.Memory(
+    widget.Memory(
         padding=10,
-        mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(terminal + ' -e btop')},
+        mouse_callbacks={'Button1': lambda: qtile.cmd_spawn(
+            terminal + ' -e btop')},
         measure_mem='M',
-        format = '{MemUsed: .0f}{mm}',
-        fmt = ' {} ',
+        format='{MemUsed: .0f}{mm}',
+        fmt=' {} ',
     ), space,
     widget.Volume(
         step=2,
@@ -133,10 +137,10 @@ right = [
             'pactl set-sink-mute @DEFAULT_SINK@ toggle')},
     ),
     widget.Volume(
-        fmt = ' {}',
+        fmt=' {}',
         channel='Capture',
-        #foreground = colors[7],
-    ),space,
+        # foreground = colors[7],
+    ), space,
     widget.StatusNotifier(),
 ]
 
@@ -144,6 +148,7 @@ right = [
 
 file = Path('/home/anthony/.config/qtile/.env')
 current_index = int(get_key(dotenv_path=file, key_to_get="FAKE_SCREEN_INDEX"))
+
 
 def next_layout(qtile):
     global file, current_index
@@ -157,6 +162,7 @@ def next_layout(qtile):
 
     qtile.reload_config()
 
+
 def prev_layout(qtile):
     global file, current_index
 
@@ -169,6 +175,7 @@ def prev_layout(qtile):
 
     qtile.reload_config()
 
+
 keys.extend([
     #  Switch super-ultrawide monitor layout
     Key([mod, shift], "o", lazy.function(next_layout)),
@@ -180,9 +187,11 @@ keys.extend([
 bottomBar = bar.Bar(
     widgets=left_offset + left + sep + middle + sep + right + right_offset,
     size=bar_size,
-    background = bar_background_color + format(int(bar_background_opacity * 255), "02x"),
-    margin = [bar_top_margin, bar_right_margin, bar_bottom_margin-layouts_margin, bar_left_margin],
-    opacity = bar_global_opacity
+    background=bar_background_color +
+    format(int(bar_background_opacity * 255), "02x"),
+    margin=[bar_top_margin, bar_right_margin,
+            bar_bottom_margin-layouts_margin, bar_left_margin],
+    opacity=bar_global_opacity
 )
 
 fake_screen_layouts = [
