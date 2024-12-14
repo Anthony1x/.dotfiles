@@ -4,9 +4,9 @@ import subprocess
 from libqtile import  hook
 from libqtile.config import Click, Drag
 from libqtile.lazy import lazy
-from screens import fake_screens
+from screens import fake_screens, widget_defaults, extension_defaults
 from keys import mod, keys
-from groups import groups
+from variables import groups
 from layouts import layouts, floating_layout
 
 groups = groups
@@ -14,6 +14,8 @@ layouts = layouts
 floating_layout = floating_layout
 fake_screens = fake_screens
 keys = keys
+widget_defaults = widget_defaults
+extension_defaults = extension_defaults
 
 # Drag floating layouts.
 mouse = [

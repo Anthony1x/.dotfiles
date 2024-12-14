@@ -1,6 +1,5 @@
 from libqtile.config import Key
 from libqtile.lazy import lazy
-from libqtile import qtile
 
 mod = "mod4"
 alt = "mod1"

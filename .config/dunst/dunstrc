@@ -27,7 +27,7 @@
     width = (100, 500)
 
     # The maximum height of a single notification, excluding the frame.
-    height = 300
+    # height = 150
 
     # Position the notification in the top right corner
     origin = bottom-right
@@ -103,7 +103,7 @@
     frame_width = 3
 
     # Defines color of the frame around the notification window.
-    frame_color = "#89b4fa"
+    frame_color = "#F38BA8"
 
     # Size of gap to display between notifications - requires a compositor.
     # If value is greater than 0, separator_height will be ignored and a border

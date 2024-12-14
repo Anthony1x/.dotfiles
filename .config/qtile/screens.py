@@ -1,170 +1,144 @@
 from libqtile.config import Screen
 from libqtile import bar, qtile
-from colors import colors, Gruvbox
 # Make sure 'qtile-extras' is installed or this config will not work.
 from qtile_extras import widget
-from qtile_extras.widget.decorations import PowerLineDecoration
-from keys import terminal
 from dotenv import set_key
 from keys import keys, mod, shift
 from libqtile.config import Key
 from libqtile.lazy import lazy
-from libqtile import qtile
 from dotenv import get_key
 from pathlib import Path
+from variables import *
 
-font = "JetbrainsMono Nerd Font"
+class WidgetTweaker:
+    def __init__(self, func):
+        self.format = func
+
+@WidgetTweaker
+def groupBox(output):
+    index = group_names.index(output)
+    label = group_labels[index]
+
+    return label
 
 
-decor_left = {
-    "decorations": [
-        PowerLineDecoration(
-            path="forward_slash"
-        )
-    ],
+@WidgetTweaker
+def volume(output):
+    if output.endswith('%'):
+        volume = int(output[:-1])
+
+        icons = {
+            range(0, 33): '󰕿 ',
+            range(33, 66): '󰖀 ',
+            range(66, 101): '󰕾 '
+        }
+
+        icon = icons[next(filter(lambda r: volume in r, icons.keys()))]
+
+        return icon + output
+    elif output == 'M':
+        return '󰕿 Muted'
+    else:
+        return output
+
+
+@WidgetTweaker
+def currentLayout(output):
+    return output.capitalize()
+
+
+decorations = {
+    "BorderDecoration": {
+        "border_width": widget_decoration_border_width,
+        "colour": widget_decoration_border_color + format(int(widget_decoration_border_opacity * 255), "02x"),
+        "padding_x": widget_decoration_border_padding_x,
+        "padding_y": widget_decoration_border_padding_y,
+    },
+    "PowerLineDecoration": {
+        "path": widget_decoration_powerline_path,
+        "size": widget_decoration_powerline_size,
+        "padding_x": widget_decoration_powerline_padding_x,
+        "padding_y": widget_decoration_powerline_padding_y,
+    },
+    "RectDecoration": {
+        "group": True,
+        "filled": widget_decoration_rect_filled,
+        "colour": widget_decoration_rect_color + format(int(widget_decoration_rect_opacity * 255), "02x"),
+        "line_width": widget_decoration_rect_border_width,
+        "line_colour": widget_decoration_rect_border_color,
+        "padding_x": widget_decoration_rect_padding_x,
+        "padding_y": widget_decoration_rect_padding_y,
+        "radius": widget_decoration_rect_radius,
+    }
 }
 
-decor_right = {
-    "decorations": [
-        PowerLineDecoration(
-            path="forward_slash"
-        )
-    ],
-}
+decoration = [getattr(widget.decorations, widget_decoration)
+              (**decorations[widget_decoration])]
 
-tsBgColor = '#08080c99' #'#0d0d1399'
+widget_defaults = dict(
+    font=bar_font,
+    foreground=bar_foreground_color,
+    fontsize=bar_fontsize,
+    padding=widget_padding,
+    decorations=decoration
+)
 
-c = "#282c34"
-def init_widgets_list():
-    widgets_list = [
-        widget.GroupBox(
-            **decor_left,
-            fontsize = 11,
-            font = font,
-            margin_y = 5,
-            margin_x = 5,
-            padding_y = 0,
-            padding_x = 1,
-            borderwidth = 3,
-            active = colors[8],
-            inactive = colors[1],
-            rounded = False,
-            hide_unused = True,
-            highlight_color = colors[2],
-            highlight_method = "line",
-            this_current_screen_border = colors[7],
-            this_screen_border = colors [4],
-            other_current_screen_border = colors[7],
-            other_screen_border = colors[4],
-        ),
-        widget.CheckUpdates(
-            **decor_left,
-            fmt=" {}",
-            foreground="000000.8",
-            font = font,
-            distro="Arch_paru",
-            update_interval=900,
-            colour_have_updates=colors[4],
-            colour_no_updates=colors[4],
-        ),
-        widget.WindowName(
-            **decor_left,
-            max_chars=40,
-            #background=Gruvbox['blue']+'.2',
-            #background=Color2+".4",
-            foreground = colors[6],
-            width=555,
-            padding=5,
-            font = font,
-            background="#08080c99",
-        ),
-        widget.Spacer(
-            **decor_right,
-            foreground="#08080c99",
-        ),
-        widget.Clock(
-            **decor_left,
-            padding=10,
-            background=Gruvbox['shade5'],
-            #foreground = colors[4],
-            format = "%a, %b %d - %H:%M 󰥔",
-            font = font,
-        ),
-        widget.Spacer(
-            **decor_right,
-            foreground="#08080c99",
-            font = font,
-        ),
-        widget.Net(
-            **decor_right,
-            #background='#303F9F'+'.8',
-            background=Gruvbox['shade1'],
-            #foreground = colors[1],
-            format='{down:.0f}{down_suffix} ↓ {up:.0f}{up_suffix}↑',
-            padding=10,
-            font = font,
-        ),
-        widget.CPU(
-            **decor_right,
-            format = '{load_percent}% ',
-            #foreground = colors[4],
-            background=Gruvbox['shade2'],
-            padding=10,
-            font = font,
-        ),
-         widget.Memory(
-            **decor_right,
-            padding=10,
-            background=Gruvbox['shade3'],
-            mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(terminal + ' -e btop')},
-            measure_mem='M',
-            format = '{MemUsed: .0f}{mm}',
-            fmt = '{} used  ',
-            font = font,
-        ),
-        widget.Volume(
-            **decor_right,
-            padding=10,
-            background=Gruvbox['shade5'],
-            fmt = '{}  ',
-            font = font,
-        ),
-        widget.Volume(
-            **decor_right,
-            padding=10,
-            background=Gruvbox['shade6'],
-            channel='Capture',
-            #foreground = colors[7],
-            font = font,
-            fmt = '{} ',
-        ),
-        widget.CurrentLayout(
-            **decor_left,
-            background='#FF5E5E'+'.7',
-            font = font,
-            #foreground = colors[1],
-            # padding = 2
-        ),
-        widget.Systray(
-            **decor_right,
-            font = font,
-            #background=Gruvbox['shade8'],
-            padding = 5
-        ),
-    ]
+extension_defaults = widget_defaults.copy()
 
-    return widgets_list
+sep = [widget.WindowName(foreground="#00000000", fmt="", decorations=[])]
+left_offset = [widget.Spacer(length=widget_left_offset, decorations=[])]
+right_offset = [widget.Spacer(length=widget_right_offset, decorations=[])]
+space = widget.Spacer(length=widget_gap, decorations=[])
 
+left = [
+    widget.GroupBox(
+        font=f"{bar_font} Bold",
+        disable_drag=True,
+        borderwidth=0,
+        fontsize=15,
+        inactive=theme['disabled'],
+        active=bar_foreground_color,
+        block_highlight_text_color=theme['accent'],
+        padding=7,
+        fmt=groupBox,
+    ),
+]
 
-def init_widgets_screen1():
-    widgets_screen1 = init_widgets_list()
-    return widgets_screen1
+middle = [
+    widget.Clock(
+        format="%a, %b %d - %H:%M",
+    ), space,
+]
 
-# All other monitors' bars will display everything but widgets 22 (systray) and 23 (spacer).
-def init_widgets_screen2():
-    widgets_screen2 = init_widgets_list()
-    del widgets_screen2[22:24]
-    return widgets_screen2
+right = [
+    widget.Net(
+        format='↓{down:.0f}{down_suffix} ↑{up:.0f}{up_suffix}',
+        padding=10,
+    ),
+    widget.CPU(
+        format = ' {load_percent}%',
+        padding=10,
+    ),
+        widget.Memory(
+        padding=10,
+        mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(terminal + ' -e btop')},
+        measure_mem='M',
+        format = '{MemUsed: .0f}{mm}',
+        fmt = ' {} ',
+    ), space,
+    widget.Volume(
+        step=2,
+        fmt=volume,
+        mouse_callbacks={'Button1': lazy.spawn(
+            'pactl set-sink-mute @DEFAULT_SINK@ toggle')},
+    ),
+    widget.Volume(
+        fmt = ' {}',
+        channel='Capture',
+        #foreground = colors[7],
+    ),space,
+    widget.StatusNotifier(),
+]
 
 # --- SCREEN INDEX SHIFT START --- #
 
@@ -178,7 +152,8 @@ def next_layout(qtile):
     if current_index >= len(fake_screen_layouts):
         current_index = 0
 
-    set_key(dotenv_path=file, key_to_set="FAKE_SCREEN_INDEX", value_to_set=str(current_index))
+    set_key(dotenv_path=file, key_to_set="FAKE_SCREEN_INDEX",
+            value_to_set=str(current_index))
 
     qtile.reload_config()
 
@@ -187,8 +162,10 @@ def prev_layout(qtile):
 
     current_index -= 1
     if current_index < 0:
-        current_index = len(fake_screen_layouts) - 1  # Loop back to the last layout if going below 0
-    set_key(dotenv_path=file, key_to_set="FAKE_SCREEN_INDEX", value_to_set=str(current_index))
+        # Loop back to the last layout if going below 0
+        current_index = len(fake_screen_layouts) - 1
+    set_key(dotenv_path=file, key_to_set="FAKE_SCREEN_INDEX",
+            value_to_set=str(current_index))
 
     qtile.reload_config()
 
@@ -200,30 +177,38 @@ keys.extend([
 
 # --- SCREEN INDEX SHIFT END --- #
 
+bottomBar = bar.Bar(
+    widgets=left_offset + left + sep + middle + sep + right + right_offset,
+    size=bar_size,
+    background = bar_background_color + format(int(bar_background_opacity * 255), "02x"),
+    margin = [bar_top_margin, bar_right_margin, bar_bottom_margin-layouts_margin, bar_left_margin],
+    opacity = bar_global_opacity
+)
+
 fake_screen_layouts = [
     # 16:9 middle
     [
-        Screen(bottom=bar.Bar(widgets=init_widgets_screen1(), background=tsBgColor, size=26),x=1280,y=0,width=2560,height=1440),
-        Screen(x=0,y=1440,width=1280,height=1440),
-        Screen(x=1280,y=1440,width=2560,height=1440),
-        Screen(x=3840,y=1440,width=1280,height=1440),
+        Screen(bottom=bottomBar, x=1280, y=0, width=2560, height=1440),
+        Screen(x=0, y=1440, width=1280, height=1440),
+        Screen(x=1280, y=1440, width=2560, height=1440),
+        Screen(x=3840, y=1440, width=1280, height=1440),
     ],
     # 21:9 + 11:9
     [
-        Screen(bottom=bar.Bar(widgets=init_widgets_screen1(), background=tsBgColor, size=26),x=1280,y=0,width=2560,height=1440),
-        Screen(x=0,y=1440,width=3440,height=1440),
-        Screen(x=3440,y=1440,width=1680,height=1440),
+        Screen(bottom=bottomBar, x=1280, y=0, width=2560, height=1440),
+        Screen(x=0, y=1440, width=3440, height=1440),
+        Screen(x=3440, y=1440, width=1680, height=1440),
     ],
     # 2x 16:9 side by side
     [
-        Screen(bottom=bar.Bar(widgets=init_widgets_screen1(), background=tsBgColor, size=26),x=1280,y=0,width=2560,height=1440),
-        Screen(x=0,y=1440,width=2560,height=1440),
-        Screen(x=2560,y=1440,width=2560,height=1440),
+        Screen(bottom=bottomBar, x=1280, y=0, width=2560, height=1440),
+        Screen(x=0, y=1440, width=2560, height=1440),
+        Screen(x=2560, y=1440, width=2560, height=1440),
     ],
     # 32:9, no fake screens
     [
-        Screen(bottom=bar.Bar(widgets=init_widgets_screen1(), background=tsBgColor, size=26),x=1280,y=0,width=2560,height=1440),
-        Screen(x=0,y=1440,width=5120,height=1440),
+        Screen(bottom=bottomBar, x=1280, y=0, width=2560, height=1440),
+        Screen(x=0, y=1440, width=5120, height=1440),
     ],
 ]
 
