@@ -49,8 +49,8 @@ keys = [
         desc="Move window to the left"),
     Key([mod, shift], "right", lazy.layout.shuffle_right(),
         desc="Move window to the right"),
-    Key([mod, shift], "up", lazy.layout.shuffle_down(), desc="Move window down"),
-    Key([mod, shift], "down", lazy.layout.shuffle_up(), desc="Move window up"),
+    Key([mod, shift], "down", lazy.layout.shuffle_down(), desc="Move window down"),
+    Key([mod, shift], "up", lazy.layout.shuffle_up(), desc="Move window up"),
 
     Key([mod, "control"], "left", lazy.layout.grow_left(),
         desc="Grow window to the left"),
