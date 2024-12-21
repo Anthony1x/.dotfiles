@@ -31,10 +31,10 @@ layout_theme_floating = {
 
 # Top bar
 
-bar_top_margin = 5
-bar_bottom_margin = 5
-bar_left_margin = 0
-bar_right_margin = 0
+bar_top_margin = 3
+bar_bottom_margin = 8
+bar_left_margin = layouts_margin
+bar_right_margin = layouts_margin
 bar_size = 32
 bar_background_color = theme['background']
 bar_foreground_color = theme['foreground']
