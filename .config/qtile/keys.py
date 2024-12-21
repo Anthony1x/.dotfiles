@@ -7,7 +7,7 @@ shift = "shift"
 
 terminal = "kitty"
 rofi = "rofi -show drun"
-browser = "brave"
+browser = "firefox"
 files = "thunar"
 screenie = "flameshot gui"
 
