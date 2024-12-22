@@ -133,31 +133,31 @@ right = [
 
 # --- SCREEN INDEX SHIFT START --- #
 
-file = Path('/home/anthony/.config/qtile/.env')
-current_index = int(get_key(dotenv_path=file, key_to_get="FAKE_SCREEN_INDEX"))
+env = Path('/home/anthony/.config/qtile/.env')
+current_index = int(get_key(dotenv_path=env, key_to_get="FAKE_SCREEN_INDEX"))
 
 
 def next_layout(qtile):
-    global file, current_index
+    global env, current_index
 
     current_index += 1
     if current_index >= len(fake_screen_layouts):
         current_index = 0
 
-    set_key(dotenv_path=file, key_to_set="FAKE_SCREEN_INDEX",
+    set_key(dotenv_path=env, key_to_set="FAKE_SCREEN_INDEX",
             value_to_set=str(current_index))
 
     qtile.reload_config()
 
 
 def prev_layout(qtile):
-    global file, current_index
+    global env, current_index
 
     current_index -= 1
     if current_index < 0:
         # Loop back to the last layout if going below 0
         current_index = len(fake_screen_layouts) - 1
-    set_key(dotenv_path=file, key_to_set="FAKE_SCREEN_INDEX",
+    set_key(dotenv_path=env, key_to_set="FAKE_SCREEN_INDEX",
             value_to_set=str(current_index))
 
     qtile.reload_config()
@@ -171,7 +171,7 @@ keys.extend([
 
 # --- SCREEN INDEX SHIFT END --- #
 
-bottomBar = bar.Bar(
+bar = bar.Bar(
     widgets=left_offset + left + sep + middle + sep + right + right_offset,
     size=bar_size,
     background=bar_background_color +
@@ -181,31 +181,38 @@ bottomBar = bar.Bar(
     opacity=bar_global_opacity
 )
 
-fake_screen_layouts = [
-    # 16:9 middle
-    [
-        Screen(bottom=bottomBar, x=1280, y=0, width=2560, height=1440),
-        Screen(x=0, y=1440, width=1280, height=1440),
-        Screen(x=1280, y=1440, width=2560, height=1440),
-        Screen(x=3840, y=1440, width=1280, height=1440),
-    ],
-    # 21:9 + 11:9
-    [
-        Screen(bottom=bottomBar, x=1280, y=0, width=2560, height=1440),
-        Screen(x=0, y=1440, width=3440, height=1440),
-        Screen(x=3440, y=1440, width=1680, height=1440),
-    ],
-    # 2x 16:9 side by side
-    [
-        Screen(bottom=bottomBar, x=1280, y=0, width=2560, height=1440),
-        Screen(x=0, y=1440, width=2560, height=1440),
-        Screen(x=2560, y=1440, width=2560, height=1440),
-    ],
-    # 32:9, no fake screens
-    [
-        Screen(bottom=bottomBar, x=1280, y=0, width=2560, height=1440),
-        Screen(x=0, y=1440, width=5120, height=1440),
-    ],
-]
+workstation = get_key(dotenv_path=env, key_to_get="WORKSTATION")
+
+if (workstation == "PC"):
+    fake_screen_layouts = [
+        # 16:9 middle
+        [
+            Screen(bottom=bar, x=1280, y=0, width=2560, height=1440),
+            Screen(x=0, y=1440, width=1280, height=1440),
+            Screen(x=1280, y=1440, width=2560, height=1440),
+            Screen(x=3840, y=1440, width=1280, height=1440),
+        ],
+        # 21:9 + 11:9
+        [
+            Screen(bottom=bar, x=1280, y=0, width=2560, height=1440),
+            Screen(x=0, y=1440, width=3440, height=1440),
+            Screen(x=3440, y=1440, width=1680, height=1440),
+        ],
+        # 2x 16:9 side by side
+        [
+            Screen(bottom=bar, x=1280, y=0, width=2560, height=1440),
+            Screen(x=0, y=1440, width=2560, height=1440),
+            Screen(x=2560, y=1440, width=2560, height=1440),
+        ],
+        # 32:9, no fake screens
+        [
+            Screen(bottom=bar, x=1280, y=0, width=2560, height=1440),
+            Screen(x=0, y=1440, width=5120, height=1440),
+        ],
+    ]
+else:
+    fake_screen_layouts = [
+        Screen(top=bar, x=0, y=0, width=2560, height=1440)
+    ]
 
 fake_screens = fake_screen_layouts[current_index]
