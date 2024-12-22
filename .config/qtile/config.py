@@ -1,6 +1,5 @@
 import os
 import subprocess
-
 from libqtile import hook
 from libqtile.config import Click, Drag
 from libqtile.lazy import lazy
