@@ -1,3 +1,4 @@
+from keys import terminal
 from libqtile.config import Screen
 from libqtile import bar, qtile
 # Make sure 'qtile-extras' is installed or this config will not work.
@@ -8,8 +9,13 @@ from libqtile.config import Key
 from libqtile.lazy import lazy
 from dotenv import get_key
 from pathlib import Path
-from variables import *
-from keys import terminal
+from colors import CATPPUCCIN_MOCHA as theme
+from variables import bar_font, group_names, group_labels, widget_decoration_rect_border_color, \
+    widget_decoration_rect_color, widget_decoration_rect_opacity, widget_decoration_rect_border_width, \
+    widget_decoration_rect_filled, widget_decoration_rect_padding_x, widget_decoration_rect_padding_y, \
+    widget_decoration_rect_radius, widget_gap, widget_left_offset, widget_padding, widget_right_offset, \
+    bar_background_color, bar_background_opacity, bar_bottom_margin, bar_fontsize, bar_foreground_color, \
+    bar_global_opacity, bar_left_margin, bar_right_margin, bar_size, bar_top_margin, layouts_margin
 
 
 class WidgetTweaker:
@@ -86,48 +92,60 @@ left = [
         block_highlight_text_color=theme['accent'],
         padding=7,
         fmt=groupBox,
-        highlight_color = "#00000000",
-        highlight_method = "line",
-        this_current_screen_border = theme['highlight'],
-        this_screen_border = '00000000',
-        other_current_screen_border = theme['highlight'],
-        other_screen_border = '00000000',
+        highlight_color="#00000000",
+        highlight_method="line",
+        this_current_screen_border=theme['highlight'],
+        this_screen_border='00000000',
+        other_current_screen_border=theme['highlight'],
+        other_screen_border='00000000',
     ),
 ]
 
 middle = [
     widget.Clock(
         format="%a, %b %d - %H:%M",
-    ), space,
+    )
 ]
 
 right = [
     widget.Net(
         format='↓{down:.0f}{down_suffix} ↑{up:.0f}{up_suffix}',
-        padding=10,
+        padding=5,
     ),
     widget.CPU(
         format=' {load_percent}%',
-        padding=10,
+        padding=5,
     ),
     widget.Memory(
-        padding=10,
+        padding=5,
         mouse_callbacks={'Button1': lambda: qtile.cmd_spawn(
             terminal + ' -e btop')},
         measure_mem='M',
         format='{MemUsed: .0f}{mm}',
         fmt=' {} ',
-    ), space,
+    ),
+    widget.Memory(
+        padding=5,
+        mouse_callbacks={'Button1': lambda: qtile.cmd_spawn(
+            terminal + ' -e btop')},
+        measure_mem='M',
+        format='{SwapUsed: .0f}{mm}',
+        fmt='󰾵{} ',
+    ),
+    space,
     widget.Volume(
         step=2,
+        padding=10,
         fmt=volume,
         mouse_callbacks={'Button1': lazy.spawn(
             'pactl set-sink-mute @DEFAULT_SINK@ toggle')},
     ),
     widget.Volume(
+        padding=10,
         fmt=' {}',
         channel='Capture',
-    ), space,
+    ),
+    space,
     widget.StatusNotifier(),
 ]
 
