@@ -24,6 +24,14 @@ alias ll="eza -labhSo"
 alias sizeof="stat --printf='%s'"
 alias man='batman'
 alias KILLYOURSELF="exit"
+alias fzf="fzf --preview 'bat --style=numbers --color=always {}'"
+
+fcd() { cd "$(find . -type d -not -path '*/.*' | fzf)" && l; }
+f() { echo "$(find . -type f -not -path '*/.*' | fzf)" | pbcopy }
+fv() { nvim "$(find . -type f -not -path '*/.*' | fzf)" }
 
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
+
+export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow'
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
