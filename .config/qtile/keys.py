@@ -13,7 +13,7 @@ screenie = "flameshot gui"
 
 screen_lock = "betterlockscreen -l"
 scripts_dir = "/home/anthony/.config/qtile/scripts"
-shutdown_command = "rofi -show power-menu -modi power-menu:/home/anthony/.local/bin/rofi-power-menu"
+shutdown_command = "rofi -show power-menu -modi power-menu://home/anthony/dotfiles/.config/rofi/scripts//rofi-power-menu"
 
 anki_menu = "/home/anthony/.config/rofi/scripts/anki.sh"
 
