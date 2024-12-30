@@ -201,36 +201,31 @@ bar = bar.Bar(
 
 workstation = get_key(dotenv_path=env, key_to_get="WORKSTATION")
 
-if (workstation == "PC"):
-    fake_screen_layouts = [
-        # 16:9 middle
-        [
-            Screen(bottom=bar, x=1280, y=0, width=2560, height=1440),
-            Screen(x=0, y=1440, width=1280, height=1440),
-            Screen(x=1280, y=1440, width=2560, height=1440),
-            Screen(x=3840, y=1440, width=1280, height=1440),
-        ],
-        # 21:9 + 11:9
-        [
-            Screen(bottom=bar, x=1280, y=0, width=2560, height=1440),
-            Screen(x=0, y=1440, width=3440, height=1440),
-            Screen(x=3440, y=1440, width=1680, height=1440),
-        ],
-        # 2x 16:9 side by side
-        [
-            Screen(bottom=bar, x=1280, y=0, width=2560, height=1440),
-            Screen(x=0, y=1440, width=2560, height=1440),
-            Screen(x=2560, y=1440, width=2560, height=1440),
-        ],
-        # 32:9, no fake screens
-        [
-            Screen(bottom=bar, x=1280, y=0, width=2560, height=1440),
-            Screen(x=0, y=1440, width=5120, height=1440),
-        ],
-    ]
-else:
-    fake_screen_layouts = [
-        Screen(top=bar, x=0, y=0, width=2560, height=1440)
-    ]
+fake_screen_layouts = [
+    # 16:9 middle
+    [
+        Screen(bottom=bar, x=1280, y=0, width=2560, height=1440),
+        Screen(x=0, y=1440, width=1280, height=1440),
+        Screen(x=1280, y=1440, width=2560, height=1440),
+        Screen(x=3840, y=1440, width=1280, height=1440),
+    ],
+    # 21:9 + 11:9
+    [
+        Screen(bottom=bar, x=1280, y=0, width=2560, height=1440),
+        Screen(x=0, y=1440, width=3440, height=1440),
+        Screen(x=3440, y=1440, width=1680, height=1440),
+    ],
+    # 2x 16:9 side by side
+    [
+        Screen(bottom=bar, x=1280, y=0, width=2560, height=1440),
+        Screen(x=0, y=1440, width=2560, height=1440),
+        Screen(x=2560, y=1440, width=2560, height=1440),
+    ],
+    # 32:9, no fake screens
+    [
+        Screen(bottom=bar, x=1280, y=0, width=2560, height=1440),
+        Screen(x=0, y=1440, width=5120, height=1440),
+    ],
+] if (workstation == "PC") else [Screen(top=bar, x=0, y=0, width=2560, height=1440)]
 
-fake_screens = fake_screen_layouts[current_index]
+fake_screens = fake_screen_layouts[current_index if (workstation == "PC") else 0]
