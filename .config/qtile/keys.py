@@ -5,7 +5,7 @@ mod = "mod4"
 alt = "mod1"
 shift = "shift"
 
-terminal = "kitty"
+terminal = "ghostty"
 rofi = "rofi -show drun"
 browser = "firefox"
 files = "thunar"
