@@ -1,12 +1,17 @@
 return {
     "neovim/nvim-lspconfig",
+    ---@class PluginLspOpts
     opts = {
-        inlay_hints = { enabled = true },
+        ---@class lspconfig.options
         servers = {
-            lua_ls = {
+            pylsp = {
                 settings = {
-                    Lua = {
-                        hint = { enable = true },
+                    pylsp = {
+                        plugins = {
+                            pycodestyle = {
+                                maxLineLength = 120,
+                            },
+                        },
                     },
                 },
             },
