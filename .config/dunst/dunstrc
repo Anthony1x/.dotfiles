@@ -103,7 +103,7 @@
     frame_width = 3
 
     # Defines color of the frame around the notification window.
-    frame_color = "#F38BA8"
+    frame_color = "#fab387"
 
     # Size of gap to display between notifications - requires a compositor.
     # If value is greater than 0, separator_height will be ignored and a border
@@ -349,7 +349,7 @@
 [urgency_critical]
     background = "#1e1e2e"
     foreground = "#cdd6f4"
-    frame_color = "#fab387"
+    frame_color = "#f38ba8"
     timeout = 0
     override_pause_level = 60
     default_icon = /usr/share/icons/Tela/32@2x/status/dialog-error.svg 
