@@ -5,15 +5,15 @@ mod = "mod4"
 alt = "mod1"
 shift = "shift"
 
-terminal = "ghostty"
-rofi = "rofi -show drun"
+terminal = "kitty"
+menu = "rofi -show drun"
 browser = "firefox"
 files = "thunar"
 screenie = "flameshot gui"
 
 screen_lock = "betterlockscreen -l"
 scripts_dir = "/home/anthony/.config/qtile/scripts"
-shutdown_command = "rofi -show power-menu -modi power-menu://home/anthony/dotfiles/.config/rofi/scripts//rofi-power-menu"
+powermenu = "rofi -show power-menu -modi power-menu://home/anthony/dotfiles/.config/rofi/scripts//rofi-power-menu"
 
 anki_menu = "/home/anthony/.config/rofi/scripts/anki.sh"
 
@@ -28,9 +28,9 @@ keys = [
     Key([mod, alt], "f", lazy.window.toggle_fullscreen(),
         desc="Toggle fullscreen on the focused window"),
     Key([mod, shift], "r", lazy.reload_config(), desc="Reload the config"),
-    Key([mod, shift], "x", lazy.spawn(shutdown_command), desc="Open power menu"),
+    Key([mod, shift], "x", lazy.spawn(powermenu), desc="Open power menu"),
     Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
-    Key([mod], "d", lazy.spawn(rofi)),
+    Key([mod], "d", lazy.spawn(menu)),
     Key([mod], "q", lazy.spawn(browser)),
     Key([mod, shift], "Return", lazy.spawn(files)),
     Key([mod, alt], "s", lazy.spawn(screenie)),
