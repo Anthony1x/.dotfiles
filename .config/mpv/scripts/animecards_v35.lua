@@ -27,7 +27,7 @@ local msg = require("mp.msg")
 
 ------------- User Config -------------
 -- Set these to match your field names in Anki
-local FRONT_FIELD = "Word"
+local FRONT_FIELD = "Expression"
 local SENTENCE_AUDIO_FIELD = "SentenceAudio"
 local SENTENCE_FIELD = "Sentence"
 local IMAGE_FIELD = "Picture"
