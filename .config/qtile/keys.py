@@ -74,7 +74,7 @@ keys = [
 
     # Anki recording scripts
     # Key([mod], "m", lazy.spawn(anki_screenie)),
-    Key([mod], "m", lazy.spawn(anki_menu)),
+    Key([mod], "m", lazy.spawn(anki_screenie)),
     Key([mod, shift], "m", lazy.spawn(anki_record)),
 ]
 
