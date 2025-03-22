@@ -1,12 +1,31 @@
+from pathlib import Path
 from colors import CATPPUCCIN_MOCHA as theme
 from keys import keys, mod, shift, terminal
 from libqtile.config import Group, ScratchPad, DropDown, Key
 from libqtile.lazy import lazy
+from dotenv import get_key, set_key
+
+env = Path('/home/anthony/.config/qtile/.env')
+should_have_borders = (get_key(dotenv_path=env, key_to_get='BORDERS')) == "True"
+
+def switch(qtile):
+    global env, should_have_borders
+
+    should_have_borders = not should_have_borders
+
+    set_key(dotenv_path=env, key_to_set='BORDERS', value_to_set=str(should_have_borders))
+
+    qtile.reload_config()
+
+keys.extend([
+    #  Switch super-ultrawide monitor layout
+    Key([mod, shift], "p", lazy.function(switch)),
+])
 
 # Layouts
 
-layouts_margin = 6
-layouts_border_width = 2
+layouts_margin = 6 if should_have_borders else 0
+layouts_border_width = 2 if should_have_borders else 0
 layouts_border_width_floating = 3
 layouts_border_color = theme['disabled']
 layouts_border_focus_color = theme['accent']

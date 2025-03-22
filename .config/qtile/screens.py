@@ -3,19 +3,17 @@ from libqtile.config import Screen
 from libqtile import bar, qtile
 # Make sure 'qtile-extras' is installed or this config will not work.
 from qtile_extras import widget
-from dotenv import set_key
+from dotenv import set_key, get_key
 from keys import keys, mod, shift
 from libqtile.config import Key
 from libqtile.lazy import lazy
-from dotenv import get_key
-from pathlib import Path
 from colors import CATPPUCCIN_MOCHA as theme
 from variables import bar_font, group_names, group_labels, widget_decoration_rect_border_color, \
     widget_decoration_rect_color, widget_decoration_rect_opacity, widget_decoration_rect_border_width, \
     widget_decoration_rect_filled, widget_decoration_rect_padding_x, widget_decoration_rect_padding_y, \
     widget_decoration_rect_radius, widget_gap, widget_left_offset, widget_padding, widget_right_offset, \
     bar_background_color, bar_background_opacity, bar_bottom_margin, bar_fontsize, bar_foreground_color, \
-    bar_global_opacity, bar_left_margin, bar_right_margin, bar_size, bar_top_margin, layouts_margin
+    bar_global_opacity, bar_left_margin, bar_right_margin, bar_size, bar_top_margin, layouts_margin, env
 
 
 class WidgetTweaker:
@@ -151,7 +149,6 @@ right = [
 
 # --- SCREEN INDEX SHIFT START --- #
 
-env = Path('/home/anthony/.config/qtile/.env')
 current_index = int(get_key(dotenv_path=env, key_to_get="FAKE_SCREEN_INDEX"))
 
 
