@@ -14,6 +14,7 @@ screenie = "flameshot gui"
 screen_lock = "betterlockscreen -l"
 scripts_dir = "/home/anthony/.config/qtile/scripts"
 powermenu = "rofi -show power-menu -modi power-menu://home/anthony/dotfiles/.config/rofi/scripts//rofi-power-menu"
+layout_select = "/home/anthony/.config/rofi/scripts/select_layout.sh"
 
 anki_menu = "/home/anthony/.config/rofi/scripts/anki.sh"
 
@@ -36,6 +37,7 @@ keys = [
     Key([mod, alt], "s", lazy.spawn(screenie)),
     Key([mod, alt], "o", lazy.spawn(f"{scripts_dir}/picom_toggle.sh")),
     Key([mod, alt], "l", lazy.spawn(screen_lock)),
+    Key([mod, shift], "q", lazy.spawn(layout_select)),
 
     # Movement Keys
     Key([mod], "left", lazy.layout.left(), desc="Move focus to left"),
