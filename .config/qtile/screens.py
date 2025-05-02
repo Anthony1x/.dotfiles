@@ -198,36 +198,52 @@ bar = bar.Bar(
 
 workstation = get_key(dotenv_path=env, key_to_get="WORKSTATION")
 
+top_screen = Screen(bottom=bar, x=1280, y=0, width=2560, height=1440)
+
 fake_screen_layouts = [
     # 16:9 middle
     [
-        Screen(bottom=bar, x=1280, y=0, width=2560, height=1440),
+        top_screen,
         Screen(x=0, y=1440, width=1280, height=1440),
         Screen(x=1280, y=1440, width=2560, height=1440),
         Screen(x=3840, y=1440, width=1280, height=1440),
     ],
+    # 18:9 middle
+    [
+        top_screen,
+        Screen(x=0, y=1440, width=1120, height=1440),
+        Screen(x=1120, y=1440, width=2880, height=1440),
+        Screen(x=4000, y=1440, width=1120, height=1440),
+    ],
     # 4:3 middle
     [
-        Screen(bottom=bar, x=1280, y=0, width=2560, height=1440),
+        top_screen,
         Screen(x=0,    y=1440, width=1600, height=1440),
         Screen(x=1600, y=1440, width=1920, height=1440),
         Screen(x=3520, y=1440, width=1600, height=1440),
     ],
     # 21:9 + 11:9
     [
-        Screen(bottom=bar, x=1280, y=0, width=2560, height=1440),
+        top_screen,
         Screen(x=0, y=1440, width=3440, height=1440),
         Screen(x=3440, y=1440, width=1680, height=1440),
     ],
+    # 21:9 middle
+    [
+        top_screen,
+        Screen(x=0,    y=1440, width=840, height=1440),
+        Screen(x=840, y=1440, width=3440, height=1440),
+        Screen(x=4280, y=1440, width=840, height=1440),
+    ],
     # 2x 16:9 side by side
     [
-        Screen(bottom=bar, x=1280, y=0, width=2560, height=1440),
+        top_screen,
         Screen(x=0, y=1440, width=2560, height=1440),
         Screen(x=2560, y=1440, width=2560, height=1440),
     ],
     # 32:9, no fake screens
     [
-        Screen(bottom=bar, x=1280, y=0, width=2560, height=1440),
+        top_screen,
         Screen(x=0, y=1440, width=5120, height=1440),
     ],
 ] if (workstation == "PC") else [Screen(top=bar, x=0, y=0, width=2560, height=1440)]
