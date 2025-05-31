@@ -33,6 +33,6 @@ CATPPUCCIN_MOCHA = {
     'background': CATPPUCCIN_BASE["base"],
     'alt_background': CATPPUCCIN_BASE["mantle"],
     'disabled': CATPPUCCIN_BASE['surface0'],
-    'accent': CATPPUCCIN_BASE['peach'],
-    'highlight': CATPPUCCIN_BASE['green'],
+    'accent': CATPPUCCIN_BASE['sky'],
+    'highlight': CATPPUCCIN_BASE['red'],
 }
