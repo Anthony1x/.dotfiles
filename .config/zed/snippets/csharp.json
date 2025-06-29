@@ -1,0 +1,7 @@
+{
+  "Log to the console": {
+    "prefix": "CoLo",
+    "body": ["Console.WriteLine($1);", "$0"],
+    "description": "Log to the console"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "Dump Exception Trace": {
+    "prefix": "varex",
+    "body": ["var_dump(\"\\n\" . (new \\Exception())->getTraceAsString());", "$1"],
+    "description": "Pretty trace dump"
+  },
+  "Dump variable": {
+    "prefix": "vard",
+    "body": ["echo '<pre>';", "var_dump($1);", "echo '</pre>';", "$2"],
+    "description": "Pretty var dump"
+  },
+  "Dump variable and die": {
+    "prefix": "vardie",
+    "body": ["echo '<pre>';", "var_dump($1);", "echo '</pre>';", "die();"],
+    "description": "Pretty var dump and die"
+  },
+  "Error log variable": {
+    "prefix": "errlo",
+    "body": ["ob_start();", "var_dump($1);", "error_log(ob_get_clean());", "$2"],
+    "description": "Pretty error_log"
+  },
+  "error_log to file in current folder": {
+    "prefix": "inilog",
+    "body": ["ini_set('log_errors', 1);", "ini_set('error_log', dirname(__FILE__) . '/error_log.txt');", "$2"],
+    "description": "Stuff"
+  }
+}
