@@ -16,7 +16,8 @@ else
     xrandr --output DP-0 --mode 2560x1440 --pos 1280x0
     xrandr --output DP-4 --primary --mode 5120x1440 --pos 0x1440
 
-    picom -b --config $HOME/.config/qtile/scripts/picom.conf &
+    # picom -b --config $HOME/.config/qtile/scripts/picom.conf &
+    redshift &
 
     # Set wallpapers
     feh --bg-fill /home/anthony/Pictures/Wallpaper/Desktop/Firewatch-Night.png
@@ -25,4 +26,5 @@ fi
 # Programs to autostart
 fcitx5 -d &
 dunst &
+npx arrpc &
 sleep 1
