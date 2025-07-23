@@ -25,6 +25,7 @@ alias sizeof="stat --printf='%s'"
 alias man='batman'
 alias KILLYOURSELF="exit"
 alias fz="fzf --preview 'bat --style=numbers --color=always {}'"
+alias qr='qrencode -m 2 -t utf8 <<< "$1"'
 
 fcd() { cd "$(find . -type d -not -path '*/.*' | fzf)" && l; }
 f() { echo "$(find . -type f -not -path '*/.*' | fzf)" | pbcopy }
