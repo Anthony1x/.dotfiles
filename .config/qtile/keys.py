@@ -18,8 +18,8 @@ layout_select = "/home/anthony/.config/rofi/scripts/select_layout.sh"
 
 anki_menu = "/home/anthony/.config/rofi/scripts/anki.sh"
 
-anki_screenie = "/home/anthony/.local/bin/take_screenshot.sh"
-anki_record = "/home/anthony/.local/bin/record_audio.sh"
+anki_screenie = "/home/anthony/Documents/Dev/vn-cards/take_screenshot.sh"
+anki_record = "/home/anthony/Documents/Dev/vn-cards/record_audio.sh"
 
 keys = [
     Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
