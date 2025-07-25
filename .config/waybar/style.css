@@ -11,5 +11,5 @@
 window#waybar {
     /* you can also GTK3 CSS functions! */
     background-color: shade(@base, 0.9);
-    border: 2px solid alpha(@crust, 0.3);
+    border: 4px solid alpha(@crust, 0.3);
 }
