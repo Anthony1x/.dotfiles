@@ -4,7 +4,7 @@
     ### Display ###
 
     # Which monitor should the notifications be displayed on.
-    monitor = 1
+    monitor = 0
 
     # Display notification on focused monitor.  Possible modes are:
     #   mouse: follow mouse pointer
@@ -33,10 +33,10 @@
     origin = bottom-right
 
     # Offset from the origin
-    offset = 13x50
+    offset = (10, 10)
 
     # Scale factor. It is auto-detected if value is 0.
-    scale = 0
+    scale = 1
 
     # Maximum number of notification (0 means no limit)
     notification_limit = 20
