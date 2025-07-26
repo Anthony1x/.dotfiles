@@ -1,0 +1,6 @@
+[submodule ".config/mpv/Anacreon"]
+	path = .config/mpv/Anacreon
+	url = git@github.com:friedrich-de/Anacreon-Script.git
+[submodule ".config/mpv/iptv"]
+	path = .config/mpv/iptv
+	url = git@github.com:gthreepw00d/mpv-iptv.git
