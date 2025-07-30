@@ -1,5 +1,5 @@
 {
-    "output": "DP-1",
+    // "output": "DP-1",
     // "layer": "top", // Waybar at top layer
     "position": "top", // Waybar position (top|bottom|left|right)
     "height": 40, // Waybar height (to be removed for auto height)
@@ -16,6 +16,7 @@
         "mpd",
         "idle_inhibitor",
         "pulseaudio",
+        "backlight",
         "network",
         "cpu",
         "memory",
@@ -26,7 +27,7 @@
         "tray"
     ],
     "niri/workspaces": {
-        "all-outputs": true,
+        // "all-outputs": true,
         "format": "{icon}",
         "format-icons": {
             "active": "",
