@@ -30,6 +30,7 @@ input {
         // dwtp
         natural-scroll
         accel-speed 0.4
+        scroll-factor 0.2
         // click-method "clickfinger"
         accel-profile "flat"
         // tap-button-map "left-middle-right"
@@ -110,6 +111,8 @@ prefer-no-csd
 // spawn-at-startup "alacritty" "-e" "fish"
 
 spawn-at-startup "/usr/lib/pam_kwallet_init"
+spawn-at-startup "safeeyes"
+spawn-at-startup "nm-applet"
 
 
 environment {
@@ -495,6 +498,7 @@ binds {
     Mod+R { switch-preset-column-width; }
     Mod+F { maximize-column; }
     Mod+Shift+F { fullscreen-window; }
+    Mod+Shift+Ctrl+F { toggle-windowed-fullscreen; }
     Mod+N { center-column; }
 
     Mod+Minus { set-column-width "-10%"; }
@@ -507,8 +511,9 @@ binds {
     Mod+Shift+Ctrl+Minus { set-window-height "-1"; }
     Mod+Shift+Ctrl+Equal { set-window-height "+1"; }
 
-    // Mod+0            { set-column-width "960"; }
-    // Mod+Shift+0      { set-window-height "540"; }
+    Mod+0            { set-column-width "1920"; }
+    Mod+Shift+0      { set-column-width "2560"; }
+    // Mod+Shift+0      { set-window-height ""; }
 
     // Mod+Space       { switch-layout "next"; }
     // Mod+Shift+Space { switch-layout "prev"; }
