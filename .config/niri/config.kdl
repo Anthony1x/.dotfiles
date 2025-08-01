@@ -87,7 +87,7 @@ layout {
     preset-column-widths {
         proportion 0.3333333333333333
         proportion 0.5
-        proportion 0.66667
+        proportion 0.6666666666666667
         // fixed 1000
     }
 
@@ -113,9 +113,11 @@ prefer-no-csd
 spawn-at-startup "/usr/lib/pam_kwallet_init"
 spawn-at-startup "safeeyes"
 spawn-at-startup "nm-applet"
+spawn-at-startup "xwayland-satellite"
 
 
 environment {
+    DISPLAY ":0"
     // GSK_RENDERER "cairo"
     // WAYLAND_DISPLAY null
 }
