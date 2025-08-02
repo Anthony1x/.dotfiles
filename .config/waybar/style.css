@@ -1,15 +1,97 @@
 @import "mocha.css";
 
 * {
-    /* `otf-font-awesome` is required to be installed for icons */
-    font-family: "JetbrainsMono Nerd Font";
+    font-family: JetbrainsMono Nerd Font;
     font-size: 13px;
-    /* reference the color by using @color-name */
-    color: @text;
+    min-height: 0;
 }
 
-window#waybar {
-    /* you can also GTK3 CSS functions! */
-    background-color: shade(@base, 0.9);
-    border: 4px solid alpha(@crust, 0.3);
+#waybar {
+    background: transparent;
+    color: @text;
+    margin: 5px 5px;
+}
+
+#workspaces {
+    border-radius: 1rem;
+    margin: 5px;
+    background-color: @surface0;
+    margin-left: 1rem;
+}
+
+#workspaces button {
+    color: @lavender;
+    border-radius: 1rem;
+    padding: 0.4rem;
+}
+
+#workspaces button.active {
+    color: @sky;
+    border-radius: 1rem;
+}
+
+#workspaces button:hover {
+    color: @sapphire;
+    border-radius: 1rem;
+}
+
+#custom-music,
+#tray,
+#backlight,
+#clock,
+#battery,
+#pulseaudio,
+#custom-lock,
+#custom-power,
+#temperature,
+#keyboard-state,
+#cpu,
+#memory,
+#network {
+    background-color: @surface0;
+    padding: 0.25rem 0.75rem;
+    margin: 5px 0;
+    border-radius: 1rem;
+}
+
+#clock {
+    color: @blue;
+}
+
+#battery {
+    color: @green;
+}
+
+#battery.charging {
+    color: @green;
+}
+
+#battery.warning:not(.charging) {
+    color: @red;
+}
+
+#backlight {
+    color: @yellow;
+}
+
+#pulseaudio {
+    color: @maroon;
+    margin-left: 1rem;
+}
+
+#custom-music {
+    color: @mauve;
+}
+
+#custom-lock {
+    color: @lavender;
+}
+
+#custom-power {
+    margin-right: 1rem;
+    color: @red;
+}
+
+#tray {
+    margin-right: 1rem;
 }
