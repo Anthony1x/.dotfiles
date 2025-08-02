@@ -59,9 +59,6 @@ export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 export PATH="$HOME/.gem/ruby/3.2.0/bin:$PATH"
 export PATH="$PATH:/home/anthony/.local/bin"
 
-# Make electron applications run with wayland
-export ELECTRON_OZONE_PLATFORM_HINT=wayland
-
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow'
 
 export LC_CTYPE=en_US.UTF-8
