@@ -114,7 +114,8 @@ spawn-at-startup "/usr/lib/pam_kwallet_init"
 spawn-at-startup "safeeyes"
 spawn-at-startup "nm-applet"
 spawn-at-startup "xwayland-satellite"
-
+spawn-at-startup "gammastep-indicator"
+spawn-at-startup "swayidle" "-w" "timeout" "601" "niri msg action power-off-monitors" "timeout" "600" "swaylock -f" "before-sleep" "swaylock -f"
 
 environment {
     DISPLAY ":0"
