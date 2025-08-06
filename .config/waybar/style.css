@@ -14,8 +14,9 @@
 
 #workspaces {
     border-radius: 1rem;
-    margin: 5px;
-    background-color: @surface0;
+    border: 2px solid @sky;
+    margin: 3px;
+    background-color: @base;
     margin-left: 1rem;
 }
 
@@ -35,23 +36,24 @@
     border-radius: 1rem;
 }
 
-#custom-music,
 #tray,
 #backlight,
 #clock,
 #battery,
-#pulseaudio,
+#wireplumber,
 #custom-lock,
 #custom-power,
 #temperature,
 #keyboard-state,
 #cpu,
 #memory,
-#network {
-    background-color: @surface0;
-    padding: 0.25rem 0.75rem;
-    margin: 5px 0;
+#network,
+#mpris {
+    background-color: @base;
+    border: 2px solid @sky;
     border-radius: 1rem;
+    padding: 0.25rem 0.75rem;
+    margin: 3px 0;
 }
 
 #clock {
@@ -74,22 +76,8 @@
     color: @yellow;
 }
 
-#pulseaudio {
+#wireplumber {
     color: @maroon;
-    margin-left: 1rem;
-}
-
-#custom-music {
-    color: @mauve;
-}
-
-#custom-lock {
-    color: @lavender;
-}
-
-#custom-power {
-    margin-right: 1rem;
-    color: @red;
 }
 
 #tray {
