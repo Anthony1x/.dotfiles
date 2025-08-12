@@ -44,7 +44,7 @@ input {
 
     // disable-power-key-handling
     // warp-mouse-to-focus
-    focus-follows-mouse
+    focus-follows-mouse max-scroll-amount="30%"
     // workspace-auto-back-and-forth
 }
 
@@ -287,51 +287,6 @@ window-rule {
     clip-to-geometry true
 }
 
-/-window-rule {
-    match app-id="Adwaita"
-    // opacity 0.5
-    block-out-from "screencast"
-    geometry-corner-radius 12
-    clip-to-geometry false
-    border {
-        // off
-        width 12
-    }
-}
-
-/-window-rule {
-    match app-id="terminal"
-    clip-to-geometry false
-    geometry-corner-radius 8 8 0 0
-    border {
-        // width 4
-    }
-}
-
-/-window-rule {
-    match app-id="code"
-    // opacity 0.98
-    border {
-        // off
-    }
-}
-
-/-window-rule {
-    match app-id="weston."
-    // block-out-from "screencast"
-    geometry-corner-radius 12 24 32 64
-    // geometry-corner-radius 999
-    clip-to-geometry true
-}
-
-// window-rule {
-//     match app-id="Alacritty"
-//     geometry-corner-radius 12 12 0 0
-//     border {
-//         width 2
-//     }
-// }
-
 window-rule {
     match title="simple-egl"
     // min-width 128
@@ -352,10 +307,11 @@ window-rule {
     // open-fullscreen false
 }
 
-window-rule {
-    // match is-active=false
-    // opacity 0.95
-}
+
+// window-rule {
+    // match app-id=r#"zen-browser$"# title="^Picture-in-Picture$"
+    // open-floating true
+// }
 
 // Qt used by OBS doesn't signal min size yet, so do it manually.
 window-rule {
@@ -363,11 +319,13 @@ window-rule {
     min-width 876
 }
 
-// window-rule {
-//     match app-id=r#"^org\.mozilla\.firefox$"#
-//
-//     default-column-width { proportion 0.66667; }
-// }
+// TODO: Make this work!
+window-rule {
+    // match app-id=r#"^md\.obsidian\.obsidian$"#
+    // match app-id="md.obsidian.Obsidian"
+
+    // open-maximized true
+}
 
 window-rule {
     match app-id=r#"^org\.keepassxc\.KeePassXC$"#
@@ -380,11 +338,15 @@ window-rule {
 
 
     block-out-from "screencast"
-    // block-out-from "screen-capture"
 
     border {
-        // active-color "red"
+        active-color "#f38ba8"
     }
+}
+
+window-rule {
+    match app-id=r#"^org\.keepassxc\.KeePassXC$"#
+    default-column-width { proportion 0.3333333333333333; }
 }
 
 binds {
@@ -413,7 +375,7 @@ binds {
 
 
     Mod+W { close-window; }
-    Mod+A { toggle-overview; }
+    Mod+A repeat=false { toggle-overview; }
     Mod+Y { toggle-column-tabbed-display; }
 
     Alt+Tab         { focus-window-down; }
@@ -509,6 +471,9 @@ binds {
     Mod+Shift+F { fullscreen-window; }
     Mod+Shift+Ctrl+F { toggle-windowed-fullscreen; }
     Mod+N { center-column; }
+
+    // Move the focused window between the floating and the tiling layout.
+    Mod+V       { toggle-window-floating; }
 
     Mod+Minus { set-column-width "-10%"; }
     Mod+Equal { set-column-width "+10%"; }
