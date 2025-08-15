@@ -121,8 +121,9 @@
     },
     "wireplumber": {
         "format": "{volume}% {icon}",
-        "format-muted": "",
+        "format-muted": "0% ",
         "on-click": "pavucontrol",
+        "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
         "scroll-step": 2,
         "format-icons": [
             "",
@@ -133,7 +134,7 @@
     "wireplumber#source": {
         "node-type": "Audio/Source",
         "format": "{volume}% 󰍬",
-        "format-muted": "󰍭",
+        "format-muted": "0% 󰍭",
         "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle",
         "scroll-step": 2
     },
