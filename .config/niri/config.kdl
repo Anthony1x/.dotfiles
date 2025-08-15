@@ -4,12 +4,13 @@ debug {
     // dbus-interfaces-in-non-session-instances
     // wait-for-frame-completion-before-queueing
     // enable-overlay-planes
-    disable-cursor-plane
+    // disable-cursor-plane
     // disable-direct-scanout
     // render-drm-device "/dev/dri/renderD129"
     // render-drm-device "/dev/dri/card1"
     // enable-color-transformations-capability
     // emulate-zero-presentation-time
+    honor-xdg-activation-with-invalid-serial
 }
 
 input {
@@ -20,32 +21,22 @@ input {
 
         repeat-delay 250
         repeat-rate 40
-
-        // track-layout "window"
     }
 
     touchpad {
         tap
-        // dwt
-        // dwtp
         natural-scroll
         accel-speed 0.4
         scroll-factor 0.2
-        // click-method "clickfinger"
         accel-profile "flat"
-        // tap-button-map "left-middle-right"
     }
 
     mouse {
-        // natural-scroll
         accel-speed 0.4
         accel-profile "flat"
     }
 
-    // disable-power-key-handling
-    // warp-mouse-to-focus
     focus-follows-mouse max-scroll-amount="30%"
-    // workspace-auto-back-and-forth
 }
 
 output "eDP-1" {
@@ -107,8 +98,6 @@ cursor {
 
 prefer-no-csd
 
-// spawn-at-startup "alacritty" "-e" "fish"
-
 spawn-at-startup "/usr/lib/pam_kwallet_init"
 spawn-at-startup "safeeyes"
 spawn-at-startup "nm-applet"
@@ -119,8 +108,6 @@ spawn-at-startup "swayidle" "-w" "timeout" "601" "niri msg action power-off-moni
 environment {
     DISPLAY ":0"
     ELECTRON_OZONE_PLATFORM_HINT "wayland"
-    // GSK_RENDERER "cairo"
-    // WAYLAND_DISPLAY null
 }
 
 // screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
@@ -128,7 +115,6 @@ environment {
 hotkey-overlay {
     skip-at-startup
 }
-
 
 gestures {
     hot-corners {
@@ -306,9 +292,9 @@ window-rule {
     // open-fullscreen false
 }
 
-
 window-rule {
     match app-id="flameshot" title="flameshot"
+    match app-id="thunar" title="Rename"
     open-floating true
     // open-fullscreen false
 }
@@ -326,6 +312,9 @@ window-rule {
 
 window-rule {
     match app-id=r#"^org\.keepassxc\.KeePassXC$"#
+    match app-id="chromium$" title="DevTools$"
+    match app-id="firefox" title="Developer Tools$"
+
     default-column-width { proportion 0.3333333333333333; }
 }
 
@@ -371,7 +360,6 @@ binds {
     Mod+U                allow-when-locked=true { spawn "playerctl" "play-pause"; }
     XF86AudioPrev        allow-when-locked=true { spawn "playerctl" "previous"; }
     XF86AudioNext        allow-when-locked=true { spawn "playerctl" "next"; }
-
 
     Mod+W repeat=false { close-window; }
     Mod+A repeat=false { toggle-overview; }
@@ -486,10 +474,6 @@ binds {
 
     Mod+0            { set-column-width "1920"; }
     Mod+Shift+0      { set-column-width "2560"; }
-    // Mod+Shift+0      { set-window-height ""; }
-
-    // Mod+Space       { switch-layout "next"; }
-    // Mod+Shift+Space { switch-layout "prev"; }
 
     Mod+Shift+Y { quit; }
 
