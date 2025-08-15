@@ -4,12 +4,13 @@ debug {
     // dbus-interfaces-in-non-session-instances
     // wait-for-frame-completion-before-queueing
     // enable-overlay-planes
-    disable-cursor-plane
+    // disable-cursor-plane
     // disable-direct-scanout
     // render-drm-device "/dev/dri/renderD129"
     // render-drm-device "/dev/dri/card1"
     // enable-color-transformations-capability
     // emulate-zero-presentation-time
+    honor-xdg-activation-with-invalid-serial
 }
 
 input {
@@ -20,31 +21,22 @@ input {
 
         repeat-delay 250
         repeat-rate 40
-
-        // track-layout "window"
     }
 
     touchpad {
         tap
-        // dwt
-        // dwtp
         natural-scroll
         accel-speed 0.4
-        // click-method "clickfinger"
+        scroll-factor 0.2
         accel-profile "flat"
-        // tap-button-map "left-middle-right"
     }
 
     mouse {
-        // natural-scroll
         accel-speed 0.4
         accel-profile "flat"
     }
 
-    // disable-power-key-handling
-    // warp-mouse-to-focus
-    focus-follows-mouse
-    // workspace-auto-back-and-forth
+    focus-follows-mouse max-scroll-amount="30%"
 }
 
 output "DP-3" {
@@ -61,7 +53,6 @@ output "DP-1" {
     position x=1280 y=0
     mode "2560x1440"
 }
-
 
 layout {
     focus-ring {
@@ -84,14 +75,13 @@ layout {
     }
 
     preset-column-widths {
-        proportion 0.25
+        proportion 0.3333333333333333
         proportion 0.5
-        proportion 0.66667
+        proportion 0.6666666666666667
         // fixed 1000
     }
 
-    default-column-width { proportion 0.25; }
-    // default-column-width { }
+    default-column-width { proportion 0.5; }
 
     gaps 4
 
@@ -101,20 +91,20 @@ layout {
 
 cursor {
     xcursor-theme "catppuccin-mocha-dark-cursors"
-    // xcursor-theme "breeze_cursors"
     xcursor-size 36
 }
 
 prefer-no-csd
 
-// spawn-at-startup "alacritty" "-e" "fish"
-
-spawn-at-startup "/usr/lib/pam_kwallet_init"
-
+spawn-at-startup "safeeyes"
+spawn-at-startup "nm-applet"
+spawn-at-startup "xwayland-satellite"
+spawn-at-startup "gammastep-indicator"
+spawn-at-startup "swayidle" "-w" "timeout" "601" "niri msg action power-off-monitors" "timeout" "600" "swaylock -f" "before-sleep" "swaylock -f"
 
 environment {
-    // GSK_RENDERER "cairo"
-    // WAYLAND_DISPLAY null
+    DISPLAY ":0"
+    ELECTRON_OZONE_PLATFORM_HINT "wayland"
 }
 
 // screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
@@ -122,7 +112,6 @@ environment {
 hotkey-overlay {
     skip-at-startup
 }
-
 
 gestures {
     hot-corners {
@@ -280,51 +269,6 @@ window-rule {
     clip-to-geometry true
 }
 
-/-window-rule {
-    match app-id="Adwaita"
-    // opacity 0.5
-    block-out-from "screencast"
-    geometry-corner-radius 12
-    clip-to-geometry false
-    border {
-        // off
-        width 12
-    }
-}
-
-/-window-rule {
-    match app-id="terminal"
-    clip-to-geometry false
-    geometry-corner-radius 8 8 0 0
-    border {
-        // width 4
-    }
-}
-
-/-window-rule {
-    match app-id="code"
-    // opacity 0.98
-    border {
-        // off
-    }
-}
-
-/-window-rule {
-    match app-id="weston."
-    // block-out-from "screencast"
-    geometry-corner-radius 12 24 32 64
-    // geometry-corner-radius 999
-    clip-to-geometry true
-}
-
-// window-rule {
-//     match app-id="Alacritty"
-//     geometry-corner-radius 12 12 0 0
-//     border {
-//         width 2
-//     }
-// }
-
 window-rule {
     match title="simple-egl"
     // min-width 128
@@ -346,8 +290,10 @@ window-rule {
 }
 
 window-rule {
-    // match is-active=false
-    // opacity 0.95
+    match app-id="flameshot" title="flameshot"
+    match app-id="thunar" title="Rename"
+    open-floating true
+    // open-fullscreen false
 }
 
 // Qt used by OBS doesn't signal min size yet, so do it manually.
@@ -356,11 +302,18 @@ window-rule {
     min-width 876
 }
 
-// window-rule {
-//     match app-id=r#"^org\.mozilla\.firefox$"#
-//
-//     default-column-width { proportion 0.66667; }
-// }
+window-rule {
+    match app-id="obsidian"
+    open-maximized true
+}
+
+window-rule {
+    match app-id=r#"^org\.keepassxc\.KeePassXC$"#
+    match app-id="chromium$" title="DevTools$"
+    match app-id="firefox" title="Developer Tools$"
+
+    default-column-width { proportion 0.3333333333333333; }
+}
 
 window-rule {
     match app-id=r#"^org\.keepassxc\.KeePassXC$"#
@@ -373,10 +326,9 @@ window-rule {
 
 
     block-out-from "screencast"
-    // block-out-from "screen-capture"
 
     border {
-        // active-color "red"
+        active-color "#f38ba8"
     }
 }
 
@@ -384,9 +336,11 @@ binds {
     Mod+Shift+C { spawn "sh" "-c" "t env DISPLAY=:0 xsel -ob | wl-copy"; }
     Mod+Shift+V { spawn "sh" "-c" "wl-paste -n | t env DISPLAY=:0 xsel -ib"; }
 
-    Mod+Q { spawn "chromium"; }
-    Mod+Return { spawn "kitty"; }
-    Mod+Alt+S { screenshot; }
+    Mod+Q repeat=false          { spawn "chromium"; }
+    Mod+Shift+Q repeat=false    { spawn "firefox"; }
+    Mod+Return repeat=false     { spawn "kitty"; }
+    Mod+Alt+S                   { screenshot; }
+
     Print { spawn "script" "--command" "XDG_CURRENT_DESKTOP=sway flameshot gui" "/dev/null"; }
     Ctrl+Print { screenshot-screen; }
     Alt+Print { screenshot-window; }
@@ -399,10 +353,14 @@ binds {
     XF86AudioLowerVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.02-"; }
     XF86AudioMute        allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"; }
     XF86AudioMicMute     allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"; }
+    XF86AudioPlay        allow-when-locked=true { spawn "playerctl" "play-pause"; }
+    Mod+U                allow-when-locked=true { spawn "playerctl" "play-pause"; }
+    XF86AudioPrev        allow-when-locked=true { spawn "playerctl" "previous"; }
+    XF86AudioNext        allow-when-locked=true { spawn "playerctl" "next"; }
 
-    Mod+W { close-window; }
-    Mod+A { toggle-overview; }
-    Mod+Y { toggle-column-tabbed-display; }
+    Mod+W repeat=false { close-window; }
+    Mod+A repeat=false { toggle-overview; }
+    Mod+Y repeat=false { toggle-column-tabbed-display; }
 
     Alt+Tab         { focus-window-down; }
     Alt+Shift+Tab   { focus-window-up; }
@@ -493,10 +451,13 @@ binds {
     Mod+BracketRight { consume-or-expel-window-right; }
 
     Mod+R { switch-preset-column-width; }
-    Mod+F { maximize-column; }
-    Mod+Shift+F { fullscreen-window; }
-    Mod+Shift+Ctrl+F { toggle-windowed-fullscreen; }
+    Mod+F repeat=false              { maximize-column; }
+    Mod+Shift+F repeat=false        { fullscreen-window; }
+    Mod+Shift+Ctrl+F repeat=false   { toggle-windowed-fullscreen; }
     Mod+N { center-column; }
+
+    // Move the focused window between the floating and the tiling layout.
+    Mod+V repeat=false { toggle-window-floating; }
 
     Mod+Minus { set-column-width "-10%"; }
     Mod+Equal { set-column-width "+10%"; }
@@ -508,11 +469,7 @@ binds {
     Mod+Shift+Ctrl+Minus { set-window-height "-1"; }
     Mod+Shift+Ctrl+Equal { set-window-height "+1"; }
 
-    // Mod+0            { set-column-width "960"; }
-    // Mod+Shift+0      { set-window-height "540"; }
-
-    // Mod+Space       { switch-layout "next"; }
-    // Mod+Shift+Space { switch-layout "prev"; }
+    Mod+0            { set-column-width "1920"; }
 
     Mod+Shift+Y { quit; }
 
