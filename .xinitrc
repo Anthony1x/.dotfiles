@@ -6,8 +6,8 @@ sysresources=/etc/X11/xinit/.Xresources
 sysmodmap=/etc/X11/xinit/.Xmodmap
 
 # Custom stuff from yours truly
-export TERMINAL=/sbin/kitty
-export EDITOR=/sbin/neovide
+TERMINAL=/sbin/kitty
+EDITOR=/sbin/neovide
 
 xset r rate 300 40
 
@@ -18,6 +18,9 @@ XMODIFIERS=@im=fcitx
 
 GTK_THEME=Adwaita:dark
 QT_QPA_PLATFORMTHEME=qt5ct:qt6ct
+QT_STYLE_OVERIDE=GTK+
+
+XCURSOR_PATH="catppuccin-mocha-dark-cursors"
 
 # End
 

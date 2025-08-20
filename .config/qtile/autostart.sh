@@ -26,5 +26,5 @@ fi
 # Programs to autostart
 fcitx5 -d &
 dunst &
-npx arrpc &
+# npx arrpc &
 sleep 1

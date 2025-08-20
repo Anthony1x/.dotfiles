@@ -51,12 +51,12 @@
   },
   "theme": {
     "mode": "system",
-    "light": "Catppuccin Mocha (sky) - No Italics",
-    "dark": "Catppuccin Mocha (sky) - No Italics"
+    "light": "Catppuccin Mocha - No Italics",
+    "dark": "Catppuccin Mocha - No Italics"
   },
   "languages": {
     "PHP": {
-      "language_servers": ["intelephense", "!phpactor", "..."]
+      "language_servers": ["intelephense", "!phpactor", "!..."]
     }
   },
   "inlay_hints": {

@@ -8,6 +8,7 @@ from dotenv import get_key, set_key
 env = Path('/home/anthony/.config/qtile/.env')
 should_have_borders = (get_key(dotenv_path=env, key_to_get='BORDERS')) == "True"
 
+
 def switch(qtile):
     global env, should_have_borders
 
@@ -17,9 +18,9 @@ def switch(qtile):
 
     qtile.reload_config()
 
+
 keys.extend([
-    #  Switch super-ultrawide monitor layout
-    Key([mod, shift], "p", lazy.function(switch)),
+    Key([mod, shift], "p", lazy.function(switch), desc="Switch between border and no border"),
 ])
 
 # Layouts

@@ -30,7 +30,7 @@ def groupBox(output):
 
 
 @WidgetTweaker
-def volume(output):
+def volume(output: str):
     if output.endswith('%'):
         volume = int(output[:-1])
 

@@ -75,7 +75,6 @@ keys = [
     Key([], "XF86AudioNext", lazy.spawn('playerctl next')),
 
     # Anki recording scripts
-    # Key([mod], "m", lazy.spawn(anki_screenie)),
     Key([mod], "m", lazy.spawn(anki_screenie)),
     Key([mod, shift], "m", lazy.spawn(anki_record)),
 ]
