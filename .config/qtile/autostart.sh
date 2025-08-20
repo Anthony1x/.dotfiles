@@ -16,7 +16,7 @@ else
     xrandr --output DP-0 --mode 2560x1440 --pos 1280x0
     xrandr --output DP-4 --primary --mode 5120x1440 --pos 0x1440
 
-    # picom -b --config $HOME/.config/qtile/scripts/picom.conf &
+    ./scripts/picom_toggle.sh &
     redshift &
 
     # Set wallpapers

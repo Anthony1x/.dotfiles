@@ -1,8 +1,7 @@
 #!/bin/bash
 
-if pgrep -x "picom" > /dev/null
-then
+if pgrep -x "picom" >/dev/null; then
     killall picom
 else
-    picom -b --config $HOME/.config/qtile/scripts/picom.conf
+    picom -b --config $HOME/.config/picom/picom.conf
 fi
