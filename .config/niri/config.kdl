@@ -51,6 +51,7 @@ output "eDP-1" {
 output "DP-1" {
     // off
 
+    focus-at-startup
     scale 1.0
     position x=1920 y=-400
     mode "3440x1440"
@@ -72,8 +73,8 @@ layout {
         // active-color "#89dceb"
         // inactive-color "#585b70"
 
-        active-gradient from="#89dceb" to="#94e2d5" angle=45 relative-to="workspace-view"
-        inactive-gradient from="#585b70" to="#7f849c" angle=45 relative-to="workspace-view"
+        active-gradient from="#89dceb" to="#a6e3a1" angle=45
+        inactive-gradient from="#585b70" to="#7f849c" angle=45
     }
 
     preset-column-widths {
@@ -86,6 +87,21 @@ layout {
     default-column-width { proportion 0.5; }
 
     gaps 4
+
+    struts {
+        left -2
+        right -2
+    }
+
+    tab-indicator {
+        width 6
+        gap 0
+        // length total-proportion=1.0
+        position "top"
+        gaps-between-tabs 4
+        corner-radius 4
+        // place-within-column
+    }
 
     // center-focused-column "on-overflow"
     // center-focused-column "always"
@@ -133,7 +149,7 @@ animations {
         // off
         // duration-ms 2500
         // curve "ease-out-cubic"
-        // spring damping-ratio=1.0 stiffness=1000 epsilon=0.0001
+        spring damping-ratio=0.8 stiffness=800 epsilon=0.0001
     }
 
     window-open {
@@ -154,8 +170,7 @@ animations {
         // off
         // duration-ms 500
         // curve "ease-out-cubic"
-        // spring damping-ratio=1.0 stiffness=20 epsilon=0.00001
-        // spring damping-ratio=10.0 stiffness=800 epsilon=0.0001
+        spring damping-ratio=0.9 stiffness=800 epsilon=0.0001
     }
 
     window-movement {
@@ -262,6 +277,12 @@ window-rule {
         // active-color "red"
     }
 
+    shadow {
+        on
+        color "#89dceb30"
+        // active-gradient from="#89dceb" to="#a6e3a1" angle=45 relative-to="workspace-view"
+    }
+
     // draw-border-with-background true
     // draw-border-with-background false
 
@@ -270,6 +291,19 @@ window-rule {
     // geometry-corner-radius 1
     geometry-corner-radius 6
     clip-to-geometry true
+}
+
+layer-rule {
+    match namespace="rofi"
+    match namespace="dunst"
+
+    shadow {
+        on
+        color "#89dceb50"
+    }
+
+    geometry-corner-radius 11
+
 }
 
 window-rule {
@@ -333,6 +367,11 @@ window-rule {
     border {
         active-color "#f38ba8"
     }
+
+    shadow {
+        on
+        color "#f38ba840"
+    }
 }
 
 binds {
@@ -365,7 +404,7 @@ binds {
     Mod+A repeat=false { toggle-overview; }
     Mod+Y repeat=false { toggle-column-tabbed-display; }
 
-    Alt+Tab         { focus-window-down; }
+    Alt+Tab         { focus-window-up-or-bottom; }
     Alt+Shift+Tab   { focus-window-up; }
 
     Mod+Left  { focus-column-left; }
@@ -380,8 +419,8 @@ binds {
 
     Mod+Home { focus-column-first; }
     Mod+End  { focus-column-last; }
-    Mod+Ctrl+Home { move-column-to-first; }
-    Mod+Ctrl+End  { move-column-to-last; }
+    Mod+Shift+Home { move-column-to-first; }
+    Mod+Shift+End  { move-column-to-last; }
 
     Mod+Ctrl+Left  { focus-monitor-left; }
     Mod+Ctrl+Down  { focus-monitor-down; }
@@ -400,13 +439,11 @@ binds {
 
     Mod+Page_Down      { focus-workspace-down; }
     Mod+Page_Up        { focus-workspace-up; }
-    Mod+Ctrl+Page_Down { move-column-to-workspace-down; }
-    Mod+Ctrl+Page_Up   { move-column-to-workspace-up; }
+    Mod+Shift+Page_Down { move-column-to-workspace-down; }
+    Mod+Shift+Page_Up   { move-column-to-workspace-up; }
 
-    Mod+Shift+WheelScrollDown   cooldown-ms=150 { focus-workspace-down; }
     Mod+Shift+WheelScrollUp     cooldown-ms=150 { focus-workspace-up; }
-    Mod+Ctrl+WheelScrollDown    cooldown-ms=150 { move-column-to-workspace-down; }
-    Mod+Ctrl+WheelScrollUp      cooldown-ms=150 { move-column-to-workspace-up; }
+    Mod+Shift+WheelScrollDown   cooldown-ms=150 { focus-workspace-down; }
 
     Mod+WheelScrollRight           { focus-column-right; }
     Mod+WheelScrollLeft            { focus-column-left; }
@@ -422,11 +459,6 @@ binds {
     Mod+TouchpadScrollDown allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.02+"; }
     // Mod+TouchpadScrollLeft  { focus-column-left; }
     // Mod+TouchpadScrollRight { focus-column-right; }
-
-    Mod+Shift+L         { move-workspace-down; }
-    Mod+Shift+U         { move-workspace-up; }
-    Mod+Shift+Page_Down { move-workspace-down; }
-    Mod+Shift+Page_Up   { move-workspace-up; }
 
     Mod+1       { focus-workspace 1; }
     Mod+2       { focus-workspace 2; }
@@ -474,6 +506,8 @@ binds {
 
     Mod+0            { set-column-width "1920"; }
     Mod+Shift+0      { set-column-width "2560"; }
+    Mod+ssharp      { set-column-width "1504"; }
+    Mod+Shift+ssharp      { set-column-width "864"; }
 
     Mod+Shift+Y { quit; }
 
