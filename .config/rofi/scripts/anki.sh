@@ -4,11 +4,8 @@ script_dir="$HOME/Documents/Dev/vn-cards"
 
 # List of scripts
 scripts=(
-    "Screenshot and append to latest card:$script_dir/take_screenshot.sh"
-    "Screenshot and start/stop recording:$script_dir/record_audio.sh"
-    "Start tag latest card:$script_dir/tag_card.php --start"
-    "Stop tag latest card:$script_dir/tag_card.php --stop"
-    "Fill fields from tags:$script_dir/copy_from_previous.php"
+    "Screenshot and append to latest card:$script_dir/capture.sh"
+    "Screenshot and start/stop recording:$script_dir/capture.sh --record"
 )
 
 # Show the menu with rofi
