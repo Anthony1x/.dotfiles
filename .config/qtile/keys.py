@@ -57,6 +57,10 @@ keys = [
     Key([mod, "control"], "i", lazy.layout.shrink(), desc="Shrink window"),
     Key([mod, "control"], "o", lazy.layout.grow(), desc="Grow window"),
 
+
+    Key([mod, "control"], "left", lazy.previous_screen(), desc="Previous screen"),
+    Key([mod, "control"], "right", lazy.next_screen(), desc="Next screen"),
+
     # Layouts
     Key([alt], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
     Key([alt, shift], "Tab", lazy.prev_layout(), desc="Toggle between layouts"),
