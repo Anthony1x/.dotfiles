@@ -35,7 +35,7 @@ keys = [
     Key([mod], "q", lazy.spawn(browser)),
     Key([mod, shift], "Return", lazy.spawn(files)),
     Key([mod, alt], "s", lazy.spawn(screenie)),
-    Key([mod, alt], "o", lazy.spawn(f"{scripts_dir}/picom_toggle.sh")),
+    Key([mod, "control"], "p", lazy.spawn(f"{scripts_dir}/picom_toggle.sh")),
     Key([mod, alt], "l", lazy.spawn(screen_lock)),
     Key([mod, shift], "q", lazy.spawn(layout_select)),
 
