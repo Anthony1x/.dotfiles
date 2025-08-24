@@ -7,7 +7,7 @@
     "spacing": 8, // Gaps between modules (4px)
     // Choose the order of the modules
     "modules-left": [
-        "niri/workspaces",
+        "hyprland/workspaces",
         "mpris"
     ],
     "modules-center": [
@@ -20,16 +20,16 @@
         "network",
         // "backlight",
         "keyboard-state",
-        "battery",
         "tray"
     ],
-    "niri/workspaces": {
+    "hyprland/workspaces": {
         // "all-outputs": true,
         "format": "{icon}",
         "format-icons": {
             "active": "",
             "default": ""
-        }
+        },
+        "all-outputs":true
     },
     "keyboard-state": {
         "numlock": true,
@@ -88,26 +88,6 @@
             "",
             "",
             ""
-        ]
-    },
-    "battery": {
-        "states": {
-            // "good": 95,
-            "warning": 30,
-            "critical": 15
-        },
-        "format": "{capacity}% {icon}",
-        "format-charging": "{capacity}% ",
-        "format-plugged": "{capacity}% ",
-        "format-alt": "{time} {icon}",
-        // "format-good": "", // An empty format will hide the module
-        "format-full": "",
-        "format-icons": [
-            "",
-            "",
-            "",
-            "",
-            ""
         ]
     },
     "network": {
