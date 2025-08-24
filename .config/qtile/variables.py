@@ -61,7 +61,7 @@ bar_foreground_color = theme['foreground']
 bar_background_opacity = 0
 bar_global_opacity = 1.0
 bar_nerd_font = "JetbrainsMono Nerd Font"
-bar_font = bar_nerd_font  # "Opensans Medium"
+bar_font = bar_nerd_font
 bar_fontsize = 13.2
 
 # Widgets
@@ -76,7 +76,7 @@ widget_padding = 15
 widget_decoration_rect_filled = True
 widget_decoration_rect_color = theme["alt_background"]
 widget_decoration_rect_opacity = 1.0
-widget_decoration_rect_border_width = 2.7
+widget_decoration_rect_border_width = 2
 widget_decoration_rect_border_color = theme["accent"]
 widget_decoration_rect_padding_x = 0
 widget_decoration_rect_padding_y = 0
