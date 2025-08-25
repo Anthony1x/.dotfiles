@@ -506,8 +506,7 @@ binds {
 
     Mod+0            { set-column-width "1920"; }
     Mod+Shift+0      { set-column-width "2560"; }
-    Mod+ssharp      { set-column-width "1504"; }
-    Mod+Shift+ssharp      { set-column-width "864"; }
+    Mod+ssharp      { expand-column-to-available-width; }
 
     Mod+Shift+Y { quit; }
 
