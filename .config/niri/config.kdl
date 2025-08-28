@@ -21,6 +21,7 @@ input {
 
         repeat-delay 250
         repeat-rate 40
+        numlock
     }
 
     touchpad {
@@ -302,6 +303,7 @@ layer-rule {
         color "#89dceb50"
     }
 
+    baba-is-float true
     geometry-corner-radius 11
 
 }
@@ -333,6 +335,16 @@ window-rule {
     // open-fullscreen false
 }
 
+window-rule {
+    match app-id="volume" title="kitty"
+    open-floating true
+
+    default-window-height { proportion 0.75; }
+    default-column-width { proportion 0.75; }
+
+    // open-fullscreen false
+}
+
 // Qt used by OBS doesn't signal min size yet, so do it manually.
 window-rule {
     match app-id=r#"^com\.obsproject\.Studio$"#
@@ -347,6 +359,7 @@ window-rule {
 window-rule {
     match app-id=r#"^org\.keepassxc\.KeePassXC$"#
     match app-id="chromium$" title="DevTools$"
+    match app-id="sublime_merge"
     match app-id="firefox" title="Developer Tools$"
 
     default-column-width { proportion 0.3333333333333333; }
@@ -374,6 +387,13 @@ window-rule {
     }
 }
 
+// Put swaybg inside the overview backdrop.
+layer-rule {
+    match namespace="^wallpaper$"
+
+    place-within-backdrop true
+}
+
 binds {
     Mod+Shift+C { spawn "sh" "-c" "t env DISPLAY=:0 xsel -ob | wl-copy"; }
     Mod+Shift+V { spawn "sh" "-c" "wl-paste -n | t env DISPLAY=:0 xsel -ib"; }
@@ -388,6 +408,7 @@ binds {
     Alt+Print { screenshot-window; }
     Mod+D { spawn "rofi" "-show" "drun"; }
     Mod+Shift+Return { spawn "thunar"; }
+    Mod+Shift+N { spawn "kitten" "quick-access-terminal"; }
     Super+L allow-when-locked=true { spawn "swaylock"; }
     Super+Shift+L { power-off-monitors; }
 
@@ -399,6 +420,7 @@ binds {
     Mod+U                allow-when-locked=true { spawn "playerctl" "play-pause"; }
     XF86AudioPrev        allow-when-locked=true { spawn "playerctl" "previous"; }
     XF86AudioNext        allow-when-locked=true { spawn "playerctl" "next"; }
+    Mod+V repeat=false { spawn "kitty" "--class=volume" "-e" "pulsemixer"; }
 
     Mod+W repeat=false { close-window; }
     Mod+A repeat=false { toggle-overview; }
@@ -486,13 +508,13 @@ binds {
     Mod+BracketRight { consume-or-expel-window-right; }
 
     Mod+R { switch-preset-column-width; }
-    Mod+F repeat=false              { maximize-column; }
+    Mod+F repeat=false          { maximize-column; }
     Mod+Shift+F repeat=false        { fullscreen-window; }
     Mod+Shift+Ctrl+F repeat=false   { toggle-windowed-fullscreen; }
     Mod+N { center-column; }
 
     // Move the focused window between the floating and the tiling layout.
-    Mod+V repeat=false { toggle-window-floating; }
+    Mod+Alt+F repeat=false { toggle-window-floating; }
 
     Mod+Minus { set-column-width "-10%"; }
     Mod+Equal { set-column-width "+10%"; }
@@ -506,7 +528,7 @@ binds {
 
     Mod+0            { set-column-width "1920"; }
     Mod+Shift+0      { set-column-width "2560"; }
-    Mod+ssharp      { expand-column-to-available-width; }
+    Mod+ssharp       { expand-column-to-available-width; }
 
     Mod+Shift+Y { quit; }
 
