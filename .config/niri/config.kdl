@@ -412,8 +412,8 @@ binds {
     Super+L allow-when-locked=true { spawn "swaylock"; }
     Super+Shift+L { power-off-monitors; }
 
-    XF86AudioRaiseVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.02+"; }
-    XF86AudioLowerVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.02-"; }
+    XF86AudioRaiseVolume allow-when-locked=true { spawn "~/dotfiles/.local/bin/volume.sh" "up"; }
+    XF86AudioLowerVolume allow-when-locked=true { spawn "~/dotfiles/.local/bin/volume.sh" "down"; }
     XF86AudioMute        allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"; }
     XF86AudioMicMute     allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"; }
     XF86AudioPlay        allow-when-locked=true { spawn "playerctl" "play-pause"; }
