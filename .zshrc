@@ -28,6 +28,7 @@ alias man='batman'
 alias KILLYOURSELF="exit"
 alias yay="paru"
 alias fz="fzf --preview 'bat --style=numbers --color=always {}'"
+alias cd="z"
 
 fcd() { cd "$(find . -type d -not -path '*/.*' | fzf)" && l; }
 f() { echo "$(find . -type f -not -path '*/.*' | fzf)" | pbcopy }
@@ -65,6 +66,8 @@ export LC_CTYPE=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
 source <(fzf --zsh)
+
+eval "$(zoxide init zsh)"
 
 # Added by `rbenv init` on Wed Apr  2 02:39:55 PM CEST 2025
 eval "$(rbenv init - --no-rehash zsh)"
