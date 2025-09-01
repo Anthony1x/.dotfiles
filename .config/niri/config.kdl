@@ -74,7 +74,7 @@ layout {
         // active-color "#89dceb"
         // inactive-color "#585b70"
 
-        active-gradient from="#89dceb" to="#a6e3a1" angle=45
+        active-gradient from="#b4befe" to="#cba6f7" angle=45
         inactive-gradient from="#585b70" to="#7f849c" angle=45
     }
 
@@ -119,7 +119,7 @@ spawn-at-startup "/usr/lib/pam_kwallet_init"
 spawn-at-startup "safeeyes"
 spawn-at-startup "nm-applet"
 spawn-at-startup "xwayland-satellite"
-spawn-at-startup "gammastep-indicator"
+spawn-at-startup "gammastep-indicator" "-c" "/home/anthony/.config/gammastep/gammastep.conf"
 spawn-at-startup "swayidle" "-w" "timeout" "601" "niri msg action power-off-monitors" "timeout" "600" "swaylock -f" "before-sleep" "swaylock -f"
 
 environment {
@@ -279,7 +279,7 @@ window-rule {
     }
 
     shadow {
-        on
+        off
         color "#89dceb30"
         // active-gradient from="#89dceb" to="#a6e3a1" angle=45 relative-to="workspace-view"
     }
@@ -382,7 +382,7 @@ window-rule {
     }
 
     shadow {
-        on
+        off
         color "#f38ba840"
     }
 }

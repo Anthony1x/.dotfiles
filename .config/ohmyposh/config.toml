@@ -27,7 +27,7 @@ final_space = true
     template = '{{.Icon}} '
     foreground = 'p:wight'
     powerline_symbol = ''
-    background = 'p:blue'
+    background = 'p:lavender'
     type = 'os'
 
   [[blocks.segments]]
@@ -35,7 +35,7 @@ final_space = true
     template = '{{ .UserName }}@{{ .HostName }}'
     foreground = 'p:text'
     powerline_symbol = ''
-    background = 'p:blue'
+    background = 'p:lavender'
     type = 'session'
 
   [[blocks.segments]]
@@ -56,7 +56,7 @@ final_space = true
     template = ' {{ .HEAD }}'
     foreground = 'p:text'
     powerline_symbol = ''
-    background = 'p:lavender'
+    background = 'p:blue'
     type = 'git'
 
     [blocks.segments.properties]
