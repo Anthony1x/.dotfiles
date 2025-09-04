@@ -123,8 +123,8 @@ spawn-at-startup "gammastep-indicator" "-c" "/home/anthony/.config/gammastep/gam
 spawn-at-startup "swayidle" "-w" "timeout" "601" "niri msg action power-off-monitors" "timeout" "600" "swaylock -f" "before-sleep" "swaylock -f"
 
 environment {
-    DISPLAY ":0"
-    ELECTRON_OZONE_PLATFORM_HINT "wayland"
+    // DISPLAY ":0"
+    // ELECTRON_OZONE_PLATFORM_HINT "wayland"
 }
 
 // screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
@@ -345,6 +345,17 @@ window-rule {
     // open-fullscreen false
 }
 
+
+window-rule {
+    match app-id="xdg-desktop-portal-gtk"
+    open-floating true
+
+    default-window-height { fixed 1000; }
+    default-column-width { fixed 1200; }
+
+    // open-fullscreen false
+}
+
 // Qt used by OBS doesn't signal min size yet, so do it manually.
 window-rule {
     match app-id=r#"^com\.obsproject\.Studio$"#
@@ -459,10 +470,10 @@ binds {
     Mod+Shift+Alt+Up    { move-workspace-to-monitor-up; }
     Mod+Shift+Alt+Right { move-workspace-to-monitor-right; }
 
-    Mod+Page_Down      { focus-workspace-down; }
-    Mod+Page_Up        { focus-workspace-up; }
-    Mod+Shift+Page_Down { move-column-to-workspace-down; }
-    Mod+Shift+Page_Up   { move-column-to-workspace-up; }
+    Mod+Page_Down repeat=false { focus-workspace-down; }
+    Mod+Page_Up   repeat=false { focus-workspace-up; }
+    Mod+Shift+Page_Down repeat=false { move-column-to-workspace-down; }
+    Mod+Shift+Page_Up   repeat=false { move-column-to-workspace-up; }
 
     Mod+Shift+WheelScrollUp     cooldown-ms=150 { focus-workspace-up; }
     Mod+Shift+WheelScrollDown   cooldown-ms=150 { focus-workspace-down; }
@@ -507,7 +518,8 @@ binds {
     Mod+BracketLeft  { consume-or-expel-window-left; }
     Mod+BracketRight { consume-or-expel-window-right; }
 
-    Mod+R { switch-preset-column-width; }
+    Mod+R repeat=false { switch-preset-column-width; }
+    Mod+Shift+R repeat=false { switch-preset-column-width-back; }
     Mod+F repeat=false          { maximize-column; }
     Mod+Shift+F repeat=false        { fullscreen-window; }
     Mod+Shift+Ctrl+F repeat=false   { toggle-windowed-fullscreen; }
