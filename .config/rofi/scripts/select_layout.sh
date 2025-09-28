@@ -6,6 +6,7 @@ layouts=(
     "18:9 middle"
     "4:3 middle"
     "21:9 + 11:9"
+    "11:9 + 21:9"
     "21:9 middle"
     "2x 16:9 side by side"
     "32:9, no fake screens"

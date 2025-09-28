@@ -228,6 +228,12 @@ fake_screen_layouts = [
         Screen(x=0, y=1440, width=3440, height=1440),
         Screen(x=3440, y=1440, width=1680, height=1440),
     ],
+    # 11:9 + 21:9
+    [
+        top_screen,
+        Screen(x=0, y=1440, width=1680, height=1440),
+        Screen(x=1680, y=1440, width=3440, height=1440),
+    ],
     # 21:9 middle
     [
         top_screen,

@@ -26,6 +26,7 @@ alias man='batman'
 alias KILLYOURSELF="exit"
 alias fz="fzf --preview 'bat --style=numbers --color=always {}'"
 alias qr='qrencode -m 2 -t utf8 <<< "$1"'
+alias cd="z"
 
 fcd() { cd "$(find . -type d -not -path '*/.*' | fzf)" && l; }
 f() { echo "$(find . -type f -not -path '*/.*' | fzf)" | pbcopy }
@@ -44,5 +45,7 @@ export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
 
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow'
+
+eval "$(zoxide init zsh)"
 
 source <(fzf --zsh)

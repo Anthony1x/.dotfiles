@@ -2,6 +2,8 @@
 
 sleep 1
 
+QT_QPA_PLATFORMTHEME="qt6ct"
+
 # Set monitors
 if [ "$XDG_SESSION_TYPE" = "wayland" ]; then
     # Wayland equivalent commands using wlr-randr

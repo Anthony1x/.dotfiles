@@ -17,5 +17,9 @@ floating_layout = layout.Floating(
         Match(wm_class="ssh-askpass"),  # ssh-askpass
         Match(title="branchdialog"),  # gitk
         Match(title="pinentry"),  # GPG key password entry
+        Match(title="Create Folder", wm_class="Godot_Editor"),  # Godot prompt
+        Match(title="Please Confirm...", wm_class="Godot_Editor"),  # Godot prompt
+        Match(title="Create New Node", wm_class="Godot_Editor"),  # Godot prompt
+
     ]
 )
