@@ -20,6 +20,7 @@ anki_menu = "/home/anthony/.config/rofi/scripts/anki.sh"
 
 anki_screenie = "/home/anthony/Documents/Dev/vn-cards/capture.sh"
 anki_record = f"{anki_screenie} --record"
+anki_replay = "/home/anthony/Documents/Dev/vn-cards/audio-replay-save.sh"
 
 keys = [
     Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
@@ -81,6 +82,7 @@ keys = [
     # Anki recording scripts
     Key([mod], "m", lazy.spawn(anki_screenie)),
     Key([mod, shift], "m", lazy.spawn(anki_record)),
+    Key([mod, "control"], "m", lazy.spawn(anki_replay)),
 ]
 
 # Scratchpad keybindings
