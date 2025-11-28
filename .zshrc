@@ -3,7 +3,7 @@ export ZSH="$HOME/.oh-my-zsh"
 
 zstyle ':omz:update' mode auto      # update automatically without asking
 
-source ~/.zsh/catppuccin_mocha-zsh-syntax-highlighting.zsh
+# source ~/.zsh/catppuccin_mocha-zsh-syntax-highlighting.zsh
 
 plugins=(
 	zsh-autosuggestions
@@ -29,6 +29,8 @@ alias KILLYOURSELF="exit"
 alias yay="paru"
 alias fz="fzf --preview 'bat --style=numbers --color=always {}'"
 alias cd="z"
+alias vim="nvim"
+
 
 fcd() { cd "$(find . -type d -not -path '*/.*' | fzf)" && l; }
 f() { echo "$(find . -type f -not -path '*/.*' | fzf)" | pbcopy }
@@ -57,7 +59,7 @@ acefs() {
 
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
-export PATH="$HOME/.gem/ruby/3.2.0/bin:$PATH"
+export PATH=$PATH:/home/anthony/.spicetify
 export PATH="$PATH:/home/anthony/.local/bin"
 
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow'
@@ -71,3 +73,5 @@ eval "$(zoxide init zsh)"
 
 # Added by `rbenv init` on Wed Apr  2 02:39:55 PM CEST 2025
 eval "$(rbenv init - --no-rehash zsh)"
+eval "$(fnm env --use-on-cd --shell zsh)"
+

@@ -7,7 +7,13 @@
 // custom settings, run the `zed: Open Default Settings` command
 // from the command palette
 {
-  "icon_theme": "Catppuccin Mocha",
+  "disable_ai": true,
+  "base_keymap": "VSCode",
+  "icon_theme": {
+    "mode": "system",
+    "light": "Catppuccin Latte",
+    "dark": "Catppuccin Mocha"
+  },
   "vim_mode": false,
   "notification_panel": {
     "dock": "left"
@@ -30,7 +36,7 @@
   },
   "ui_font_size": 15,
   "buffer_font_size": 13.333,
-  "ui_font_family": "Product Sans",
+  "ui_font_family": "Noto Sans",
   "buffer_font_family": "JetBrainsMono Nerd Font",
   "buffer_line_height": {
     "custom": 1.8
@@ -51,16 +57,16 @@
   },
   "theme": {
     "mode": "system",
-    "light": "Catppuccin Mocha (sky) - No Italics",
-    "dark": "Catppuccin Mocha (sky) - No Italics"
+    "light": "Catppuccin Mocha - No Italics",
+    "dark": "Catppuccin Mocha - No Italics"
   },
   "languages": {
     "PHP": {
-      "language_servers": ["intelephense", "!phpactor", "..."]
+      "language_servers": ["intelephense", "!phpactor", "!..."]
     }
   },
   "inlay_hints": {
-    "enabled": true
+    "enabled": false
   },
   "git": {
     "inline_blame": {
