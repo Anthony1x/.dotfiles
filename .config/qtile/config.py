@@ -7,7 +7,7 @@ from screens import fake_screens, widget_defaults, extension_defaults
 from keys import mod, keys
 from variables import groups
 from layouts import layouts, floating_layout
-from libqtile.backend.wayland import InputConfig
+# from libqtile.backend.wayland import InputConfig
 
 groups = groups
 layouts = layouts
@@ -38,9 +38,9 @@ reconfigure_screens = True
 
 # Wayland specific config
 
-wl_input_rules = {
-    "type:pointer": InputConfig(accel_profile='flat'),
-}
+# wl_input_rules = {
+#     "type:pointer": InputConfig(accel_profile='flat'),
+# }
 
 
 @hook.subscribe.startup_once

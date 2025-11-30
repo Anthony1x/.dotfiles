@@ -116,7 +116,7 @@ right = [
     ),
     widget.Memory(
         padding=5,
-        mouse_callbacks={'Button1': lambda: qtile.cmd_spawn(
+        mouse_callbacks={'Button1': lambda: qtile.spawn(
             terminal + ' -e btop')},
         measure_mem='M',
         format='{MemUsed: .0f}{mm}',
@@ -124,7 +124,7 @@ right = [
     ),
     widget.Memory(
         padding=5,
-        mouse_callbacks={'Button1': lambda: qtile.cmd_spawn(
+        mouse_callbacks={'Button1': lambda: qtile.spawn(
             terminal + ' -e btop')},
         measure_mem='M',
         format='{SwapUsed: .0f}{mm}',
