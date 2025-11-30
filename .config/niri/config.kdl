@@ -37,7 +37,7 @@ input {
         accel-profile "flat"
     }
 
-    focus-follows-mouse max-scroll-amount="30%"
+    focus-follows-mouse max-scroll-amount="0%"
 }
 
 output "DP-3" {
@@ -82,7 +82,7 @@ layout {
         // fixed 1000
     }
 
-    default-column-width { proportion 0.5; }
+    default-column-width { proportion 0.25; }
 
     gaps 4
 
