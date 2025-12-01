@@ -1,0 +1,14 @@
+debug {
+    // preview-render "screencast"
+    // preview-render "screen-capture"
+    // dbus-interfaces-in-non-session-instances
+    // wait-for-frame-completion-before-queueing
+    // enable-overlay-planes
+    // disable-cursor-plane
+    // disable-direct-scanout
+    // render-drm-device "/dev/dri/renderD129"
+    // render-drm-device "/dev/dri/card1"
+    // enable-color-transformations-capability
+    // emulate-zero-presentation-time
+    honor-xdg-activation-with-invalid-serial
+}

@@ -1,0 +1,6 @@
+// spawn-at-startup "safeeyes"
+spawn-at-startup "nm-applet"
+spawn-at-startup "xwayland-satellite"
+spawn-at-startup "gammastep-indicator" "-c" "/home/anthony/.config/gammastep/gammastep.conf"
+spawn-at-startup "swayidle" "-w" "timeout" "601" "niri msg action power-off-monitors" "timeout" "600" "swaylock -f" "before-sleep" "swaylock -f"
+spawn-sh-at-startup "`ssh-agent -s`; ssh-add ~/.ssh/next; ssh-add ~/.ssh/id_rsa"
