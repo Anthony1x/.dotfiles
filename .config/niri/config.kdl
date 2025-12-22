@@ -77,7 +77,9 @@ layout {
 
     preset-column-widths {
         proportion 0.25
+        proportion 0.33333
         proportion 0.5
+        proportion 0.66667
         proportion 0.75
         // fixed 1000
     }
@@ -113,13 +115,13 @@ cursor {
 prefer-no-csd
 
 spawn-at-startup "nm-applet"
-spawn-at-startup "xwayland-satellite"
 spawn-at-startup "gammastep-indicator" "-c" "/home/anthony/.config/gammastep/gammastep.conf"
 spawn-at-startup "swayidle" "-w" "timeout" "601" "niri msg action power-off-monitors" "timeout" "600" "swaylock -f" "before-sleep" "swaylock -f"
 
 environment {
-    DISPLAY ":0"
-    ELECTRON_OZONE_PLATFORM_HINT "wayland"
+    // DISPLAY ":0"
+    // ELECTRON_OZONE_PLATFORM_HINT "wayland"
+    QT_QPA_PLATFORMTHEME "qt6ct"
 }
 
 // screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
@@ -218,12 +220,6 @@ layer-rule {
     match namespace="rofi"
     match namespace="dunst"
 
-    shadow {
-        on
-        color "#89dceb50"
-    }
-
-    baba-is-float true
     geometry-corner-radius 11
 
 }
@@ -250,6 +246,7 @@ window-rule {
 
 window-rule {
     match app-id="xdg-desktop-portal-gtk"
+    match app-id="Xdg-desktop-portal-gtk"
     open-floating true
 
     default-window-height { fixed 1000; }
@@ -261,11 +258,6 @@ window-rule {
 window-rule {
     match app-id=r#"^com\.obsproject\.Studio$"#
     min-width 876
-}
-
-window-rule {
-    match app-id="obsidian"
-    open-maximized true
 }
 
 window-rule {
@@ -283,9 +275,6 @@ window-rule {
     match app-id=r#"^org\.telegram\.desktop$"#
 
     // Doesn't quite work: Firefox changes the title one frame early.
-    match app-id=r#"^org\.mozilla\.firefox$"# title="- Gmail "
-    match app-id=r#"^org\.mozilla\.firefox$"# title="^Google Calendar "
-
 
     block-out-from "screencast"
 
@@ -299,11 +288,31 @@ window-rule {
     }
 }
 
-// Put swaybg inside the overview backdrop.
-layer-rule {
-    match namespace="^wallpaper$"
+overview {
+    zoom 0.7
+}
 
-    place-within-backdrop true
+// Put swaybg inside the overview backdrop.
+// layer-rule {
+//     match namespace="^wallpaper$"
+//
+//     place-within-backdrop true
+// }
+
+recent-windows {
+    // Pre-select the "Output" scope when switching windows.
+    binds {
+        Mod+Tab         { next-window     scope="output"; }
+        Mod+Shift+Tab   { previous-window scope="output"; }
+        Mod+Escape      { next-window     scope="output" filter="app-id"; }
+        Mod+Shift+Escape { previous-window scope="output" filter="app-id"; }
+    }
+
+    highlight {
+        corner-radius 8
+        active-color "#b4befe"
+        urgent-color "#f38ba8"
+    }
 }
 
 binds {
@@ -338,7 +347,7 @@ binds {
     Mod+A repeat=false { toggle-overview; }
     Mod+Y repeat=false { toggle-column-tabbed-display; }
 
-    Alt+Tab         { focus-window-up-or-bottom; }
+    Alt+Tab         { focus-window-down; }
     Alt+Shift+Tab   { focus-window-up; }
 
     Mod+Left  { focus-column-left; }
@@ -403,15 +412,15 @@ binds {
     Mod+7       { focus-workspace 7; }
     Mod+8       { focus-workspace 8; }
     Mod+9       { focus-workspace 9; }
-    Mod+Ctrl+1  { move-column-to-workspace 1; }
-    Mod+Ctrl+2  { move-column-to-workspace 2; }
-    Mod+Ctrl+3  { move-column-to-workspace 3; }
-    Mod+Ctrl+4  { move-column-to-workspace 4; }
-    Mod+Ctrl+5  { move-column-to-workspace 5; }
-    Mod+Ctrl+6  { move-column-to-workspace 6; }
-    Mod+Ctrl+7  { move-column-to-workspace 7; }
-    Mod+Ctrl+8  { move-column-to-workspace 8; }
-    Mod+Ctrl+9  { move-column-to-workspace 9; }
+    Mod+Shift+1  { move-column-to-workspace 1; }
+    Mod+Shift+2  { move-column-to-workspace 2; }
+    Mod+Shift+3  { move-column-to-workspace 3; }
+    Mod+Shift+4  { move-column-to-workspace 4; }
+    Mod+Shift+5  { move-column-to-workspace 5; }
+    Mod+Shift+6  { move-column-to-workspace 6; }
+    Mod+Shift+7  { move-column-to-workspace 7; }
+    Mod+Shift+8  { move-column-to-workspace 8; }
+    Mod+Shift+9  { move-column-to-workspace 9; }
 
     Mod+Comma  { consume-window-into-column; }
     Mod+Period { expel-window-from-column; }
@@ -430,17 +439,13 @@ binds {
     Mod+Alt+F repeat=false { toggle-window-floating; }
 
     Mod+Minus { set-column-width "-10%"; }
-    Mod+Equal { set-column-width "+10%"; }
+    Mod+Shift+Minus { set-column-width "+10%"; }
     Mod+Ctrl+Minus { set-column-width "-1"; }
-    Mod+Ctrl+Equal { set-column-width "+1"; }
-
-    Mod+Shift+Minus      { set-window-height "-10%"; }
-    Mod+Shift+Equal      { set-window-height "+10%"; }
-    Mod+Shift+Ctrl+Minus { set-window-height "-1"; }
-    Mod+Shift+Ctrl+Equal { set-window-height "+1"; }
+    Mod+Ctrl+Shift+Minus { set-column-width "+1"; }
 
     Mod+0            { set-column-width "1920"; }
     Mod+Shift+0      { set-column-width "2560"; }
+    Mod+Ctrl+0       { set-window-height "1080"; }
     Mod+ssharp       { expand-column-to-available-width; }
 
     Mod+Shift+Y { quit; }

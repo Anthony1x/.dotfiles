@@ -14,7 +14,7 @@
 
 #workspaces {
     border-radius: 1rem;
-    border: 2px solid @sky;
+    border: 2px solid @lavender;
     margin: 3px;
     background-color: @base;
     margin-left: 1rem;
@@ -27,12 +27,12 @@
 }
 
 #workspaces button.active {
-    color: @sky;
+    color: @lavender;
     border-radius: 1rem;
 }
 
 #workspaces button:hover {
-    color: @sapphire;
+    color: @mauve;
     border-radius: 1rem;
 }
 
@@ -50,14 +50,14 @@
 #network,
 #mpris {
     background-color: @base;
-    border: 2px solid @sky;
+    border: 2px solid @lavender;
     border-radius: 1rem;
     padding: 0.25rem 0.75rem;
     margin: 3px 0;
 }
 
 #clock {
-    color: @blue;
+    color: @text;
 }
 
 #battery {

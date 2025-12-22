@@ -13,4 +13,4 @@ italic = { style = "Italic" }  # Inherits family from normal, Default style: Ita
 bold_italic = { style = "Bold Italic" }  # Inherits family from normal, Default style: Bold Italic
 
 # Font size in points
-size = 12  # Default: 11.25
+size = 11  # Default: 11.25
