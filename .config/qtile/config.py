@@ -1,13 +1,15 @@
 import os
 import subprocess
-from libqtile import hook
+from libqtile import hook, qtile
 from libqtile.config import Click, Drag
 from libqtile.lazy import lazy
 from screens import fake_screens, widget_defaults, extension_defaults
 from keys import mod, keys
 from variables import groups
 from layouts import layouts, floating_layout
-# from libqtile.backend.wayland import InputConfig
+
+if qtile.core.name == "wayland":
+    from libqtile.backend.wayland import InputConfig
 
 groups = groups
 layouts = layouts
@@ -27,7 +29,7 @@ mouse = [
 ]
 
 dgroups_key_binder = None
-dgroups_app_rules = []  # type: list
+dgroups_app_rules = []
 follow_mouse_focus = True
 bring_front_click = False
 floats_kept_above = True
@@ -38,9 +40,11 @@ reconfigure_screens = True
 
 # Wayland specific config
 
-# wl_input_rules = {
-#     "type:pointer": InputConfig(accel_profile='flat'),
-# }
+if qtile.core.name == "wayland":
+    wl_input_rules = {
+        "type:pointer": InputConfig(accel_profile='flat'),
+        "type:keyboard": InputConfig(kb_layout="de"),
+    }
 
 
 @hook.subscribe.startup_once
