@@ -2,10 +2,12 @@
 
 sleep 1
 
-QT_QPA_PLATFORMTHEME="qt6ct"
+export XCURSOR_PATH="catppuccin-mocha-dark-cursors"
+export QT_QPA_PLATFORMTHEME="qt6ct"
 
 # Set monitors
 if [ "$XDG_SESSION_TYPE" = "wayland" ]; then
+
     # Wayland equivalent commands using wlr-randr
     # For some reason, the outputs are different. I don't know why.
     wlr-randr --output DP-1 --mode 2560x1440 --pos 1280,0
@@ -13,6 +15,8 @@ if [ "$XDG_SESSION_TYPE" = "wayland" ]; then
 
     # Set wallpapers
     swaybg --image ~/Pictures/Wallpaper/Desktop/city.jpg &
+
+    gammastep-indicator -c ~/.config/gammastep/gammastep.conf &
 else
     # X11 commands
     xrandr --output DP-0 --mode 2560x1440 --pos 1280x0
