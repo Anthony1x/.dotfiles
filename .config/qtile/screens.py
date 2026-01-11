@@ -21,12 +21,11 @@ class WidgetTweaker:
         self.format = func
 
 
+group_map = dict(zip(group_names, group_labels))
+
 @WidgetTweaker
 def groupBox(output):
-    index = group_names.index(output)
-    label = group_labels[index]
-
-    return label
+    return group_map.get(output, output)
 
 
 @WidgetTweaker
