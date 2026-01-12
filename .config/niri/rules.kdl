@@ -1,16 +1,6 @@
 window-rule {
-
-
-
-    shadow {
-        off
-        color "#89dceb30"
-        // active-gradient from="#89dceb" to="#a6e3a1" angle=45 relative-to="workspace-view"
-    }
-
     geometry-corner-radius 6
     clip-to-geometry true
-
 }
 
 layer-rule {
@@ -22,7 +12,6 @@ layer-rule {
         color "#89dceb50"
     }
 
-    baba-is-float true
     geometry-corner-radius 11
 
 }
@@ -75,7 +64,7 @@ window-rule {
 // Qt used by OBS doesn't signal min size yet, so do it manually.
 window-rule {
     match app-id=r#"^com\.obsproject\.Studio$"#
-    min-width 876
+    min-width 800
 }
 
 window-rule {
@@ -86,10 +75,15 @@ window-rule {
 window-rule {
     match app-id=r#"^org\.keepassxc\.KeePassXC$"#
     match app-id="chromium$" title="DevTools$"
-    match app-id="sublime_merge"
     match app-id="firefox" title="Developer Tools$"
 
     default-column-width { proportion 0.3333333333333333; }
+}
+
+window-rule {
+    match app-id="sublime_merge"
+
+    default-column-width { fixed 1500; }
 }
 
 window-rule {

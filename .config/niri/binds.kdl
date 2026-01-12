@@ -122,9 +122,9 @@ binds {
     Mod+Alt+F repeat=false { toggle-window-floating; }
 
     Mod+Minus { set-column-width "-10%"; }
-    Mod+Shift+Minus { set-column-width "+10%"; }
+    Mod+Plus { set-column-width "+10%"; }
     Mod+Ctrl+Minus { set-column-width "-1"; }
-    Mod+Ctrl+Shift+Minus { set-column-width "+1"; }
+    Mod+Ctrl+Plus { set-column-width "+1"; }
 
     Mod+0            { set-column-width "1920"; }
     Mod+Shift+0      { set-column-width "2560"; }
