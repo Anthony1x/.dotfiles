@@ -1,28 +1,22 @@
 from libqtile.config import Key
 from libqtile.lazy import lazy
+from dotenv import set_key
+from settings import (
+    mod, alt, shift, control,
+    terminal, menu, browser, files, screenie, screen_lock,
+    powermenu, layout_select, scripts_dir,
+    anki_screenie, anki_record, anki_replay,
+    env, should_have_borders
+)
 
-mod = "mod4"
-alt = "mod1"
-shift = "shift"
-
-terminal = "kitty"
-menu = "rofi -show drun"
-browser = "floorp"
-files = "thunar"
-screenie = "flameshot gui"
-
-screen_lock = "betterlockscreen -l"
-scripts_dir = "/home/anthony/.config/qtile/scripts"
-powermenu = "rofi -show power-menu -modi power-menu://home/anthony/dotfiles/.config/rofi/scripts//rofi-power-menu"
-layout_select = "/home/anthony/.config/rofi/scripts/select_layout.sh"
-
-anki_menu = "/home/anthony/.config/rofi/scripts/anki.sh"
-
-anki_screenie = "/home/anthony/Documents/Dev/vn-cards/capture.sh"
-anki_record = f"{anki_screenie} --record"
-anki_replay = "/home/anthony/Documents/Dev/vn-cards/audio-replay-save.sh"
+# Function to toggle borders
+def switch(qtile):
+    new_state = not should_have_borders
+    set_key(dotenv_path=env, key_to_set='BORDERS', value_to_set=str(new_state))
+    qtile.reload_config()
 
 keys = [
+    # Essentials
     Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
     Key([mod], "w", lazy.window.kill(), desc="Kill focused window"),
     Key([mod], "f", lazy.window.toggle_floating(),
@@ -36,9 +30,12 @@ keys = [
     Key([mod], "q", lazy.spawn(browser)),
     Key([mod, shift], "Return", lazy.spawn(files)),
     Key([mod, alt], "s", lazy.spawn(screenie)),
-    Key([mod, "control"], "p", lazy.spawn(f"{scripts_dir}/picom_toggle.sh")),
+    Key([mod, control], "p", lazy.spawn(f"{scripts_dir}/picom_toggle.sh")),
     Key([mod, alt], "l", lazy.spawn(screen_lock)),
     Key([mod, shift], "q", lazy.spawn(layout_select)),
+    
+    # Border toggle
+    Key([mod, shift], "p", lazy.function(switch), desc="Switch between border and no border"),
 
     # Movement Keys
     Key([mod], "left", lazy.layout.left(), desc="Move focus to left"),
@@ -55,12 +52,11 @@ keys = [
     Key([mod, shift], "down", lazy.layout.shuffle_down(), desc="Move window down"),
     Key([mod, shift], "up", lazy.layout.shuffle_up(), desc="Move window up"),
 
-    Key([mod, "control"], "i", lazy.layout.shrink(), desc="Shrink window"),
-    Key([mod, "control"], "o", lazy.layout.grow(), desc="Grow window"),
+    Key([mod, control], "i", lazy.layout.shrink(), desc="Shrink window"),
+    Key([mod, control], "o", lazy.layout.grow(), desc="Grow window"),
 
-
-    Key([mod, "control"], "left", lazy.previous_screen(), desc="Previous screen"),
-    Key([mod, "control"], "right", lazy.next_screen(), desc="Next screen"),
+    Key([mod, control], "left", lazy.previous_screen(), desc="Previous screen"),
+    Key([mod, control], "right", lazy.next_screen(), desc="Next screen"),
 
     # Layouts
     Key([alt], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
@@ -82,12 +78,5 @@ keys = [
     # Anki recording scripts
     Key([mod], "m", lazy.spawn(anki_screenie)),
     Key([mod, shift], "m", lazy.spawn(anki_record)),
-    Key([mod, "control"], "m", lazy.spawn(anki_replay)),
+    Key([mod, control], "m", lazy.spawn(anki_replay)),
 ]
-
-# Scratchpad keybindings
-keys.extend([
-    Key([mod], "n", lazy.group['scratchpad'].dropdown_toggle('term')),
-    Key([mod], "v", lazy.group['scratchpad'].dropdown_toggle('volume')),
-    Key([mod, shift], "n", lazy.group['scratchpad'].dropdown_toggle('top')),
-])

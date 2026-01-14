@@ -1,19 +1,23 @@
-from keys import terminal
-from libqtile.config import Screen
 from libqtile import bar, qtile
-# Make sure 'qtile-extras' is installed or this config will not work.
-from qtile_extras import widget
-from dotenv import set_key, get_key
-from keys import keys, mod, shift
-from libqtile.config import Key
+from libqtile.config import Screen, Key
 from libqtile.lazy import lazy
-from colors import CATPPUCCIN_MOCHA as theme
-from variables import bar_font, group_names, group_labels, widget_decoration_rect_border_color, \
-    widget_decoration_rect_color, widget_decoration_rect_opacity, widget_decoration_rect_border_width, \
-    widget_decoration_rect_filled, widget_decoration_rect_padding_x, widget_decoration_rect_padding_y, \
-    widget_decoration_rect_radius, widget_gap, widget_left_offset, widget_padding, widget_right_offset, \
-    bar_background_color, bar_background_opacity, bar_bottom_margin, bar_fontsize, bar_foreground_color, \
-    bar_global_opacity, bar_left_margin, bar_right_margin, bar_size, bar_top_margin, layouts_margin, env
+from qtile_extras import widget
+from dotenv import set_key
+
+from settings import (
+    theme, env, current_fake_screen_index, workstation, terminal,
+    bar_font, bar_fontsize, bar_foreground_color, bar_background_color,
+    bar_background_opacity, bar_global_opacity, bar_size,
+    bar_top_margin, bar_bottom_margin, bar_left_margin, bar_right_margin,
+    layouts_margin,
+    widget_gap, widget_padding, widget_left_offset, widget_right_offset,
+    widget_decoration_rect_filled, widget_decoration_rect_color,
+    widget_decoration_rect_opacity, widget_decoration_rect_border_width,
+    widget_decoration_rect_border_color, widget_decoration_rect_padding_x,
+    widget_decoration_rect_padding_y, widget_decoration_rect_radius,
+    mod, shift
+)
+from groups import group_names, group_labels
 
 
 class WidgetTweaker:
@@ -22,6 +26,7 @@ class WidgetTweaker:
 
 
 group_map = dict(zip(group_names, group_labels))
+
 
 @WidgetTweaker
 def groupBox(output):
@@ -39,7 +44,10 @@ def volume(output: str):
             range(66, 101): '󰕾 '
         }
 
-        icon = icons[next(filter(lambda r: volume in r, icons.keys()))]
+        try:
+            icon = icons[next(filter(lambda r: volume in r, icons.keys()))]
+        except StopIteration:
+            icon = '󰕾 '
 
         return icon + output
     elif output == 'M':
@@ -146,46 +154,7 @@ right = [
     widget.StatusNotifier(),
 ]
 
-# --- SCREEN INDEX SHIFT START --- #
-
-current_index = int(get_key(dotenv_path=env, key_to_get="FAKE_SCREEN_INDEX"))
-
-
-def next_layout(qtile):
-    global env, current_index
-
-    current_index += 1
-    if current_index >= len(fake_screen_layouts):
-        current_index = 0
-
-    set_key(dotenv_path=env, key_to_set="FAKE_SCREEN_INDEX",
-            value_to_set=str(current_index))
-
-    qtile.reload_config()
-
-
-def prev_layout(qtile):
-    global env, current_index
-
-    current_index -= 1
-    if current_index < 0:
-        # Loop back to the last layout if going below 0
-        current_index = len(fake_screen_layouts) - 1
-    set_key(dotenv_path=env, key_to_set="FAKE_SCREEN_INDEX",
-            value_to_set=str(current_index))
-
-    qtile.reload_config()
-
-
-keys.extend([
-    #  Switch super-ultrawide monitor layout
-    Key([mod, shift], "o", lazy.function(next_layout)),
-    Key([mod, shift], "i", lazy.function(prev_layout)),
-])
-
-# --- SCREEN INDEX SHIFT END --- #
-
-bar = bar.Bar(
+bar_instance = bar.Bar(
     widgets=left_offset + left + sep + middle + sep + right + right_offset,
     size=bar_size,
     background=bar_background_color +
@@ -195,9 +164,9 @@ bar = bar.Bar(
     opacity=bar_global_opacity
 )
 
-workstation = get_key(dotenv_path=env, key_to_get="WORKSTATION")
+# Screens Logic
 
-top_screen = Screen(bottom=bar, x=1280, y=0, width=2560, height=1440)
+top_screen = Screen(bottom=bar_instance, x=1280, y=0, width=2560, height=1440)
 
 fake_screen_layouts = [
     # 16:9 middle
@@ -251,6 +220,34 @@ fake_screen_layouts = [
         top_screen,
         Screen(x=0, y=1440, width=5120, height=1440),
     ],
-] if (workstation == "PC") else [Screen(top=bar, x=0, y=0, width=2560, height=1440)]
+] if (workstation == "PC") else [Screen(top=bar_instance, x=0, y=0, width=2560, height=1440)]
 
-fake_screens = fake_screen_layouts[current_index if (workstation == "PC") else 0]
+fake_screens = fake_screen_layouts[current_fake_screen_index if (workstation == "PC") else 0]
+
+# Screen Index Shift Logic
+
+def next_layout(qtile):
+    new_index = current_fake_screen_index + 1
+    if new_index >= len(fake_screen_layouts):
+        new_index = 0
+
+    set_key(dotenv_path=env, key_to_set="FAKE_SCREEN_INDEX",
+            value_to_set=str(new_index))
+
+    qtile.reload_config()
+
+
+def prev_layout(qtile):
+    new_index = current_fake_screen_index - 1
+    if new_index < 0:
+        new_index = len(fake_screen_layouts) - 1
+        
+    set_key(dotenv_path=env, key_to_set="FAKE_SCREEN_INDEX",
+            value_to_set=str(new_index))
+
+    qtile.reload_config()
+
+screen_keys = [
+    Key([mod, shift], "o", lazy.function(next_layout)),
+    Key([mod, shift], "i", lazy.function(prev_layout)),
+]

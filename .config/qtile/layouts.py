@@ -1,6 +1,6 @@
 from libqtile import layout
 from libqtile.config import Match
-from variables import layout_theme, layout_theme_floating
+from settings import layout_theme, layout_theme_floating
 
 layouts = [
     layout.MonadTall(**layout_theme),
