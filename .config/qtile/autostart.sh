@@ -26,10 +26,15 @@ else
     redshift &
 
     # Set wallpapers
-    feh --bg-fill ~/Pictures/Wallpaper/Desktop/city.jpg &
+    feh --bg-fill --randomize \
+        ~/Pictures/Wallpaper/Desktop/2026-01-15_13.21.56.png \
+        ~/Pictures/Wallpaper/Desktop/2026-01-15_13.20.41.png \
+        ~/Pictures/Wallpaper/Desktop/2026-01-15_13.23.29.png
+
 fi
 
 # Programs to autostart
+~/Documents/Dev/vn-cards/audio-replay-recorder.sh &
 fcitx5 -d &
 dunst &
 # npx arrpc &

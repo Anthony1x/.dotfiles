@@ -1,7 +1,7 @@
 #!/bin/bash
 
-if pgrep -x "picom" >/dev/null; then
-    killall picom
+if pgrep -x "fastcompmgr" >/dev/null; then
+    killall fastcompmgr
 else
-    picom -b --config $HOME/.config/picom/picom.conf
+    fastcompmgr
 fi

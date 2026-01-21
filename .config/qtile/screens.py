@@ -1,3 +1,5 @@
+from typing import Any
+from libqtile.bar import Bar
 from libqtile import bar, qtile
 from libqtile.config import Screen, Key
 from libqtile.lazy import lazy
@@ -154,13 +156,13 @@ right = [
     widget.StatusNotifier(),
 ]
 
-bar_instance = bar.Bar(
+bar_instance: Bar = bar.Bar(
     widgets=left_offset + left + sep + middle + sep + right + right_offset,
     size=bar_size,
     background=bar_background_color +
     format(int(bar_background_opacity * 255), "02x"),
-    margin=[bar_top_margin, bar_right_margin,
-            bar_bottom_margin-layouts_margin, bar_left_margin],
+    margin=[0, layouts_margin,
+            layouts_margin, layouts_margin],
     opacity=bar_global_opacity
 )
 
@@ -241,7 +243,7 @@ def prev_layout(qtile):
     new_index = current_fake_screen_index - 1
     if new_index < 0:
         new_index = len(fake_screen_layouts) - 1
-        
+
     set_key(dotenv_path=env, key_to_set="FAKE_SCREEN_INDEX",
             value_to_set=str(new_index))
 

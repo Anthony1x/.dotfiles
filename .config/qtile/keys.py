@@ -33,7 +33,7 @@ keys = [
     Key([mod, control], "p", lazy.spawn(f"{scripts_dir}/picom_toggle.sh")),
     Key([mod, alt], "l", lazy.spawn(screen_lock)),
     Key([mod, shift], "q", lazy.spawn(layout_select)),
-    
+
     # Border toggle
     Key([mod, shift], "p", lazy.function(switch), desc="Switch between border and no border"),
 
@@ -55,7 +55,7 @@ keys = [
     Key([mod, control], "i", lazy.layout.shrink(), desc="Shrink window"),
     Key([mod, control], "o", lazy.layout.grow(), desc="Grow window"),
 
-    Key([mod, control], "left", lazy.previous_screen(), desc="Previous screen"),
+    Key([mod, control], "left", lazy.prev_screen(), desc="Previous screen"),
     Key([mod, control], "right", lazy.next_screen(), desc="Next screen"),
 
     # Layouts

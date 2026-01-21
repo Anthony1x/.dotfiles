@@ -59,7 +59,7 @@ layout_theme_floating: dict = {
 }
 
 # Bar Styling
-bar_top_margin: int = 3
+bar_top_margin: int = 2
 bar_bottom_margin: int = 8
 bar_left_margin: int = layouts_margin
 bar_right_margin: int = layouts_margin
