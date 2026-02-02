@@ -21,7 +21,7 @@ files: str = "thunar"
 screenie: str = "flameshot gui"
 screen_lock: str = "betterlockscreen -l"
 powermenu: str = "rofi -show power-menu -modi power-menu://home/anthony/dotfiles/.config/rofi/scripts//rofi-power-menu"
-layout_select: str = "/home/anthony/.config/rofi/scripts/select_layout.sh"
+layout_select: str = f"{scripts_dir}/select_layout.sh"
 
 # Anki
 anki_menu: str = "/home/anthony/.config/rofi/scripts/anki.sh"

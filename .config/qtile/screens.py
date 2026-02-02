@@ -170,53 +170,41 @@ bar_instance: Bar = bar.Bar(
 
 top_screen = Screen(bottom=bar_instance, x=1280, y=0, width=2560, height=1440)
 
+
+def generate_layout(width, screens=3):
+    if screens == 3:
+        side_width = (5120 - width) // 2
+        return [
+            top_screen,
+            Screen(x=0, y=1440, width=side_width, height=1440),
+            Screen(x=side_width, y=1440, width=width, height=1440),
+            Screen(x=side_width + width, y=1440, width=side_width, height=1440),
+        ]
+    elif screens == 2:
+        return [
+            top_screen,
+            Screen(x=0, y=1440, width=width, height=1440),
+            Screen(x=width, y=1440, width=5120 - width, height=1440),
+        ]
+
+
 fake_screen_layouts = [
     # 16:9 middle
-    [
-        top_screen,
-        Screen(x=0, y=1440, width=1280, height=1440),
-        Screen(x=1280, y=1440, width=2560, height=1440),
-        Screen(x=3840, y=1440, width=1280, height=1440),
-    ],
+    generate_layout(2560, 3),
+    # YouTube optimized
+    generate_layout(2230, 3),
     # 18:9 middle
-    [
-        top_screen,
-        Screen(x=0, y=1440, width=1120, height=1440),
-        Screen(x=1120, y=1440, width=2880, height=1440),
-        Screen(x=4000, y=1440, width=1120, height=1440),
-    ],
+    generate_layout(2880, 3),
     # 4:3 middle
-    [
-        top_screen,
-        Screen(x=0,    y=1440, width=1600, height=1440),
-        Screen(x=1600, y=1440, width=1920, height=1440),
-        Screen(x=3520, y=1440, width=1600, height=1440),
-    ],
+    generate_layout(1920, 3),
     # 21:9 + 11:9
-    [
-        top_screen,
-        Screen(x=0, y=1440, width=3440, height=1440),
-        Screen(x=3440, y=1440, width=1680, height=1440),
-    ],
+    generate_layout(3440, 2),
     # 11:9 + 21:9
-    [
-        top_screen,
-        Screen(x=0, y=1440, width=1680, height=1440),
-        Screen(x=1680, y=1440, width=3440, height=1440),
-    ],
+    generate_layout(1680, 2),
     # 21:9 middle
-    [
-        top_screen,
-        Screen(x=0,    y=1440, width=840, height=1440),
-        Screen(x=840, y=1440, width=3440, height=1440),
-        Screen(x=4280, y=1440, width=840, height=1440),
-    ],
+    generate_layout(3440, 3),
     # 2x 16:9 side by side
-    [
-        top_screen,
-        Screen(x=0, y=1440, width=2560, height=1440),
-        Screen(x=2560, y=1440, width=2560, height=1440),
-    ],
+    generate_layout(2560, 2),
     # 32:9, no fake screens
     [
         top_screen,

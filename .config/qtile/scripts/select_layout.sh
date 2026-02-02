@@ -3,6 +3,7 @@
 # Define the layouts
 layouts=(
     "16:9 middle"
+    "YouTube optimized"
     "18:9 middle"
     "4:3 middle"
     "21:9 + 11:9"
