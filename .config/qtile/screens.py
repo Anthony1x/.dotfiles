@@ -20,6 +20,7 @@ from settings import (
     mod, shift
 )
 from groups import group_names, group_labels
+from fake_screens import layout_config
 
 
 class WidgetTweaker:
@@ -186,30 +187,15 @@ def generate_layout(width, screens=3):
             Screen(x=0, y=1440, width=width, height=1440),
             Screen(x=width, y=1440, width=5120 - width, height=1440),
         ]
+    elif screens == 1:
+        return [
+            top_screen,
+            Screen(x=0, y=1440, width=5120, height=1440),
+        ]
 
 
 fake_screen_layouts = [
-    # 16:9 middle
-    generate_layout(2560, 3),
-    # YouTube optimized
-    generate_layout(2230, 3),
-    # 18:9 middle
-    generate_layout(2880, 3),
-    # 4:3 middle
-    generate_layout(1920, 3),
-    # 21:9 + 11:9
-    generate_layout(3440, 2),
-    # 11:9 + 21:9
-    generate_layout(1680, 2),
-    # 21:9 middle
-    generate_layout(3440, 3),
-    # 2x 16:9 side by side
-    generate_layout(2560, 2),
-    # 32:9, no fake screens
-    [
-        top_screen,
-        Screen(x=0, y=1440, width=5120, height=1440),
-    ],
+    generate_layout(layout["width"], layout["screens"]) for layout in layout_config
 ] if (workstation == "PC") else [Screen(top=bar_instance, x=0, y=0, width=2560, height=1440)]
 
 fake_screens = fake_screen_layouts[current_fake_screen_index if (workstation == "PC") else 0]
