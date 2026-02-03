@@ -57,6 +57,13 @@ acefs() {
     sshfs "$remote" "$local_dir"
 }
 
+# Command runs detached from the terminal
+spawn() {
+    local command="$1"
+
+    setsid "$command" & disown
+}
+
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
 export PATH=$PATH:/home/anthony/.spicetify
