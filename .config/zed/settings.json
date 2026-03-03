@@ -56,8 +56,8 @@
     }
   },
   "theme": {
-    "mode": "system",
-    "light": "Catppuccin Mocha - No Italics",
+    "mode": "light",
+    "light": "Catppuccin Latte - No Italics",
     "dark": "Catppuccin Mocha - No Italics"
   },
   "languages": {

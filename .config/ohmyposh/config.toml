@@ -2,13 +2,13 @@ version = 4
 final_space = true
 
 [palette]
-  blue = '#8AADF4'
-  lavender = '#B7BDF8'
+  blue = '#1e66f5'
+  lavender = '#7287FD'
   os = '#ACB0BE'
-  pink = '#F5BDE6'
+  pink = '#ea76cb'
   text = '#494D64'
   wight = '#FFFFFF'
-  yellow = '#F9E2AF'
+  yellow = '#df8e1d'
 
 [transient_prompt]
   template = "\n❯ "

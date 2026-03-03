@@ -12,7 +12,7 @@ layout {
         off
         width 2
 
-        active-color "#74c7ec"
+        active-color "#04a5e5"
         inactive-color "#585b70"
     }
 
@@ -20,11 +20,11 @@ layout {
         // off
         width 2
 
-        active-color "#b4befe"
+        active-color "#7287fd"
         // inactive-color "#585b70"
 
         // active-gradient from="#b4befe" to="#cba6f7" angle=45
-        inactive-gradient from="#585b70" to="#7f849c" angle=45
+        inactive-gradient from="#5c5f77" to="#6c6f85" angle=45
     }
 
     preset-column-widths {
@@ -97,8 +97,9 @@ recent-windows {
 
     highlight {
         corner-radius 8
-        active-color "#b4befe"
-        urgent-color "#f38ba8"
+        active-color "#7287fd"
+        urgent-color "#d20f39"
     }
 }
+
 

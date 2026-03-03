@@ -9,7 +9,7 @@ layer-rule {
 
     shadow {
         on
-        color "#89dceb50"
+        color "#7287fd50"
     }
 
     geometry-corner-radius 11
@@ -98,7 +98,7 @@ window-rule {
     block-out-from "screencast"
 
     border {
-        active-color "#f38ba8"
+        active-color "#d20f39"
     }
 
     shadow {
@@ -107,9 +107,8 @@ window-rule {
     }
 }
 
-// Put swaybg inside the overview backdrop.
 layer-rule {
-    match namespace="^wallpaper$"
+    match namespace="backdrop"
 
     place-within-backdrop true
 }
