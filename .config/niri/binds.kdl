@@ -126,9 +126,10 @@ binds {
     Mod+Ctrl+Minus { set-column-width "-1"; }
     Mod+Ctrl+Plus { set-column-width "+1"; }
 
-    Mod+0            { set-column-width "1920"; }
+    Mod+Ctrl+Shift+0 { set-column-width "1280"; }
     Mod+Shift+0      { set-column-width "2560"; }
-    Mod+Ctrl+0       { set-window-height "1080"; }
+    Mod+0            { set-column-width "1920"; }
+    Mod+Ctrl+0       { set-window-height "1078"; }
     Mod+ssharp       { expand-column-to-available-width; }
 
     Mod+Shift+Y { quit; }
