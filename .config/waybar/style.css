@@ -10,6 +10,7 @@
     background: transparent;
     color: @text;
     margin: 5px 5px;
+    margin-left: 0.5rem;
 }
 
 #workspaces {
@@ -17,7 +18,6 @@
     border: 2px solid @lavender;
     margin: 3px;
     background-color: @base;
-    margin-left: 1rem;
 }
 
 #workspaces button {
@@ -81,5 +81,5 @@
 }
 
 #tray {
-    margin-right: 1rem;
+    margin-right: 0.5rem;
 }

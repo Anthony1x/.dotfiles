@@ -1,9 +1,7 @@
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
-zstyle ':omz:update' mode auto      # update automatically without asking
-
-# source ~/.zsh/catppuccin_mocha-zsh-syntax-highlighting.zsh
+zstyle ':omz:update' mode auto
 
 plugins=(
 	zsh-autosuggestions
@@ -19,8 +17,6 @@ if [[ "$TERM_PROGRAM" == 'vscode' ]] || [[ "$TERM_PROGRAM" == 'zed' ]] ; then
   alias 'rg'='rg --smart-case --hidden --no-heading --column'
 fi
 
-alias xampp="sudo /opt/lampp/xampp"
-alias vimconf="/home/anthony/.config/nvim/init.vim"
 alias ls="eza"
 alias ll="eza -labhSo"
 alias sizeof="stat --printf='%s'"
@@ -31,6 +27,8 @@ alias fz="fzf --preview 'bat --style=numbers --color=always {}'"
 alias cd="z"
 alias vim="nvim"
 
+alias dcu="docker compose up -d"
+alias dcul="docker compose up -d & lazydocker"
 
 fcd() { cd "$(find . -type d -not -path '*/.*' | fzf)" && l; }
 f() { echo "$(find . -type f -not -path '*/.*' | fzf)" | pbcopy }
@@ -73,6 +71,9 @@ export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow'
 
 export LC_CTYPE=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
+
+export EDITOR="nvim"
+export SUDO_EDITOR="nvim"
 
 source <(fzf --zsh)
 

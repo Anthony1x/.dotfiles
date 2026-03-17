@@ -89,10 +89,10 @@ gestures {
 recent-windows {
     // Pre-select the "Output" scope when switching windows.
     binds {
-        Mod+Tab         { next-window     scope="output"; }
-        Mod+Shift+Tab   { previous-window scope="output"; }
-        Mod+Escape      { next-window     scope="output" filter="app-id"; }
-        Mod+Shift+Escape { previous-window scope="output" filter="app-id"; }
+        Mod+Tab         { next-window     scope="all"; }
+        Mod+Shift+Tab   { previous-window scope="all"; }
+        Mod+Escape      { next-window     scope="all" filter="app-id"; }
+        Mod+Shift+Escape { previous-window scope="all" filter="app-id"; }
     }
 
     highlight {
