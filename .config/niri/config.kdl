@@ -18,7 +18,7 @@ layout {
 
     border {
         // off
-        width 2
+        width 3
 
         active-color "#7287fd"
         // inactive-color "#585b70"
@@ -36,16 +36,17 @@ layout {
 
     default-column-width { proportion 0.5; }
 
-    gaps 4
+    gaps 3
 
     struts {
-        left -2
-        right -2
+        left -1
+        right -1
+        top -2
     }
 
     tab-indicator {
         width 6
-        gap 0
+        gap 2
         // length total-proportion=1.0
         position "top"
         gaps-between-tabs 4
@@ -86,20 +87,21 @@ gestures {
     }
 }
 
-recent-windows {
-    // Pre-select the "Output" scope when switching windows.
-    binds {
-        Mod+Tab         { next-window     scope="all"; }
-        Mod+Shift+Tab   { previous-window scope="all"; }
-        Mod+Escape      { next-window     scope="all" filter="app-id"; }
-        Mod+Shift+Escape { previous-window scope="all" filter="app-id"; }
-    }
 
-    highlight {
-        corner-radius 8
-        active-color "#7287fd"
-        urgent-color "#d20f39"
-    }
-}
-
+// recent-windows {
+//     // Pre-select the "Output" scope when switching windows.
+//     binds {
+//         Mod+Tab         { next-window     scope="all"; }
+//         Mod+Shift+Tab   { previous-window scope="all"; }
+//         Mod+Escape      { next-window     scope="all" filter="app-id"; }
+//         Mod+Shift+Escape { previous-window scope="all" filter="app-id"; }
+//     }
+//
+//     highlight {
+//         corner-radius 8
+//         active-color "#7287fd"
+//         urgent-color "#d20f39"
+//     }
+// }
+//
 

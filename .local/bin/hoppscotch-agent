@@ -1,0 +1,8 @@
+#!/bin/sh
+# Hoppscotch Agent AppImage wrapper.
+# The AppImage bundles Ubuntu's old libwayland-{client,server,egl}, which the
+# host Mesa EGL stack rejects ("Could not create default EGL display:
+# EGL_BAD_PARAMETER") -> white, dead webview. Preloading the host libwayland
+# libraries overrides the bundled copies and fixes rendering.
+export LD_PRELOAD="/usr/lib/libwayland-client.so.0:/usr/lib/libwayland-server.so.0:/usr/lib/libwayland-egl.so.1${LD_PRELOAD:+:$LD_PRELOAD}"
+exec /home/anthony/Downloads/Hoppscotch_Agent_linux_x64.AppImage "$@"

@@ -20,7 +20,7 @@ output "Philips Consumer Electronics Company PHL 346E2C UK02145033071" {
     // off
 
     focus-at-startup
-    scale 1.0
+    scale 1
     position x=1920 y=-400
     mode "3440x1440"
 }

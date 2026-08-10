@@ -68,8 +68,8 @@ binds {
     Mod+Shift+Page_Down repeat=false { move-column-to-workspace-down; }
     Mod+Shift+Page_Up   repeat=false { move-column-to-workspace-up; }
 
-    Mod+Shift+WheelScrollUp     cooldown-ms=150 { focus-workspace-up; }
-    Mod+Shift+WheelScrollDown   cooldown-ms=150 { focus-workspace-down; }
+    Mod+Shift+WheelScrollUp     cooldown-ms=100 { focus-workspace-up; }
+    Mod+Shift+WheelScrollDown   cooldown-ms=100 { focus-workspace-down; }
 
     Mod+WheelScrollRight           { focus-column-right; }
     Mod+WheelScrollLeft            { focus-column-left; }

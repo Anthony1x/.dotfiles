@@ -19,13 +19,18 @@ fi
 
 alias ls="eza"
 alias ll="eza -labhSo"
+alias cd="z"
 alias sizeof="stat --printf='%s'"
 alias man='batman'
 alias KILLYOURSELF="exit"
+alias brexit="exit"
 alias yay="paru"
 alias fz="fzf --preview 'bat --style=numbers --color=always {}'"
-alias cd="z"
 alias vim="nvim"
+alias sudo="sudo-rs"
+alias sudoedit="sudoedit-rs"
+alias claude="claude --allow-dangerously-skip-permissions"
+alias clear="pyroclear"
 
 alias dcu="docker compose up -d"
 alias dcul="docker compose up -d & lazydocker"
@@ -66,6 +71,7 @@ export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
 export PATH=$PATH:/home/anthony/.spicetify
 export PATH="$PATH:/home/anthony/.local/bin"
+export PATH="$HOME/.cargo/bin:$PATH"
 
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow'
 
@@ -83,3 +89,20 @@ eval "$(zoxide init zsh)"
 eval "$(rbenv init - --no-rehash zsh)"
 eval "$(fnm env --use-on-cd --shell zsh)"
 
+
+# SSH agent socket (managed by systemd user ssh-agent.socket)
+export SSH_AUTH_SOCK="${XDG_RUNTIME_DIR}/ssh-agent.socket"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# Claude Code sources this file into its own shell and sets CLAUDECODE=1.
+# Give it back the plain `cd` builtin: anything that shadows cd (zoxide's
+# `--cmd cd`, an alias) makes the agent fuzzy-jump to some other directory
+# instead of failing on a bad path. Keep this last so it wins over every init
+# above. `z` and the rest of the aliases stay available to the agent.
+if [[ -n "$CLAUDECODE" ]]; then
+  unalias cd 2>/dev/null
+  unfunction cd 2>/dev/null
+fi

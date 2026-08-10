@@ -3,6 +3,17 @@ window-rule {
     clip-to-geometry true
 }
 
+// Make top and overlay layers use the regular blur (if enabled),
+// while bottom and background layers keep using the efficient xray blur.
+layer-rule {
+    match layer="top"
+    match layer="overlay"
+
+    background-effect {
+        xray false
+    }
+}
+
 layer-rule {
     match namespace="rofi"
     match namespace="dunst"
@@ -10,6 +21,12 @@ layer-rule {
     shadow {
         on
         color "#7287fd50"
+    }
+
+    opacity 0.90
+
+    background-effect {
+        blur true
     }
 
     geometry-corner-radius 11
@@ -21,11 +38,36 @@ window-rule {
     draw-border-with-background false
 }
 
+// window-rule {
+//     popups {
+//         // Note: it'll look better to set background opacity
+//         // through your GTK theme CSS and not here.
+//         // This is just an example that makes it look obvious.
+//         opacity 0.9
+//
+//         background-effect {
+//             blur true
+//         }
+//     }
+// }
+
 window-rule {
     match app-id="flameshot" title="flameshot"
-    match app-id="thunar" title="Rename"
+    match app-id="thunar" title="Rename "
+    match app-id="thunar" title="File Operation Progress"
     open-floating true
-    // open-fullscreen false
+}
+
+// Windows to be blurred
+window-rule {
+    match app-id="thunar"
+    match app-id="obsidian"
+
+    opacity 0.95
+
+    background-effect {
+        blur true
+    }
 }
 
 window-rule {
@@ -94,6 +136,7 @@ window-rule {
     // Doesn't quite work: Firefox changes the title one frame early.
     match app-id="firefox" title="Chat aceArt"
     match app-id="firefox" title="anthony.landolina@aceart.de"
+    match app-id="firefox" title="Passbolt"
 
     block-out-from "screencast"
 
