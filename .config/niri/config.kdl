@@ -93,7 +93,7 @@ gestures {
 //
 //     highlight {
 //         corner-radius 8
-//         active-color "#7287fd"
+//         active-color "#ea76cb"
 //         urgent-color "#d20f39"
 //     }
 // }

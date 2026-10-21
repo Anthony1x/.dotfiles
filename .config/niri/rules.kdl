@@ -1,5 +1,5 @@
 window-rule {
-    geometry-corner-radius 6
+    geometry-corner-radius 8
     clip-to-geometry true
 }
 
@@ -20,7 +20,7 @@ layer-rule {
 
     shadow {
         on
-        color "#7287fd50"
+        color "#ea76cb50"
     }
 
     opacity 0.90

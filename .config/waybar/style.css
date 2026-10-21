@@ -16,19 +16,19 @@
 
 #workspaces {
     border-radius: 1rem;
-    border: 2px solid @lavender;
+    border: 2px solid @pink;
     margin: 3px;
     background-color: @base;
 }
 
 #workspaces button {
-    color: @lavender;
+    color: @pink;
     border-radius: 1rem;
     padding: 0.4rem;
 }
 
 #workspaces button.active {
-    color: @lavender;
+    color: @pink;
     border-radius: 1rem;
 }
 
@@ -52,7 +52,7 @@
 #custom-theme,
 #mpris {
     background-color: @base;
-    border: 2px solid @lavender;
+    border: 2px solid @pink;
     border-radius: 1rem;
     padding: 0.25rem 0.75rem;
     margin: 3px 0;

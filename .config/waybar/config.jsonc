@@ -155,6 +155,7 @@
     "mpris": {
         "format": "{player_icon} {title}",
         "format-paused": "{status_icon} <i>{title}</i>",
+        "title-len": 75,
         "player-icons": {
             "default": "▶",
             "mpv": "🎵",
