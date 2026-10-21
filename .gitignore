@@ -1,3 +1,7 @@
 lazy-lock.json
 .config/tmux/plugins
 __pycache__
+.config/niri/colors.kdl
+.config/waybar/colors.css
+.config/dunst/dunstrc.d/
+.local/share/rofi/themes/catppuccin.rasi

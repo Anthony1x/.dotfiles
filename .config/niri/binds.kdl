@@ -15,6 +15,7 @@ binds {
     Mod+Shift+N { spawn "kitten" "quick-access-terminal"; }
     Super+L allow-when-locked=true { spawn "swaylock"; }
     Super+Shift+L { power-off-monitors; }
+    Mod+Shift+T { spawn "darkman" "toggle"; }
 
     XF86AudioRaiseVolume allow-when-locked=true { spawn "~/dotfiles/.local/bin/volume.sh" "up"; }
     XF86AudioLowerVolume allow-when-locked=true { spawn "~/dotfiles/.local/bin/volume.sh" "down"; }

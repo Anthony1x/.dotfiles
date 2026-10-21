@@ -8,23 +8,17 @@ include "rules.kdl"
 include "binds.kdl"
 
 layout {
+    // Colors live in colors-latte.kdl / colors-mocha.kdl (included at the bottom).
     focus-ring {
         off
         width 2
-
-        active-color "#04a5e5"
-        inactive-color "#585b70"
     }
 
     border {
         // off
         width 3
 
-        active-color "#7287fd"
-        // inactive-color "#585b70"
-
         // active-gradient from="#b4befe" to="#cba6f7" angle=45
-        inactive-gradient from="#5c5f77" to="#6c6f85" angle=45
     }
 
     preset-column-widths {
@@ -104,4 +98,8 @@ gestures {
 //     }
 // }
 //
+
+// Light/dark colors: darkman (~/.local/share/darkman/niri.sh) copies
+// colors-latte.kdl or colors-mocha.kdl here. Must stay last to override.
+include optional=true "colors.kdl"
 

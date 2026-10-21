@@ -5,6 +5,7 @@
     "height": 40, // Waybar height (to be removed for auto height)
     // "width": 1280, // Waybar width
     "spacing": 8, // Gaps between modules (4px)
+    "reload_style_on_change": true, // also watches @import-ed colors.css (light/dark)
     // Choose the order of the modules
     "modules-left": [
         "niri/workspaces",
@@ -21,6 +22,7 @@
         // "backlight",
         "keyboard-state",
         "battery",
+        "custom/theme",
         "tray"
     ],
     "niri/workspaces": {
@@ -50,6 +52,19 @@
     "tray": {
         // "icon-size": 21,
         "spacing": 10
+    },
+    "custom/theme": {
+        // Light/dark toggle; darkman's waybar.sh sends SIGRTMIN+8 to refresh the icon
+        "exec": "~/.config/waybar/scripts/theme-mode",
+        "return-type": "json",
+        "interval": "once",
+        "signal": 8,
+        "format": "{icon}",
+        "format-icons": {
+            "light": "",
+            "dark": ""
+        },
+        "on-click": "darkman toggle"
     },
     "clock": {
         // "timezone": "America/New_York",

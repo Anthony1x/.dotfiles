@@ -1,0 +1,9 @@
+#!/bin/sh
+
+# Without a location darkman starts in mode "null" and forgets the last mode.
+# Restore it from the color-scheme that ~/.local/share/darkman/gtk.sh persists
+# in gsettings, which re-runs every darkman script once after login.
+case "$(gsettings get org.gnome.desktop.interface color-scheme)" in
+    *dark*) darkman set dark ;;
+    *) darkman set light ;;
+esac

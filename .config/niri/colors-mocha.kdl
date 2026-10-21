@@ -1,0 +1,12 @@
+// Catppuccin Mocha. Copied to colors.kdl by ~/.local/share/darkman/niri.sh.
+layout {
+    focus-ring {
+        active-color "#89dceb"
+        inactive-color "#585b70"
+    }
+
+    border {
+        active-color "#f5c2e7"
+        inactive-gradient from="#585b70" to="#6c7086" angle=45
+    }
+}

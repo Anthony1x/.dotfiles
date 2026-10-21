@@ -14,4 +14,5 @@ configuration{
     sidebar-mode: true;
 }
 
-@theme "catppuccin-latte"
+// Symlink to catppuccin-latte.rasi / catppuccin-mocha.rasi, switched by ~/.local/share/darkman/rofi.sh
+@theme "catppuccin"

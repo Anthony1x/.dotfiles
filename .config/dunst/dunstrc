@@ -102,8 +102,8 @@
     # Set to 0 to disable.
     frame_width = 3
 
-    # Defines color of the frame around the notification window.
-    frame_color = "#7287fd" # "#b4befe"
+    # Frame and urgency colors live in colors-latte.conf / colors-mocha.conf,
+    # copied to dunstrc.d/99-colors.conf by ~/.local/share/darkman/dunst.sh.
 
     # Size of gap to display between notifications - requires a compositor.
     # If value is greater than 0, separator_height will be ignored and a border
@@ -332,24 +332,15 @@
 
 
 [urgency_low]
-    # IMPORTANT: colors have to be defined in quotation marks.
-    # Otherwise the "#" and following would be interpreted as a comment.
-    background = "#eff1f5"
-    foreground = "#4c4f69"
     timeout = 10
     default_icon = /usr/share/icons/Tela/32@2x/status/dialog-information.svg
 
 [urgency_normal]
-    background = "#eff1f5"
-    foreground = "#4c4f69"
     timeout = 10
     override_pause_level = 30
     default_icon = /usr/share/icons/Tela/32@2x/status/dialog-warning.svg
 
 [urgency_critical]
-    background = "#eff1f5"
-    foreground = "#4c4f69"
-    frame_color = "#d20f39"
     timeout = 0
     override_pause_level = 60
     default_icon = /usr/share/icons/Tela/32@2x/status/dialog-error.svg 

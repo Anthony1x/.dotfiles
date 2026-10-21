@@ -1,14 +1,29 @@
 version = 4
 final_space = true
 
-[palette]
-  blue = '#1e66f5'
-  lavender = '#7287FD'
-  os = '#ACB0BE'
-  pink = '#ea76cb'
-  text = '#494D64'
-  wight = '#FFFFFF'
-  yellow = '#df8e1d'
+# THEME_MODE is exported before every prompt by a precmd hook in ~/.zshrc,
+# from the mode file ~/.local/share/darkman/ohmyposh.sh writes.
+[palettes]
+  template = '{{ if eq .Env.THEME_MODE "dark" }}mocha{{ else }}latte{{ end }}'
+
+  [palettes.list.latte]
+    blue = '#1e66f5'
+    lavender = '#7287FD'
+    os = '#ACB0BE'
+    pink = '#ea76cb'
+    text = '#494D64'
+    wight = '#FFFFFF'
+    yellow = '#df8e1d'
+
+  # Pastel backgrounds in Mocha, so text and icon are dark.
+  [palettes.list.mocha]
+    blue = '#89b4fa'
+    lavender = '#b4befe'
+    os = '#585b70'
+    pink = '#f5c2e7'
+    text = '#1e1e2e'
+    wight = '#1e1e2e'
+    yellow = '#f9e2af'
 
 [transient_prompt]
   template = "\n❯ "

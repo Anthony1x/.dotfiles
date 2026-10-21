@@ -1,0 +1,12 @@
+// Catppuccin Latte. Copied to colors.kdl by ~/.local/share/darkman/niri.sh.
+layout {
+    focus-ring {
+        active-color "#04a5e5"
+        inactive-color "#585b70"
+    }
+
+    border {
+        active-color "#ea76cb"
+        inactive-gradient from="#5c5f77" to="#6c6f85" angle=45
+    }
+}

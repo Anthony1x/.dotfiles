@@ -1,0 +1,10 @@
+#!/bin/sh
+
+# Current light/dark mode for the custom/theme module, read from the colors.css
+# symlink that ~/.local/share/darkman/waybar.sh switches.
+case "$(readlink ~/.config/waybar/colors.css)" in
+    mocha.css) mode=dark ;;
+    *) mode=light ;;
+esac
+
+printf '{"alt":"%s","tooltip":"Theme: %s (click to toggle)"}\n' "$mode" "$mode"

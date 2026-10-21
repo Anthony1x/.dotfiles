@@ -1,4 +1,5 @@
-@import "latte.css";
+/* Symlink to latte.css or mocha.css, switched by ~/.local/share/darkman/waybar.sh */
+@import "colors.css";
 
 * {
     font-family: Maple Mono NF;
@@ -48,6 +49,7 @@
 #cpu,
 #memory,
 #network,
+#custom-theme,
 #mpris {
     background-color: @base;
     border: 2px solid @lavender;
@@ -58,6 +60,10 @@
 
 #clock {
     color: @text;
+}
+
+#custom-theme {
+    color: @pink;
 }
 
 #battery {

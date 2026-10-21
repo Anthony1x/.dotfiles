@@ -1,0 +1,7 @@
+# Manual switching only (Mod+Shift+T in niri, click in waybar):
+# no geoclue and no lat/lng disables automatic sunrise/sunset transitions.
+usegeoclue: false
+
+# The color-scheme keeps coming from gsettings via xdg-desktop-portal-gnome
+# (set by ~/.local/share/darkman/gtk.sh), so darkman doesn't serve the portal.
+portal: false

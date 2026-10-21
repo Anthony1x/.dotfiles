@@ -13,6 +13,13 @@ plugins=(
 source $ZSH/oh-my-zsh.sh
 eval "$(oh-my-posh init zsh --config $HOME/.config/ohmyposh/config.toml)"
 
+# Light/dark palette for oh-my-posh (see palettes in its config). Must run
+# before _omp_precmd, which renders the prompt, hence prepended.
+_theme_mode_precmd() {
+  [[ -r ~/.local/state/theme-mode ]] && export THEME_MODE=$(<~/.local/state/theme-mode)
+}
+precmd_functions=(_theme_mode_precmd $precmd_functions)
+
 if [[ "$TERM_PROGRAM" == 'vscode' ]] || [[ "$TERM_PROGRAM" == 'zed' ]] ; then
   alias 'rg'='rg --smart-case --hidden --no-heading --column'
 fi
