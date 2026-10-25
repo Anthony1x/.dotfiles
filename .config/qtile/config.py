@@ -5,7 +5,7 @@ from libqtile.config import Click, Drag
 from libqtile.lazy import lazy
 
 # Import configuration modules
-from settings import mod
+from settings import mod, super_disabled
 from keys import keys
 from groups import groups, group_keys
 from layouts import layouts, floating_layout

@@ -1,85 +1,71 @@
-@import "mocha.css";
+/* Catppuccin Mocha Mauve - ported from qtile colors.py + screens.py */
 
 * {
-    font-family: JetbrainsMono Nerd Font;
-    font-size: 13px;
+    border: none;
+    font-family: "Maple Mono NF", "FontAwesome6Free", sans-serif;
+    font-size: 13.2px;
     min-height: 0;
 }
 
-#waybar {
+window#waybar {
     background: transparent;
-    color: @text;
-    margin: 5px 5px;
+    color: #CDD6F4;
 }
 
 #workspaces {
-    border-radius: 1rem;
-    border: 2px solid @lavender;
-    margin: 3px;
-    background-color: @base;
-    margin-left: 1rem;
+    margin-left: 4px;
 }
 
 #workspaces button {
-    color: @lavender;
-    border-radius: 1rem;
-    padding: 0.4rem;
+    padding: 0 7px;
+    margin: 0;
+    background: transparent;
+    color: #313244;
+    border-bottom: 2px solid transparent;
+    font-weight: bold;
+    font-size: 15px;
 }
 
 #workspaces button.active {
-    color: @lavender;
-    border-radius: 1rem;
+    color: #CDD6F4;
+    border-bottom: 2px solid #F38BA8;
+}
+
+#workspaces button.urgent {
+    color: #F38BA8;
 }
 
 #workspaces button:hover {
-    color: @mauve;
-    border-radius: 1rem;
+    background: transparent;
+    box-shadow: none;
+    color: #CDD6F4;
 }
 
-#tray,
-#backlight,
+/* Pill-shaped widget background (matching qtile RectDecoration) */
 #clock,
-#battery,
-#wireplumber,
-#custom-lock,
-#custom-power,
-#temperature,
-#keyboard-state,
+#network,
 #cpu,
 #memory,
-#network,
-#mpris {
-    background-color: @base;
-    border: 2px solid @lavender;
-    border-radius: 1rem;
-    padding: 0.25rem 0.75rem;
-    margin: 3px 0;
-}
-
-#clock {
-    color: @text;
-}
-
-#battery {
-    color: @green;
-}
-
-#battery.charging {
-    color: @green;
-}
-
-#battery.warning:not(.charging) {
-    color: @red;
-}
-
-#backlight {
-    color: @yellow;
-}
-
-#wireplumber {
-    color: @maroon;
+#pulseaudio,
+#pulseaudio#mic,
+#tray {
+    padding: 0 15px;
+    margin: 0;
+    background-color: #181825;
+    color: #CDD6F4;
+    border: 2px solid #CBA6F7;
+    border-radius: 10px;
 }
 
 #tray {
-    margin-right: 1rem;
+    padding: 0 10px;
+}
+
+#pulseaudio.muted,
+#pulseaudio#mic.muted {
+    color: #313244;
+}
+
+#network.disconnected {
+    color: #F38BA8;
 }

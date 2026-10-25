@@ -1,30 +1,42 @@
 from libqtile.config import Group, ScratchPad, DropDown, Key
 from libqtile.lazy import lazy
-from settings import terminal, mod, shift
+from settings import terminal, mod, shift, super_disabled
 
 groups: list[Group | ScratchPad] = []
 group_keys: list[Key] = []
 
-group_names: list[str] = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
-group_labels: list[str] = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
+group_specs: list[tuple[str, str, str]] = [
+    ("circumflex", "dead_circumflex", "^"),
+    ("1", "1", "1"),
+    ("2", "2", "2"),
+    ("3", "3", "3"),
+    ("4", "4", "4"),
+    ("5", "5", "5"),
+    ("6", "6", "6"),
+    ("7", "7", "7"),
+    ("8", "8", "8"),
+    ("9", "9", "9"),
+    ("0", "0", "0"),
+    ("ssharp", "ssharp", "ß"),
+    ("dead_acute", "dead_acute", "´"),
+]
 
-# Add group names, labels, and default layouts to the groups object.
-for i in range(len(group_names)):
-    name = group_names[i]
-    label = group_labels[i]
-    
+group_names = [name for name, _, _ in group_specs]
+group_labels = [label for _, _, label in group_specs]
+
+for group_name, key_name, label in group_specs:
     groups.append(
         Group(
-            name=name,
+            name=group_name,
             layout='monadtall',
             label=label,
         ))
     
     group_keys.extend([
-        Key([mod], name, lazy.group[name].toscreen(),
-            desc=f"Switch to group {name}"),
-        Key([mod, shift], name, lazy.window.togroup(name),
-            desc=f"Move focused window to group {name}"),
+        Key([mod], key_name, lazy.group[group_name].toscreen(),
+            desc=f"Switch to group {label}"),
+        Key([mod, shift], key_name, lazy.window.togroup(group_name),
+            desc=f"Move focused window to group {label}"),
     ])
 
 # Cycle groups
@@ -45,8 +57,9 @@ groups.append(ScratchPad("scratchpad", [
 ]))
 
 # Scratchpad keybindings
-group_keys.extend([
-    Key([mod], "n", lazy.group['scratchpad'].dropdown_toggle('term')),
-    Key([mod], "v", lazy.group['scratchpad'].dropdown_toggle('volume')),
-    Key([mod, shift], "n", lazy.group['scratchpad'].dropdown_toggle('top')),
-])
+if not super_disabled:
+    group_keys.extend([
+        Key([mod], "n", lazy.group['scratchpad'].dropdown_toggle('term')),
+        Key([mod], "v", lazy.group['scratchpad'].dropdown_toggle('volume')),
+        Key([mod, shift], "n", lazy.group['scratchpad'].dropdown_toggle('top')),
+    ])

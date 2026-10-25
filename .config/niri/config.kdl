@@ -40,7 +40,7 @@ input {
     focus-follows-mouse max-scroll-amount="0%"
 }
 
-output "DP-3" {
+output "Samsung Electric Company LS49AG95 HNTT300057" {
     // off
 
     scale 1.0
@@ -49,7 +49,7 @@ output "DP-3" {
     mode "5120x1440"
 }
 
-output "DP-1" {
+output "Samsung Electric Company C32JG5x HTOK700299" {
     // off
     position x=1280 y=0
     mode "2560x1440"
@@ -60,8 +60,8 @@ layout {
         off
         width 2
 
-        active-color "#74c7ec"
-        inactive-color "#585b70"
+        active-color "#cba6f7"
+        inactive-color "#313244"
     }
 
     border {
@@ -72,7 +72,7 @@ layout {
         // inactive-color "#585b70"
 
         active-gradient from="#b4befe" to="#cba6f7" angle=45
-        inactive-gradient from="#585b70" to="#7f849c" angle=45
+        inactive-gradient from="#313244" to="#45475a" angle=45
     }
 
     preset-column-widths {
@@ -117,6 +117,10 @@ prefer-no-csd
 spawn-at-startup "nm-applet"
 spawn-at-startup "gammastep-indicator" "-c" "/home/anthony/.config/gammastep/gammastep.conf"
 spawn-at-startup "swayidle" "-w" "timeout" "601" "niri msg action power-off-monitors" "timeout" "600" "swaylock -f" "before-sleep" "swaylock -f"
+spawn-at-startup "fcitx5" "-d"
+spawn-at-startup "dunst"
+spawn-at-startup "swaybg" "-i" "/home/anthony/Pictures/Wallpaper/Desktop/city.jpg"
+spawn-at-startup "/home/anthony/Documents/Dev/vn-cards/audio-replay-recorder.sh"
 
 environment {
     // DISPLAY ":0"
@@ -330,18 +334,23 @@ binds {
     Mod+D { spawn "rofi" "-show" "drun"; }
     Mod+Shift+Return { spawn "thunar"; }
     Mod+Shift+N { spawn "kitten" "quick-access-terminal"; }
-    Super+L allow-when-locked=true { spawn "swaylock"; }
+    Mod+Alt+L allow-when-locked=true { spawn "swaylock"; }
+    Mod+Shift+X { spawn "rofi" "-show" "power-menu" "-modi" "power-menu://home/anthony/dotfiles/.config/rofi/scripts//rofi-power-menu"; }
     Super+Shift+L { power-off-monitors; }
 
     XF86AudioRaiseVolume allow-when-locked=true { spawn "~/dotfiles/.local/bin/volume.sh" "up"; }
     XF86AudioLowerVolume allow-when-locked=true { spawn "~/dotfiles/.local/bin/volume.sh" "down"; }
-    XF86AudioMute        allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"; }
+    XF86AudioMute        allow-when-locked=true { spawn "~/dotfiles/.local/bin/volume.sh" "mute"; }
     XF86AudioMicMute     allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"; }
     XF86AudioPlay        allow-when-locked=true { spawn "playerctl" "play-pause"; }
     Mod+U                allow-when-locked=true { spawn "playerctl" "play-pause"; }
     XF86AudioPrev        allow-when-locked=true { spawn "playerctl" "previous"; }
     XF86AudioNext        allow-when-locked=true { spawn "playerctl" "next"; }
     Mod+V repeat=false { spawn "kitty" "--class=volume" "-e" "pulsemixer"; }
+
+    Mod+M { spawn "/home/anthony/Documents/Dev/vn-cards/scripts/capture.sh"; }
+    Mod+Shift+M { spawn "/home/anthony/Documents/Dev/vn-cards/scripts/capture.sh" "--record"; }
+    Mod+Ctrl+M { spawn "/home/anthony/Documents/Dev/vn-cards/scripts/audio-replay-save.sh"; }
 
     Mod+W repeat=false { close-window; }
     Mod+A repeat=false { toggle-overview; }
@@ -430,16 +439,16 @@ binds {
 
     Mod+R repeat=false { switch-preset-column-width; }
     Mod+Shift+R repeat=false { switch-preset-column-width-back; }
-    Mod+F repeat=false          { maximize-column; }
+    Mod+F repeat=false { toggle-window-floating; }
+    Mod+Alt+F repeat=false { maximize-column; }
     Mod+Shift+F repeat=false        { fullscreen-window; }
     Mod+Shift+Ctrl+F repeat=false   { toggle-windowed-fullscreen; }
     Mod+N { center-column; }
 
-    // Move the focused window between the floating and the tiling layout.
-    Mod+Alt+F repeat=false { toggle-window-floating; }
-
     Mod+Minus { set-column-width "-10%"; }
     Mod+Shift+Minus { set-column-width "+10%"; }
+    Mod+Ctrl+I { set-column-width "-10%"; }
+    Mod+Ctrl+O { set-column-width "+10%"; }
     Mod+Ctrl+Minus { set-column-width "-1"; }
     Mod+Ctrl+Shift+Minus { set-column-width "+1"; }
 

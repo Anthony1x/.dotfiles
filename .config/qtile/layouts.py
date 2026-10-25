@@ -20,6 +20,6 @@ floating_layout = layout.Floating(
         Match(title="Create Folder", wm_class="Godot_Editor"),  # Godot prompt
         Match(title="Please Confirm...", wm_class="Godot_Editor"),  # Godot prompt
         Match(title="Create New Node", wm_class="Godot_Editor"),  # Godot prompt
-
+        Match(wm_class="flameshot"),
     ]
 )

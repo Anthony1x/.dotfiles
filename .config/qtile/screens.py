@@ -17,7 +17,7 @@ from settings import (
     widget_decoration_rect_opacity, widget_decoration_rect_border_width,
     widget_decoration_rect_border_color, widget_decoration_rect_padding_x,
     widget_decoration_rect_padding_y, widget_decoration_rect_radius,
-    mod, shift
+    mod, shift, super_disabled
 )
 from groups import group_names, group_labels
 from fake_screens import layout_config
@@ -226,4 +226,4 @@ def prev_layout(qtile):
 screen_keys = [
     Key([mod, shift], "o", lazy.function(next_layout)),
     Key([mod, shift], "i", lazy.function(prev_layout)),
-]
+] if not super_disabled else []

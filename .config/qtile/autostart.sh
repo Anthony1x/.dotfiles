@@ -3,7 +3,7 @@
 sleep 1
 
 export XCURSOR_PATH="catppuccin-mocha-dark-cursors"
-export QT_QPA_PLATFORMTHEME="qt6ct"
+export QT_QPA_PLATFORMTHEME=qt6ct
 
 # Set monitors
 if [ "$XDG_SESSION_TYPE" = "wayland" ]; then
@@ -22,7 +22,8 @@ else
     xrandr --output DP-0 --mode 2560x1440 --pos 1280x0
     xrandr --output DP-4 --primary --mode 5120x1440 --pos 0x1440
 
-    ~/.config/qtile/scripts/picom_toggle.sh &
+    # ~/.config/qtile/scripts/picom_toggle.sh &
+    # TODO: Redshift doesn't work?
     redshift &
 
     # Set wallpapers
@@ -30,8 +31,9 @@ else
 fi
 
 # Programs to autostart
-~/Documents/Dev/vn-cards/audio-replay-recorder.sh &
+~/Documents/Dev/vn-cards/scripts/audio-replay-recorder.sh &
 fcitx5 -d &
 dunst &
+/usr/libexec/xdg-desktop-portal &
 # npx arrpc &
 sleep 1

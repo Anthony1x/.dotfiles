@@ -18,19 +18,21 @@ terminal: str = "kitty"
 menu: str = "rofi -show drun"
 browser: str = "floorp"
 files: str = "thunar"
-screenie: str = "flameshot gui"
+screenie: str = "sh -c 'scrot -z - | satty --filename - --fullscreen'"
+region_screenie: str = str(scripts_dir / "region_screenshot.py")
 screen_lock: str = "betterlockscreen -l"
 powermenu: str = "rofi -show power-menu -modi power-menu://home/anthony/dotfiles/.config/rofi/scripts//rofi-power-menu"
 layout_select: str = f"{scripts_dir}/select_layout.sh"
 
 # Anki
 anki_menu: str = "/home/anthony/.config/rofi/scripts/anki.sh"
-anki_screenie: str = "/home/anthony/Documents/Dev/vn-cards/capture.sh"
+anki_screenie: str = "/home/anthony/Documents/Dev/vn-cards/scripts/capture.sh"
 anki_record: str = f"{anki_screenie} --record"
-anki_replay: str = "/home/anthony/Documents/Dev/vn-cards/audio-replay-save.sh"
+anki_replay: str = "/home/anthony/Documents/Dev/vn-cards/scripts/audio-replay-save.sh"
 
 # State & Environment
 should_have_borders: bool = (get_key(dotenv_path=env, key_to_get='BORDERS')) == "True"
+super_disabled: bool = (get_key(dotenv_path=env, key_to_get='SUPER_TOGGLE')) == "True"
 workstation: str | None = get_key(dotenv_path=env, key_to_get="WORKSTATION")
 current_fake_screen_index: int = int(get_key(dotenv_path=env, key_to_get="FAKE_SCREEN_INDEX") or 0)
 
@@ -68,7 +70,7 @@ bar_background_color: str = theme['background']
 bar_foreground_color: str = theme['foreground']
 bar_background_opacity: float = 0.0
 bar_global_opacity: float = 1.0
-bar_nerd_font: str = "JetbrainsMono Nerd Font"
+bar_nerd_font: str = "Maple Mono NF"
 bar_font: str = bar_nerd_font
 bar_fontsize: float = 13.2
 
