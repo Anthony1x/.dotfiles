@@ -127,11 +127,19 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # Claude Code sources this file into its own shell and sets CLAUDECODE=1.
-# Give it back the plain `cd` builtin: anything that shadows cd (zoxide's
-# `--cmd cd`, an alias) makes the agent fuzzy-jump to some other directory
-# instead of failing on a bad path. Keep this last so it wins over every init
-# above. `z` and the rest of the aliases stay available to the agent.
+# Give it back the plain builtins/binaries. Anything that shadows these breaks
+# the agent in ways that look like a failing command instead of a bad alias:
+#   cd -> zoxide's `--cmd cd` or an alias makes it fuzzy-jump to some other
+#         directory instead of failing on a bad path.
+#   ls -> eza blocks forever reading stdin when it follows a heredoc in the same
+#         command. The call "times out" and is backgrounded although the real
+#         work already succeeded, so the obvious fix (rerun) just adds another
+#         stuck process.
+# Keep this last so it wins over every init above. `z`, `eza` and the rest stay
+# available to the agent under their own names.
 if [[ -n "$CLAUDECODE" ]]; then
   unalias cd 2>/dev/null
   unfunction cd 2>/dev/null
+  unalias ls 2>/dev/null
+  unalias ll 2>/dev/null
 fi
