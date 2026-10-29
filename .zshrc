@@ -1,6 +1,11 @@
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
+# macOS: Homebrew onto PATH before anything below calls brew-installed tools
+if [[ "$OSTYPE" == darwin* && -x /opt/homebrew/bin/brew ]]; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
+
 zstyle ':omz:update' mode auto
 
 plugins=(
@@ -15,8 +20,13 @@ eval "$(oh-my-posh init zsh --config $HOME/.config/ohmyposh/config.toml)"
 
 # Light/dark palette for oh-my-posh (see palettes in its config). Must run
 # before _omp_precmd, which renders the prompt, hence prepended.
+# Linux: darkman writes ~/.local/state/theme-mode. macOS: read the system appearance.
 _theme_mode_precmd() {
-  [[ -r ~/.local/state/theme-mode ]] && export THEME_MODE=$(<~/.local/state/theme-mode)
+  if [[ -r ~/.local/state/theme-mode ]]; then
+    export THEME_MODE=$(<~/.local/state/theme-mode)
+  elif [[ "$OSTYPE" == darwin* ]]; then
+    [[ "$(defaults read -g AppleInterfaceStyle 2>/dev/null)" == Dark ]] && export THEME_MODE=dark || export THEME_MODE=light
+  fi
 }
 precmd_functions=(_theme_mode_precmd $precmd_functions)
 
@@ -27,17 +37,23 @@ fi
 alias ls="eza"
 alias ll="eza -labhSo"
 alias cd="z"
-alias sizeof="stat --printf='%s'"
 alias man='batman'
 alias KILLYOURSELF="exit"
 alias brexit="exit"
-alias yay="paru"
 alias fz="fzf --preview 'bat --style=numbers --color=always {}'"
 alias vim="nvim"
-alias sudo="sudo-rs"
-alias sudoedit="sudoedit-rs"
 alias claude="claude --allow-dangerously-skip-permissions"
-alias clear="pyroclear"
+
+if [[ "$OSTYPE" == linux* ]]; then
+  alias sizeof="stat --printf='%s'"
+  alias yay="paru"
+  alias sudo="sudo-rs"
+  alias sudoedit="sudoedit-rs"
+  alias clear="pyroclear"
+else
+  alias sizeof="stat -f %z"
+  alias sudoedit="sudo -e"
+fi
 
 alias dcu="docker compose up -d"
 alias dcul="docker compose up -d & lazydocker"
@@ -67,17 +83,21 @@ acefs() {
     sshfs "$remote" "$local_dir"
 }
 
-# Command runs detached from the terminal
+# Command runs detached from the terminal (macOS has no setsid)
 spawn() {
     local command="$1"
 
-    setsid "$command" & disown
+    if (( $+commands[setsid] )); then
+        setsid "$command" & disown
+    else
+        "$command" &>/dev/null & disown
+    fi
 }
 
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
-export PATH=$PATH:/home/anthony/.spicetify
-export PATH="$PATH:/home/anthony/.local/bin"
+export PATH="$PATH:$HOME/.spicetify"
+export PATH="$PATH:$HOME/.local/bin"
 export PATH="$HOME/.cargo/bin:$PATH"
 
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow'
@@ -88,17 +108,19 @@ export LC_ALL=en_US.UTF-8
 export EDITOR="nvim"
 export SUDO_EDITOR="nvim"
 
-source <(fzf --zsh)
+(( $+commands[fzf] )) && source <(fzf --zsh)
 
-eval "$(zoxide init zsh)"
+(( $+commands[zoxide] )) && eval "$(zoxide init zsh)"
 
 # Added by `rbenv init` on Wed Apr  2 02:39:55 PM CEST 2025
-eval "$(rbenv init - --no-rehash zsh)"
-eval "$(fnm env --use-on-cd --shell zsh)"
+(( $+commands[rbenv] )) && eval "$(rbenv init - --no-rehash zsh)"
+(( $+commands[fnm] )) && eval "$(fnm env --use-on-cd --shell zsh)"
 
 
-# SSH agent socket (managed by systemd user ssh-agent.socket)
-export SSH_AUTH_SOCK="${XDG_RUNTIME_DIR}/ssh-agent.socket"
+# SSH agent socket (managed by systemd user ssh-agent.socket); macOS brings its own via launchd
+if [[ "$OSTYPE" == linux* ]]; then
+  export SSH_AUTH_SOCK="${XDG_RUNTIME_DIR}/ssh-agent.socket"
+fi
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
