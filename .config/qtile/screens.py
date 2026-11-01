@@ -1,3 +1,4 @@
+from pathlib import Path
 from typing import Any
 from libqtile.bar import Bar
 from libqtile import bar, qtile
@@ -17,10 +18,16 @@ from settings import (
     widget_decoration_rect_opacity, widget_decoration_rect_border_width,
     widget_decoration_rect_border_color, widget_decoration_rect_padding_x,
     widget_decoration_rect_padding_y, widget_decoration_rect_radius,
-    mod, shift, super_disabled
+    widget_metrics_interval,
+    mod, shift, super_disabled, is_wayland
 )
 from groups import group_names, group_labels
 from fake_screens import layout_config
+from widgets import PulseMicVolume, speed_up_bar
+
+
+if is_wayland:
+    speed_up_bar()
 
 
 class WidgetTweaker:
@@ -118,14 +125,17 @@ middle = [
 right = [
     widget.Net(
         format='↓{down:.0f}{down_suffix} ↑{up:.0f}{up_suffix}',
+        update_interval=widget_metrics_interval,
         padding=5,
     ),
     widget.CPU(
         format=' {load_percent}%',
+        update_interval=widget_metrics_interval,
         padding=5,
     ),
     widget.Memory(
         padding=5,
+        update_interval=widget_metrics_interval,
         mouse_callbacks={'Button1': lambda: qtile.spawn(
             terminal + ' -e btop')},
         measure_mem='M',
@@ -134,6 +144,7 @@ right = [
     ),
     widget.Memory(
         padding=5,
+        update_interval=widget_metrics_interval,
         mouse_callbacks={'Button1': lambda: qtile.spawn(
             terminal + ' -e btop')},
         measure_mem='M',
@@ -141,18 +152,31 @@ right = [
         fmt='󰾵{} ',
     ),
     space,
-    widget.Volume(
-        step=2,
-        padding=10,
-        fmt=volume,
-        mouse_callbacks={'Button1': lazy.spawn(
-            'pactl set-sink-mute @DEFAULT_SINK@ toggle')},
-    ),
-    widget.Volume(
-        padding=10,
-        fmt=' {}',
-        channel='Capture',
-    ),
+    # On Wayland qtile is the compositor, so the polling Volume widget (amixer in a
+    # shell every 0.2s) stalls frames. Use the event driven Pulse widgets there.
+    *([
+        widget.PulseVolume(
+            step=2,
+            padding=10,
+            fmt=volume,
+            mouse_callbacks={'Button1': lazy.spawn(
+                'pactl set-sink-mute @DEFAULT_SINK@ toggle')},
+        ),
+        widget.modify(PulseMicVolume, padding=10, fmt=' {}'),
+    ] if is_wayland else [
+        widget.Volume(
+            step=2,
+            padding=10,
+            fmt=volume,
+            mouse_callbacks={'Button1': lazy.spawn(
+                'pactl set-sink-mute @DEFAULT_SINK@ toggle')},
+        ),
+        widget.Volume(
+            padding=10,
+            fmt=' {}',
+            channel='Capture',
+        ),
+    ]),
     space,
     widget.StatusNotifier(),
 ]
@@ -169,7 +193,12 @@ bar_instance: Bar = bar.Bar(
 
 # Screens Logic
 
-top_screen = Screen(bottom=bar_instance, x=1280, y=0, width=2560, height=1440)
+# Debug switch: `touch ~/.config/qtile/.nobar` + reload runs without any bar
+# (used to find out whether the bar causes frame hitches). Delete the file to undo.
+no_bar: bool = (Path(__file__).parent / ".nobar").exists()
+screen_bar = None if no_bar else bar_instance
+
+top_screen = Screen(bottom=screen_bar, x=1280, y=0, width=2560, height=1440)
 
 
 def generate_layout(width, screens=3):
@@ -196,7 +225,7 @@ def generate_layout(width, screens=3):
 
 fake_screen_layouts = [
     generate_layout(layout["width"], layout["screens"]) for layout in layout_config
-] if (workstation == "PC") else [Screen(top=bar_instance, x=0, y=0, width=2560, height=1440)]
+] if (workstation == "PC") else [Screen(top=screen_bar, x=0, y=0, width=2560, height=1440)]
 
 fake_screens = fake_screen_layouts[current_fake_screen_index if (workstation == "PC") else 0]
 

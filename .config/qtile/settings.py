@@ -99,6 +99,9 @@ bar_font: str = bar_nerd_font
 bar_fontsize: float = 13.2
 
 # Widget Styling
+# How often Net/CPU/Memory refresh. Every refresh redraws the whole bar, and on Wayland
+# that blocks the compositor for ~12-20ms (a few dropped frames), so keep it high.
+widget_metrics_interval: int = 5
 widget_gap: int = 6
 widget_left_offset: int = 4
 widget_right_offset: int = 4

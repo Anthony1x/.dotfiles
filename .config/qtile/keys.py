@@ -22,6 +22,20 @@ def switch_super(qtile):
     set_key(dotenv_path=env, key_to_set='SUPER_TOGGLE', value_to_set=str(new_state))
     qtile.reload_config()
 
+# Toggle the bar. On Wayland the bar's redraws cost the compositor frames (qtile
+    # composites and runs Python on one thread), which shows as hitches in games.
+    # screens.py checks for this file when the config loads.
+no_bar_flag = scripts_dir.parent / ".nobar"
+
+
+def toggle_bar(qtile):
+    if no_bar_flag.exists():
+        no_bar_flag.unlink()
+    else:
+        no_bar_flag.touch()
+    qtile.reload_config()
+
+
 keys = [
     # Essentials (Always active)
     Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
@@ -108,6 +122,7 @@ if not super_disabled:
         Key([mod, alt], "l", lazy.spawn(screen_lock)),
         Key([mod, shift], "q", lazy.spawn(layout_select)),
         Key([mod, shift], "p", lazy.function(switch), desc="Switch between border and no border"),
+        Key([mod], "b", lazy.function(toggle_bar), desc="Toggle the bar (off = smooth games on Wayland)"),
 
         Key([mod, control], "i", lazy.layout.shrink(), desc="Shrink window"),
         Key([mod, control], "o", lazy.layout.grow(), desc="Grow window"),
