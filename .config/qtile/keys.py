@@ -1,4 +1,5 @@
-from libqtile.config import Key
+from libqtile import qtile
+from libqtile.config import Key, KeyChord
 from libqtile.lazy import lazy
 from dotenv import set_key
 from settings import (
@@ -6,7 +7,7 @@ from settings import (
     terminal, menu, browser, files, screenie, region_screenie, screen_lock,
     powermenu, layout_select, scripts_dir,
     anki_screenie, anki_record, anki_replay,
-    env, should_have_borders, super_disabled
+    env, should_have_borders, super_disabled, is_wayland
 )
 
 # Function to toggle borders
@@ -65,6 +66,32 @@ keys = [
     Key([], "XF86AudioNext", lazy.spawn('playerctl next')),
 ]
 
+if is_wayland:
+    # Ctrl+Alt+F1..F7 to switch VTs (on X11 the X server does this itself)
+    for vt in range(1, 8):
+        keys.append(Key(
+            ["control", alt], f"f{vt}",
+            lazy.core.change_vt(vt).when(func=lambda: qtile.core.name == "wayland"),
+            desc=f"Switch to VT{vt}"))
+
+# Region screenshot. X11: the script grabs the keyboard itself and waits for a
+# key. Wayland has no global keyboard grab, so a key chord picks the region and
+# passes it to the script instead (the hint notification is in config.py).
+if is_wayland:
+    region_screenie_key = KeyChord(
+        [mod, alt], "s",
+        [Key([], key, lazy.spawn(f"{region_screenie} --region {region}"))
+         for key, region in (
+            ("Up", "top"), ("w", "top"),
+            ("Down", "middle"), ("s", "middle"),
+            ("Left", "left"), ("a", "left"),
+            ("Right", "right"), ("d", "right"),
+        )],
+        name="screenshot",
+    )
+else:
+    region_screenie_key = Key([mod, alt], "s", lazy.spawn(region_screenie))
+
 if not super_disabled:
     keys.extend([
         # Super + Letter keys (Toggleable)
@@ -76,9 +103,8 @@ if not super_disabled:
         Key([mod, shift], "x", lazy.spawn(powermenu), desc="Open power menu"),
         Key([mod], "d", lazy.spawn(menu)),
         Key([mod], "q", lazy.spawn(browser)),
-        Key([mod, alt], "s", lazy.spawn(region_screenie)),
+        region_screenie_key,
         Key([mod, control], "s", lazy.spawn(screenie)),
-        Key([mod, control], "p", lazy.spawn(f"{scripts_dir}/picom_toggle.sh")),
         Key([mod, alt], "l", lazy.spawn(screen_lock)),
         Key([mod, shift], "q", lazy.spawn(layout_select)),
         Key([mod, shift], "p", lazy.function(switch), desc="Switch between border and no border"),
@@ -91,3 +117,7 @@ if not super_disabled:
         Key([mod, shift], "m", lazy.spawn(anki_record)),
         Key([mod, control], "m", lazy.spawn(anki_replay)),
     ])
+
+    # picom/fastcompmgr is X11-only; the Wayland compositor does its own compositing
+    if not is_wayland:
+        keys.append(Key([mod, control], "p", lazy.spawn(f"{scripts_dir}/picom_toggle.sh")))

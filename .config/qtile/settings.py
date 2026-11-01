@@ -1,6 +1,19 @@
+import os
 from pathlib import Path
 from dotenv import get_key
+from libqtile import qtile
 from colors import CATPPUCCIN_MOCHA as theme
+
+
+def _detect_wayland() -> bool:
+    """True when running the Wayland backend (also when nested in an X11 session)."""
+    try:
+        return qtile.core.name == "wayland"
+    except AttributeError:  # e.g. `qtile check`, where there is no running core
+        return bool(os.environ.get("WAYLAND_DISPLAY"))
+
+
+is_wayland: bool = _detect_wayland()
 
 # Paths
 home: Path = Path.home()
@@ -18,9 +31,13 @@ terminal: str = "kitty"
 menu: str = "rofi -show drun"
 browser: str = "floorp"
 files: str = "thunar"
-screenie: str = "sh -c 'scrot -z - | satty --filename - --fullscreen'"
 region_screenie: str = str(scripts_dir / "region_screenshot.py")
-screen_lock: str = "betterlockscreen -l"
+if is_wayland:
+    screenie: str = "sh -c 'grim - | satty --filename - --fullscreen'"
+    screen_lock: str = str(scripts_dir / "lock.sh")
+else:
+    screenie: str = "sh -c 'scrot -z - | satty --filename - --fullscreen'"
+    screen_lock: str = "betterlockscreen -l"
 powermenu: str = "rofi -show power-menu -modi power-menu://home/anthony/dotfiles/.config/rofi/scripts//rofi-power-menu"
 layout_select: str = f"{scripts_dir}/select_layout.sh"
 
@@ -35,6 +52,13 @@ should_have_borders: bool = (get_key(dotenv_path=env, key_to_get='BORDERS')) == 
 super_disabled: bool = (get_key(dotenv_path=env, key_to_get='SUPER_TOGGLE')) == "True"
 workstation: str | None = get_key(dotenv_path=env, key_to_get="WORKSTATION")
 current_fake_screen_index: int = int(get_key(dotenv_path=env, key_to_get="FAKE_SCREEN_INDEX") or 0)
+
+# Wayland (cursor + keyboard, the equivalents of Xresources / `xset r rate`)
+cursor_theme: str = "catppuccin-mocha-dark-cursors"
+cursor_size: int = 36
+kb_layout: str = "de"
+kb_repeat_delay: int = 300
+kb_repeat_rate: int = 40
 
 # Layout Themes
 layouts_margin: int = 6 if should_have_borders else 0

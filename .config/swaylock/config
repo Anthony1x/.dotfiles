@@ -1,1 +1,5 @@
-image=~/Pictures/Wallpapers/Desktop/city.jpg
+image=~/Pictures/Wallpaper/Desktop/city.jpg
+scaling=fill
+color=1e1e2e
+ignore-empty-password
+show-failed-attempts

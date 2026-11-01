@@ -2,10 +2,16 @@
 """
 Region screenshot: capture full screen, wait for arrow/wasd key,
 crop the selected region based on the active fake_screen layout,
-open in satty. Uses ctypes + libX11 for keyboard grabbing.
+open in satty.
+
+X11:     maim + ImageMagick, uses ctypes + libX11 for keyboard grabbing.
+Wayland: grim, region is passed with --region {top,left,middle,right} because
+         there is no global keyboard grab (qtile's key chord in keys.py does that).
 """
 
+import argparse
 import ctypes
+import json
 import os
 import subprocess
 import re
@@ -81,10 +87,26 @@ def read_fake_screen_index():
     return 0
 
 
-def find_top_monitor():
-    """Find the top monitor via xrandr. Returns (x, y, w, h) or None."""
-    out = subprocess.check_output(["xrandr"], text=True)
+def is_wayland():
+    return bool(os.environ.get("WAYLAND_DISPLAY"))
+
+
+def list_monitors():
+    """All enabled monitors as (x, y, w, h), via xrandr or wlr-randr."""
     monitors = []
+    if is_wayland():
+        out = json.loads(subprocess.check_output(["wlr-randr", "--json"], text=True))
+        for o in out:
+            if not o.get("enabled", True):
+                continue
+            mode = next((m for m in o["modes"] if m.get("current")), None)
+            if mode:
+                scale = o.get("scale", 1) or 1
+                monitors.append((o["position"]["x"], o["position"]["y"],
+                                 round(mode["width"] / scale), round(mode["height"] / scale)))
+        return monitors
+
+    out = subprocess.check_output(["xrandr"], text=True)
     for line in out.splitlines():
         if " connected" not in line:
             continue
@@ -92,6 +114,12 @@ def find_top_monitor():
         if m:
             w, h, x, y = map(int, m.groups())
             monitors.append((x, y, w, h))
+    return monitors
+
+
+def find_top_monitor():
+    """Find the top monitor via xrandr/wlr-randr. Returns (x, y, w, h) or None."""
+    monitors = list_monitors()
 
     if not monitors:
         return None
@@ -202,7 +230,37 @@ def notify(msg):
 
 # ── Main ──
 
+def capture_wayland(geometry):
+    """Pipe a grim capture of `geometry` ("WxH+X+Y") into satty."""
+    w, h, x, y = map(int, re.match(r"(\d+)x(\d+)\+(\d+)\+(\d+)", geometry).groups())
+    subprocess.run(
+        f"grim -g '{x},{y} {w}x{h}' - | satty --filename - --fullscreen",
+        shell=True,
+    )
+
+
+def main_wayland(region_key):
+    index = read_fake_screen_index()
+    if index >= len(LAYOUT_CONFIG):
+        index = 0
+    regions = compute_regions(LAYOUT_CONFIG[index])
+    if region_key in regions:
+        capture_wayland(regions[region_key])
+
+
 def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--region", choices=["top", "left", "middle", "right"],
+                        help="Wayland: region to capture (X11 asks for a key press)")
+    args = parser.parse_args()
+
+    if is_wayland():
+        if not args.region:
+            notify("--region is required on Wayland (use the key chord)")
+            return
+        main_wayland(args.region)
+        return
+
     index = read_fake_screen_index()
     if index >= len(LAYOUT_CONFIG):
         index = 0

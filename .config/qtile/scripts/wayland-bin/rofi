@@ -1,0 +1,27 @@
+#!/bin/sh
+# Wayland-only shim, put first on PATH by config.py (X11 never sees it).
+#
+# Without an explicit monitor, rofi's layer-shell surface asks qtile for the
+# "current output". With fake_screens qtile can't always map that to a real
+# output: rofi then ends up on the wrong monitor, or crashes outright when a
+# window on the bottom monitor has focus. Pinning the output avoids that.
+# Primary = the widest enabled output, like X11's primary (DP-4, 5120x1440).
+
+for arg in "$@"; do
+    case $arg in -m | -monitor | --monitor) exec /usr/bin/rofi "$@" ;; esac
+done
+
+primary=$(wlr-randr --json 2>/dev/null | python3 -c '
+import json, sys
+best = None
+for o in json.load(sys.stdin):
+    cur = next((m for m in o["modes"] if m.get("current")), None)
+    if o.get("enabled", True) and cur and (best is None or cur["width"] > best[0]):
+        best = (cur["width"], o["name"])
+print(best[1] if best else "")
+' 2>/dev/null)
+
+if [ -n "$primary" ]; then
+    exec /usr/bin/rofi -m "$primary" "$@"
+fi
+exec /usr/bin/rofi "$@"
