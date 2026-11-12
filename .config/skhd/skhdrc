@@ -1,0 +1,31 @@
+# niri's Mod is right cmd here: apps don't tell left from right cmd, so left cmd shortcuts keep working.
+# On the HyperX, NGenuity puts right Win on the menu key. Window management (niri focus/move/workspaces)
+# is left out on purpose, it goes to AeroSpace later.
+
+# --- Apps (Mod+Return, Mod+Q, Mod+Shift+Q, Mod+Shift+Return, Mod+Shift+N) ---
+# New kitty OS window in the same instance the Dock uses
+rcmd - return : ~/.config/skhd/kitty-new-window.sh
+# Browsers: new window in the running instance, last used profile; never start them directly (Firefox: "Profile Missing")
+rcmd - q : ~/.config/skhd/app-new-window.sh org.mozilla.firefox --new-window
+rcmd + shift - q : ~/.config/skhd/app-new-window.sh io.ungoogled-software.ungoogled-chromium --new-window
+# Finder in place of thunar (first use asks to let skhd control Finder)
+rcmd + shift - return : osascript -e 'tell application "Finder"' -e 'make new Finder window to home' -e 'activate' -e 'end tell'
+# Toggle the kitty quick access (quake) terminal; the script also hands focus back when hiding it
+rcmd + shift - n : ~/.config/skhd/kitty-quick-access-toggle.sh
+
+# --- System (Mod+D rofi, Mod+A overview, Mod+V pulsemixer, Mod+U, Mod+Shift+T darkman, Super+L, Super+Shift+L) ---
+rcmd - d | cmd - space
+rcmd - a : open -a "Mission Control"
+rcmd - v : open "x-apple.systempreferences:com.apple.Sound-Settings.extension"
+rcmd - u | play
+# Light/dark (first use asks to let skhd control System Events); kitty, nvim, yazi and the appearance hooks follow
+rcmd + shift - t : osascript -e 'tell application "System Events" to tell appearance preferences to set dark mode to not dark mode'
+rcmd - l | ctrl + cmd - q
+# Lock and turn the displays off
+rcmd + shift - l : ~/.config/skhd/lock-screen.sh
+
+# --- Screenshots (Mod+Alt+S, Print = F13 on the Mac, Ctrl+Print); macOS saves them to the Desktop ---
+rcmd + alt - s | cmd + shift - 4
+# Screenshot toolbar in place of flameshot gui
+f13 : open -a Screenshot
+ctrl - f13 | cmd + shift - 3
